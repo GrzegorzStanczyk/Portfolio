@@ -2,10 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { MainComponent } from './main/main.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent,
+    ProjectsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'universal-portfolio'})
