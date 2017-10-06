@@ -9,6 +9,84 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <style>
+      body {
+          filter: url('#goo');
+          width: 100vw;
+          height: 100vh;
+          margin: 0;
+          padding: 0;
+          background: #f093fb linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+          background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+      }
+      .loader {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-left: -50px;
+          margin-top: -50px;
+          width: 100px;
+          height: 100px;
+          animation: spin 3s linear infinite;
+      }
+      .dot {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          background-color: #fff;
+          border-radius: 50%;
+      }
+      .dot:nth-child(1) {
+          margin-left: 37.5%;
+          animation: resize-dot 1.5s linear infinite;
+      }
+      .dot:nth-child(2) {
+          margin-top:  75%;
+          animation: resize-dot 1.5s linear 0.3s infinite;
+      }
+      .dot:nth-child(3) {
+          margin-top:  75%;
+          margin-left:  75%;
+          animation: resize-dot 1.5s linear 1.3s infinite;
+      }
+
+      @keyframes spin {
+          0% {
+              transform: rotate(0deg);
+          }
+          100% {
+              transform: rotate(360deg);
+          }
+      }
+
+      @keyframes resize-dot {
+          0% {
+              transform: scale(1);
+          }
+          50% {
+              transform: scale(2);
+          }
+          100% {
+              transform: scale(1);
+          }
+      }
+    </style>
+    <div class="loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+          <feBlend in="SourceGraphic" in2="goo" />
+        </filter>
+      </defs>
+    </svg>
+  </app-root>
 </body>
 </html>
