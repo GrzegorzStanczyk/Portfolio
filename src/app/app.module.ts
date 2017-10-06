@@ -7,13 +7,15 @@ import { MainComponent } from './main/main.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ContactComponent } from './contact/contact.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     ProjectsComponent,
-    ContactComponent
+    ContactComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'universal-portfolio'}),
