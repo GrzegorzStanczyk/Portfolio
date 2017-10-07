@@ -1,0 +1,180 @@
+$cubic: cubic-bezier(.05,.79,.82,.31);
+$cubic2: cubic-bezier(.35,1.1,.57,.76);
+$delay: 0.7s;
+
+:host {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.canvas {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    width: 70%;
+    height: 100%;
+    animation: canvas 1s $delay ease-out forwards;
+    // background: linear-gradient(120deg,  #fdfbfb 0%, #ebedee 100%);
+    background: linear-gradient(90deg,
+    rgba(253, 251, 251, 0) 0%,
+    rgba(253, 251, 251, 0.2) 20%,
+    rgba(253, 251, 251, 0.6) 50%, #ebedee 100%);
+}
+
+.container {
+    position: relative;
+    top: -7%;
+    max-width: 500px;
+    max-height: 500px;
+    width: 50vw;
+    height: 50vw;
+    animation: moveInContainer 1s $delay ease-out;
+    div {
+        position: absolute;
+    }
+    div:nth-last-child(n+2) {
+        background: #000;
+    }
+}
+
+.text {
+    font-family: 'Oswald', sans-serif;
+    top: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 50%;
+    background: none;
+    font-size: 3.5vw;
+    line-height: 1;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: text 0.5s 1.4s+$delay $cubic2 forwards;
+    h1 {
+        margin: 0;
+    }
+}
+
+.mask {
+    right: 0;
+    width: 0%;
+    height: 100%;
+    animation: mask 1s .9s+$delay $cubic2;
+}
+
+.line-top {
+    top: 0;
+    left: 0;
+    width: 0px;
+    height: 20px;
+    animation: lineTop 0.8s $delay $cubic forwards;
+    
+}
+.line-right {
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    height: 0px;
+    animation: lineRight 0.8s $delay $cubic forwards;
+}
+.line-bottom {
+    right: 0;
+    bottom: 0;
+    width: 0px;
+    height: 20px;
+    animation: lineBottom 0.8s $delay $cubic forwards;
+}
+.line-left {
+    left: 0;
+    bottom: 0;
+    width: 20px;
+    height: 0px;
+    animation: lineLeft 0.8s $delay $cubic forwards;
+}
+
+@keyframes moveInContainer {
+    from { opacity: 0; transform: translateX(20%) }
+    to { opacity: 1; transform: translateX(0%) }
+}
+@keyframes mask {
+    0% { width: 0% }
+    50% { width: 100% }
+    100% { width:0% }
+}
+@keyframes lineTop {
+    from { width: 0% }
+    to { width: 100% }
+}
+@keyframes lineRight {
+    from { height: 0% }
+    to { height: 100% }
+}
+@keyframes lineBottom {
+    from { width: 0% }
+    to { width: 100% }
+}
+@keyframes lineLeft {
+    from { height: 0% }
+    to { height: 50% }
+}
+@keyframes text {
+    from { opacity : 0}
+    to { opacity : 1 }
+}
+@keyframes canvas {
+    from { opacity: 0; transform: translateX(-10%) }
+    to { opacity: 0.4; transform: translateX(0%) }
+}
+
+@media screen and (min-width: 1000px) {
+    .text {
+        font-size: 35px;
+    }
+}
+
+@media screen and (min-width: 701px) {
+    .container {
+        left: 10%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    :host {
+        justify-content: center;
+    }
+    .canvas {
+        display: none;
+    }
+    .container {
+        top: -10%;
+        width: 60vw;
+        height: 60vw;
+    }
+    .text {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        width: 70vw;
+        height: 70vw;
+    }
+    .text {
+        width: 65%;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .container {
+        width: 250px;
+        height: 250px;
+    }
+    .text {
+        width: 65%;
+        font-size: 16px;
+    }
+}
