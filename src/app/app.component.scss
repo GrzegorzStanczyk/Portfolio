@@ -1,86 +1,8 @@
-.navigation {
-    filter: url('#goo');
-    min-width: 290px;
-    position: fixed;
-    display: flex;
-    z-index: 100;
-    bottom: 7%;
-    left: 50%;
-    transform: translateX(-50%);
-    a {
-        color: #0A0A0A;
-        font-weight: 700;
-        text-align: center;
-        text-decoration: none;
-        z-index: 100;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 85px;
-        height: 45px;
-        border-radius: 20px;
-        background-color: rgba(253, 251, 251, 0.8);
-        &:nth-child(3) {
-            margin: 0 auto;
-        }
-        &.animate-left {
-            animation: move-left 0.7s ease 0s forwards;
-        }
-        &.animate-righy {
-            animation: move-right 0.7s ease 0s forwards;
-        }
-    }
-}
-
 .content {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #000;
+    background: #f093fb linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
 }
-
-.svg-flt {
-    position: absolute;
-    width: 0;
-    height: 0;
-}
-
-.active-move {
-    position: absolute;
-    width: 91px;
-    height: 51px;
-    top: -3px;
-    left: -3px;
-    z-index: 10;
-    border-radius: 20px;
-    background-color: rgba(253, 251, 251, 0.8);
-    &.animate {
-        animation: select-move 0.5s ease 0s forwards;
-    }
-}
-
-@keyframes select-move {
-	0%{ transform: scale(1,1);} 
-	20%{ transform: scale(1,0.5);} 
-	40%{ transform: scale(1,0.5);} 
-	100%{ transform: scale(1,1);} 
-}
-@keyframes move-right {
-	0%{ transform: translateX(0px);} 
-	20%{ transform: translateX(20px);} 
-	40%{ transform: translateX(-10px);} 
-	60%{ transform: translateX(5px);} 
-	80%{ transform: translateX(0px);} 
-	100%{ transform: translateX(0px);} 
-}
-@keyframes move-left {
-	0%{ transform: translateX(0px);} 
-	20%{ transform: translateX(-20px);} 
-	40%{ transform: translateX(10px);} 
-	60%{ transform: translateX(-5px);} 
-	80%{ transform: translateX(0px);} 
-	100%{ transform: translateX(0px);} 
-}
-
