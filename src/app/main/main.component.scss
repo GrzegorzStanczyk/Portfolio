@@ -23,6 +23,11 @@ $delay: 0.7s;
     rgba(253, 251, 251, 0.6) 50%, #ebedee 100%);
 }
 
+.canvas {
+    position: absolute;
+    right: 0;
+}
+
 .container {
     position: relative;
     z-index: 100;
