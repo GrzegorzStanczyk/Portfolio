@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   message: string = "Inspirations are everywhere";
-  constructor() { }
+  constructor(private router: Router) { }
+
+  @HostListener('document:keydown.ArrowRight')
+  navigeteToTheRoute() {
+    this.router.navigate(['/projects']);
+  }
 
   ngOnInit() {
   }
