@@ -9,6 +9,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ParticlesDirective } from './shared/directives/particles.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     ProjectsComponent,
     ContactComponent,
     NotFoundComponent,
-    NavigationComponent
+    NavigationComponent,
+    ParticlesDirective
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'universal-portfolio'}),
