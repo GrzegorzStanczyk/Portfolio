@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, HostListener, Input, NgZone } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
@@ -11,7 +11,8 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   private resizeEvent$: Subject<MouseEvent> = new Subject<MouseEvent>();
   private canvasEl: HTMLCanvasElement = this.el.nativeElement;
   private ctx: CanvasRenderingContext2D = this.canvasEl.getContext('2d');
-  private numberOfParticles: number = 100;
+  private numberOfParticles: number = 50;
+  private particlesSpeed: number = 2;
   private particlesArray: Array<any> = [];
   private clearInterval;
   private animationFrame;
@@ -19,7 +20,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       "#00d1cb", "#ff4699", "#fbb63a", "#b3dc5b", "#ffe100"
   ];
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private ngZone: NgZone) { }
 
   @HostListener('window:resize')
   resize() {
@@ -27,30 +28,47 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setCanvasSize(): void {
-    this.canvasEl.width = window.innerWidth/2;
+    this.canvasEl.width = window.innerWidth;
+    
     this.canvasEl.height = window.innerHeight;
   }
 
   clearCanvas(): void {
-    this.ctx.clearRect(0, 0, window.innerWidth/2, window.innerHeight);
+    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
 
   createParticle(): void {
-    if(this.particlesArray.length > 100) {this.particlesArray.shift();}
+    // If particle amount is more than this.numberOfParticles delete first one
+    if(this.particlesArray.length > this.numberOfParticles) this.particlesArray.shift()
+    // If particle is outside of canvas delete it
+    this.particlesArray = this.particlesArray.filter(p => {
+      return p.x > p.r * -1;
+    });
+
     let p = {
       y: Math.random() * window.innerHeight,
       r: Math.floor(Math.random() * 20) + 3,
-      x: window.innerWidth/2,
+      x: window.innerWidth,
+      // direction: Math.random()*0.2,
+      direction: 0.1,
+      // 
       color: this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)]
     }
+    // Set initial particle outside the canvas
     p.x += p.r;
-    this.particlesArray.push(p)
+    this.particlesArray.push(p);
   }
 
   animateParticles(): any {
     this.particlesArray.forEach(p => {
-      p.x -= 2/p.r;
-      p.y += (Math.random() - 0.5)*0.2;
+    // Set particle speed depend on its size
+      p.x -= this.particlesSpeed/p.r;
+      // Change particle direction
+      if(Math.floor(Math.random()*500) === 0) {
+        p.direction = p.direction * -1;
+      }
+      // p.y += (Math.random() - 0.5)*0.2;
+      p.y += p.direction;
     })
   }
 
@@ -91,14 +109,16 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       this.stopAnimationFrame();
       this.particlesArray = [];
       this.setCanvasSize();
-      this.loop();
+    // Paint loop run outside the Angular zone
+      this.ngZone.runOutsideAngular(()=>this.loop())
     });
   }
 
   ngAfterViewInit() {
     this.setCanvasSize();
     this.particleDrawDelay();
-    this.loop();
+    // Paint loop run outside the Angular zone
+    this.ngZone.runOutsideAngular(()=>this.loop())
   }
 
   ngOnDestroy() {
