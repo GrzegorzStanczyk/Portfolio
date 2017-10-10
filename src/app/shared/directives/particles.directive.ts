@@ -1,27 +1,30 @@
-import { Directive, ElementRef, OnInit, AfterViewInit, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, HostListener, Input } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/operator/debounceTime';
 
 @Directive({
   selector: '[appParticles]'
 })
 
-export class ParticlesDirective implements OnInit, AfterViewInit {
+export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   private resizeEvent$: Subject<MouseEvent> = new Subject<MouseEvent>();
   private canvasEl: HTMLCanvasElement = this.el.nativeElement;
   private ctx: CanvasRenderingContext2D = this.canvasEl.getContext('2d');
-  private numberOfParticles: number = 5;
+  private numberOfParticles: number = 100;
   private particlesArray: Array<any> = [];
-  private clearTimeout: Array<any> = [];
+  private clearInterval;
+  private animationFrame;
   private colorsArray: Array<string> = [
       "#00d1cb", "#ff4699", "#fbb63a", "#b3dc5b", "#ffe100"
   ];
 
-  myReq = requestAnimationFrame(() => this.loop());
-  pause = null;
-
   constructor(private el: ElementRef) { }
+
+  @HostListener('window:resize')
+  resize() {
+    this.resizeEvent$.next();
+  }
 
   setCanvasSize(): void {
     this.canvasEl.width = window.innerWidth/2;
@@ -32,112 +35,74 @@ export class ParticlesDirective implements OnInit, AfterViewInit {
     this.ctx.clearRect(0, 0, window.innerWidth/2, window.innerHeight);
   }
 
-  createParticles(): void {
-    // if(this.particlesArray.length > 100) {this.particlesArray.shift();}
-    if(this.particlesArray.length > 100) return 
-    
+  createParticle(): void {
+    if(this.particlesArray.length > 100) {this.particlesArray.shift();}
     let p = {
-      x: window.innerWidth/2,
       y: Math.random() * window.innerHeight,
-      r: Math.floor(Math.random() * 10) + 1,
+      r: Math.floor(Math.random() * 20) + 3,
+      x: window.innerWidth/2,
       color: this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)]
     }
+    p.x += p.r;
     this.particlesArray.push(p)
   }
 
   animateParticles(): any {
     this.particlesArray.forEach(p => {
-      p.x -= 0.1;
+      p.x -= 2/p.r;
       p.y += (Math.random() - 0.5)*0.2;
     })
   }
 
-
   drawParticles(): void {
-    // for(let i = 1; i < this.numberOfParticles; i++) {
-      // this.clearTimeout.push(
-        // setTimeout(()=> {
           this.particlesArray.forEach(p => {
             this.ctx.beginPath();
             this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
             this.ctx.fillStyle = p.color;
             this.ctx.fill();
           })
-        // }, i * 2000)
-      // )
-    // }
   }
 
+  particleDrawDelay(): void {
+    setTimeout(()=>{
+      this.clearInterval = setInterval(() => this.createParticle(), 2000);
+    }, 2000)
+  }
 
+  loop() {
+    this.clearCanvas();
+    this.animateParticles();
+    this.drawParticles();
+    this.animationFrame = requestAnimationFrame(() => this.loop());
+  }
 
-  // drawParticles(): void {
-  //   for(let i = 1; i < this.numberOfParticles; i++) {
-  //     // let x = Math.random() * window.innerWidth;
-  //     // let p = {
-  //     //   x: window.innerWidth/2,
-  //     //   y: Math.random() * window.innerHeight,
-  //     //   r: Math.floor(Math.random() * 10) + 1
-  //     // }
+  stopCreatingParticles(): void {
+    clearInterval(this.clearInterval);
+  }
 
-  //     this.clearTimeout.push(
-  //       setTimeout(()=> {
-
-  //         let p = {
-  //           x: window.innerWidth/2,
-  //           y: Math.random() * window.innerHeight,
-  //           r: Math.floor(Math.random() * 10) + 1
-  //         }
-
-  //         this.particlesArray.push(p)
-
-  //         this.ctx.beginPath();
-  //         this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
-  //         this.ctx.fillStyle = this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)];
-  //         this.ctx.fill();
-
-  //   this.animateParticles();
-          
-  //       }, i * 2000)
-  //     )
-  //   }
-  // }
-
-  cancelDraw(): void {
-    this.clearTimeout.forEach(particle => clearTimeout(particle));
+  stopAnimationFrame(): void {
+    cancelAnimationFrame(this.animationFrame);
   }
 
   ngOnInit() {
-    this.resizeEvent$.throttleTime(200)
+    this.resizeEvent$
+    .debounceTime(200)
     .subscribe(event => {
-      // this.animateParticles()
-      // this.cancelDraw();
-      // this.clearCanvas();
-      // this.pause = true;
-      cancelAnimationFrame(this.myReq)
-      this.setCanvasSize();
-      // this.drawParticles();
-      // this.pause = undefined;
+      this.stopAnimationFrame();
       this.particlesArray = [];
+      this.setCanvasSize();
       this.loop();
     });
   }
 
-  loop() {
-    if(this.pause) return;
-    this.clearCanvas();
-    this.createParticles();
-    this.animateParticles();
-    this.drawParticles();
-    this.myReq = requestAnimationFrame(() => this.loop());
-  }
-
   ngAfterViewInit() {
     this.setCanvasSize();
+    this.particleDrawDelay();
     this.loop();
   }
 
-  @HostListener('window:resize')
-  resize() {
-    this.resizeEvent$.next();
+  ngOnDestroy() {
+    this.stopCreatingParticles();
+    this.stopAnimationFrame();
   }
 }
