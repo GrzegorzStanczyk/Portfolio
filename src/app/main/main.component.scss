@@ -9,16 +9,6 @@ $delay: 0.7s;
     background: #f093fb linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
 }
 
-.bar {
-    filter: url('#goo');
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 20px;
-    background: red;
-}
-
 .canvas-container {
     position: absolute;
     top: 0;
@@ -34,14 +24,7 @@ $delay: 0.7s;
     rgba(253, 251, 251, 0.6) 50%, #ebedee 100%);
 }
 
-.svg-flt {
-    position: absolute;
-    width: 0;
-    height: 0;
-}
-
 .canvas {
-    filter: url('#goo');
     position: absolute;
     top: 0;
     right: 0;

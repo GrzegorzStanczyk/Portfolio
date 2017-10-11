@@ -11,7 +11,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   private resizeEvent$: Subject<MouseEvent> = new Subject<MouseEvent>();
   private canvasEl: HTMLCanvasElement = this.el.nativeElement;
   private ctx: CanvasRenderingContext2D = this.canvasEl.getContext('2d');
-  private numberOfParticles: number = 50;
+  private numberOfParticles: number = 100;
   private particlesSpeed: number = 2;
   private particlesArray: Array<any> = [];
   private clearInterval;
@@ -29,7 +29,6 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
 
   setCanvasSize(): void {
     this.canvasEl.width = window.innerWidth;
-    
     this.canvasEl.height = window.innerHeight;
   }
 
@@ -41,9 +40,9 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     // If particle amount is more than this.numberOfParticles delete first one
     if(this.particlesArray.length > this.numberOfParticles) this.particlesArray.shift()
     // If particle is outside of canvas delete it
-    this.particlesArray = this.particlesArray.filter(p => {
-      return p.x > p.r * -1;
-    });
+    // this.particlesArray = this.particlesArray.filter(p => {
+    //   return p.x > p.r * -1;
+    // });
 
     let p = {
       y: Math.random() * window.innerHeight,
