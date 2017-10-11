@@ -7,5 +7,5 @@
   <div class="text"><h1>{{message}}</h1></div>
 </div>
 <div class="canvas-container">
-  <canvas class="canvas" appParticles></canvas>
+  <canvas *ngIf="!showCanvas" class="canvas" appParticles></canvas>
 </div>

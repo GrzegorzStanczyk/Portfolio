@@ -23,7 +23,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   constructor(private el: ElementRef, private ngZone: NgZone) { }
 
   @HostListener('window:resize')
-  resize() {
+  resize(): void {
     this.resizeEvent$.next();
   }
 
@@ -69,7 +69,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
         p.direction = p.direction * -1
       }
       p.y += p.direction;
-    })
+    });
   }
 
   drawParticles(): void {
@@ -78,7 +78,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
       this.ctx.fillStyle = p.color;
       this.ctx.fill();
-    })
+    });
   }
 
   particleDrawDelay(): void {
@@ -118,7 +118,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     this.setCanvasSize();
     this.particleDrawDelay();
     // Paint loop run outside the Angular zone
-    this.ngZone.runOutsideAngular(()=>this.loop())
+    this.ngZone.runOutsideAngular(()=>this.loop());
   }
 
   ngOnDestroy() {
