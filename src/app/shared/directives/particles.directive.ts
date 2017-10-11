@@ -40,13 +40,12 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     // If particle amount is more than this.numberOfParticles delete first one
     if(this.particlesArray.length > this.numberOfParticles) this.particlesArray.shift()
     // If particle is outside of canvas delete it
-    this.particlesArray = this.particlesArray.filter(p => {
-      return p.x > p.r * -1;
-    });
+    // this.particlesArray = this.particlesArray.filter(p => {
+    //   return p.x > p.r * -1;
+    // });
 
     let p = {
-      // y: (Math.random() * (window.innerHeight - 20) + 20),
-      y: Math.random(),
+      y: null,
       r: Math.floor(Math.random() * 20) + 3,
       x: window.innerWidth,
       direction: 0.1,
@@ -55,9 +54,10 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     // Set initial particles outside the canvas
     p.x += p.r;
     // Set initial particles on y axis in range
-    p.y = p.y * (window.innerHeight - 20) + 20;
+    p.y = Math.random() * (window.innerHeight - p.r - p.r + 1) + p.r; 
 
     this.particlesArray.push(p);
+    console.log(this.particlesArray.length)
   }
 
   animateParticles(): any {
@@ -65,7 +65,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     // Set particle speed depend on its size
       p.x -= this.particlesSpeed/p.r;
       // Change particle direction
-      if(Math.floor(Math.random()*500) === 0) {
+      if(Math.floor(Math.random()*500) === 250) {
         p.direction = p.direction * -1;
       }
       // Bounce from horizontal lines 
