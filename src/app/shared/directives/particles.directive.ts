@@ -40,21 +40,23 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     // If particle amount is more than this.numberOfParticles delete first one
     if(this.particlesArray.length > this.numberOfParticles) this.particlesArray.shift()
     // If particle is outside of canvas delete it
-    // this.particlesArray = this.particlesArray.filter(p => {
-    //   return p.x > p.r * -1;
-    // });
+    this.particlesArray = this.particlesArray.filter(p => {
+      return p.x > p.r * -1;
+    });
 
     let p = {
-      y: Math.random() * window.innerHeight,
+      // y: (Math.random() * (window.innerHeight - 20) + 20),
+      y: Math.random(),
       r: Math.floor(Math.random() * 20) + 3,
       x: window.innerWidth,
-      // direction: Math.random()*0.2,
       direction: 0.1,
-      // 
       color: this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)]
     }
-    // Set initial particle outside the canvas
+    // Set initial particles outside the canvas
     p.x += p.r;
+    // Set initial particles on y axis in range
+    p.y = p.y * (window.innerHeight - 20) + 20;
+
     this.particlesArray.push(p);
   }
 
@@ -66,18 +68,21 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       if(Math.floor(Math.random()*500) === 0) {
         p.direction = p.direction * -1;
       }
-      // p.y += (Math.random() - 0.5)*0.2;
+      // Bounce from horizontal lines 
+      if(p.y >= window.innerHeight - p.r || p.y <= 0 + p.r) {
+        p.direction = p.direction * -1
+      };
       p.y += p.direction;
     })
   }
 
   drawParticles(): void {
-          this.particlesArray.forEach(p => {
-            this.ctx.beginPath();
-            this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
-            this.ctx.fillStyle = p.color;
-            this.ctx.fill();
-          })
+    this.particlesArray.forEach(p => {
+      this.ctx.beginPath();
+      this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
+      this.ctx.fillStyle = p.color;
+      this.ctx.fill();
+    })
   }
 
   particleDrawDelay(): void {
