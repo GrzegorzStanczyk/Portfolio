@@ -48,6 +48,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       y: null,
       r: Math.floor(Math.random() * 20) + 3,
       x: window.innerWidth,
+      direction: 0.1,
       color: this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)]
     }
     // Set initial particles outside the canvas
@@ -65,9 +66,9 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       p.x -= this.particlesSpeed/p.r;
       // Change particle direction || Bounce from horizontal lines 
       if(Math.floor(Math.random()*500) === 250 || p.y >= window.innerHeight - p.r || p.y <= 0 + p.r) {
-        p.y = this.particlesSpeed/p.r * -1;
+        p.direction = p.direction * -1
       }
-      p.y = this.particlesSpeed/p.r;
+      p.y += p.direction;
     })
   }
 
