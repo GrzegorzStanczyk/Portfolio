@@ -187,3 +187,23 @@ $delay: 0.7s;
         font-size: 16px;
     }
 }
+
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .container {
+        width: 70vh;
+        height: 70vh;
+    }
+    .text {
+        font-size: 4.5vh;
+    }
+}
+
+@media screen and (max-height: 300px) and (orientation: landscape) {
+    .container {
+        width: 170px;
+        height: 170px;
+    }
+    .text {
+        font-size: 11px;
+    }
+}
