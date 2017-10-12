@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -23,8 +23,10 @@ export class NavigationComponent implements OnInit {
       name: 'Contact'
     }
   ];
+  @ViewChild('navigation') navigation: ElementRef;
+  @ViewChild('selector') selector: ElementRef;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private el: ElementRef) {}
 
   ngOnInit() {
   }
@@ -40,7 +42,29 @@ export class NavigationComponent implements OnInit {
           
           console.log('prev', prev);
           console.log('index', index);
-          // console.log(this.router.url)
+          console.log(event)
+          // console.log(event.path[0].clientHeight)
+          // console.log(event.path[0].clientWidth)
+          // console.log(event.path[0].classList)
+          // console.log(this.el.nativeElement.getBoundingClientRect().top)
+
+          console.log('this.navigation.nativeElement.clientHeight', this.navigation.nativeElement.clientHeight)
+          console.log('this.navigation.nativeElement.clientWidth', this.navigation.nativeElement.clientWidth)
+
+          console.log('this.navigation.nativeElement.offsetTop', this.navigation.nativeElement.offsetTop)
+          console.log('this.navigation.nativeElement.offsetLeft', this.navigation.nativeElement.offsetLeft)
+          
+          console.log('event.path[0].offsetTop', event.path[0].offsetTop)
+          console.log('event.path[0].offsetLeft', event.path[0].offsetLeft)
+
+          console.log('event.path[0].clientHeight', event.path[0].clientHeight)
+          console.log('event.path[0].clientWidth', event.path[0].clientWidth)
+
+          console.log('this.selector.nativeElement.clientHeight', this.selector.nativeElement.clientHeight)
+          console.log('this.selector.nativeElement.clientWidth', this.selector.nativeElement.clientWidth)
+
+          console.log('this.selector.nativeElement.offsetTop', this.selector.nativeElement.offsetTop)
+          console.log('this.selector.nativeElement.offsetLeft', this.selector.nativeElement.offsetLeft)
   }
 
 }
