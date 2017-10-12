@@ -11,9 +11,9 @@ import 'rxjs/add/operator/debounceTime';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  private message: string = "Inspirations are everywhere";
+  message: string = "Inspirations are everywhere";
+  showCanvas: boolean = true;
   private resizeEvent$: Subject<boolean> = new Subject<boolean>();
-  private showCanvas: boolean = true;
   
   constructor(private router: Router) { }
 

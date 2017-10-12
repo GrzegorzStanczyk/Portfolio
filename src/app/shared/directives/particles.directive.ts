@@ -11,9 +11,10 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   private resizeEvent$: Subject<MouseEvent> = new Subject<MouseEvent>();
   private canvasEl: HTMLCanvasElement = this.el.nativeElement;
   private ctx: CanvasRenderingContext2D = this.canvasEl.getContext('2d');
-  private numberOfParticles: number = 100;
+  private maxParticlesAmount: number = 500;
   private particlesSpeed: number = 2;
   private particlesArray: Array<any> = [];
+  private particleInterval: number = 100;
   private clearInterval;
   private animationFrame;
   private colorsArray: Array<string> = [
@@ -36,14 +37,18 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
 
-  createParticle(): void {
-    // If particle amount is more than this.numberOfParticles delete first one
-    if(this.particlesArray.length > this.numberOfParticles) this.particlesArray.shift()
-    // If particle is outside of canvas delete it
-    // this.particlesArray = this.particlesArray.filter(p => {
-    //   return p.x > p.r * -1;
-    // });
+  whetherCanvasIsFull(): Array<{any}> {
+    return this.particlesArray.filter(p => {
+      return p.x > p.r * -1;
+    });
+  }
 
+  createParticle(): void {
+    // If particle is outside of canvas filter it outside
+    let particlesInRange = this.whetherCanvasIsFull();
+    // Do not create new particle if canvas is full
+    if(particlesInRange.length >= this.maxParticlesAmount) return;
+    
     let p = {
       y: null,
       r: Math.floor(Math.random() * 20) + 3,
@@ -51,6 +56,12 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       direction: 0.1,
       color: this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)]
     }
+    // If particle amount is more than this.maxParticlesAmount delete first one
+    // if(this.particlesArray.length > this.maxParticlesAmount) this.particlesArray.shift()
+
+    // Prevent delete particles from canvas if they are in it
+    this.particlesArray = particlesInRange;
+
     // Set initial particles outside the canvas
     p.x += p.r;
     // Set initial particles on y axis in range
@@ -83,7 +94,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
 
   particleDrawDelay(): void {
     setTimeout(()=>{
-      this.clearInterval = setInterval(() => this.createParticle(), 2000);
+      this.clearInterval = setInterval(() => this.createParticle(), this.particleInterval);
     }, 2000)
   }
 
