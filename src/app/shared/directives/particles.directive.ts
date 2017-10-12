@@ -14,7 +14,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   private maxParticlesAmount: number = 500;
   private particlesSpeed: number = 2;
   private particlesArray: Array<any> = [];
-  private particleInterval: number = 100;
+  private particleInterval: number = 1000;
   private clearInterval;
   private animationFrame;
   private colorsArray: Array<string> = [
@@ -71,8 +71,8 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.particlesArray.length)
   }
 
-  animateParticles(): any {
-    this.particlesArray.forEach(p => {
+  animateParticles(p): any {
+    // this.particlesArray.forEach(p => {
       // Set particle speed depend on its size
       p.x -= this.particlesSpeed/p.r;
       // Change particle direction || Bounce from horizontal lines 
@@ -80,16 +80,16 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
         p.direction = p.direction * -1
       }
       p.y += p.direction;
-    });
+    // });
   }
 
-  drawParticles(): void {
-    this.particlesArray.forEach(p => {
+  drawParticles(p): void {
+    // this.particlesArray.forEach(p => {
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
       this.ctx.fillStyle = p.color;
       this.ctx.fill();
-    });
+    // });
   }
 
   particleDrawDelay(): void {
@@ -100,8 +100,10 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
 
   loop() {
     this.clearCanvas();
-    this.animateParticles();
-    this.drawParticles();
+    this.particlesArray.forEach(p => {
+      this.animateParticles(p);
+      this.drawParticles(p);
+    })
     this.animationFrame = requestAnimationFrame(() => this.loop());
   }
 
