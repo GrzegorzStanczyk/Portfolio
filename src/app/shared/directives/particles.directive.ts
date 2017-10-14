@@ -56,8 +56,6 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       direction: 0.1,
       color: this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)]
     }
-    // If particle amount is more than this.maxParticlesAmount delete first one
-    // if(this.particlesArray.length > this.maxParticlesAmount) this.particlesArray.shift()
 
     // Prevent delete particles from canvas if they are in it
     this.particlesArray = particlesInRange;
@@ -72,7 +70,6 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   animateParticles(p): any {
-    // this.particlesArray.forEach(p => {
       // Set particle speed depend on its size
       p.x -= this.particlesSpeed/p.r;
       // Change particle direction || Bounce from horizontal lines 
@@ -80,16 +77,13 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
         p.direction = p.direction * -1
       }
       p.y += p.direction;
-    // });
   }
 
   drawParticles(p): void {
-    // this.particlesArray.forEach(p => {
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
       this.ctx.fillStyle = p.color;
       this.ctx.fill();
-    // });
   }
 
   particleDrawDelay(): void {
