@@ -1,4 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterContentInit } from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  ElementRef,
+  Renderer2, 
+  ViewChild, 
+  AfterContentInit } from '@angular/core';
 
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/filter';
@@ -34,10 +40,8 @@ export class NavigationComponent implements OnInit, AfterContentInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private el: ElementRef) {
-    router.events
-    .filter((event) => event instanceof NavigationEnd)
-    .subscribe((url:any) => console.log(url.url));
+    private el: ElementRef,
+    private renderer: Renderer2) {
   }
 
   ngAfterContentInit() {
@@ -64,41 +68,49 @@ export class NavigationComponent implements OnInit, AfterContentInit {
     });
   }
 
-  // selectActive(event, index) {
-  //   const links = this.routerLinks.map(data => data.link)
-  //   const delay = 0.05,
-  //         init = 1,
-  //         prev = links.indexOf(this.router.url.slice(1)),
-  //         len = this.routerLinks.length,
-  //         diff = index - prev,
-  //         dur = Math.abs(diff)
+  selectActive(event, index) {
+    const links = this.routerLinks.map(data => data.link)
+    const delay = 0.05,
+          init = 1,
+          prev = links.indexOf(this.router.url.slice(1)),
+          len = this.routerLinks.length,
+          diff = index - prev,
+          dur = Math.abs(diff)
           
-  //         console.log('this.router.url', this.router.url)
-  //         console.log('prev', prev);
-  //         console.log('index', index);
-  //         console.log(event)
-  //         // console.log(event.path[0].clientHeight)
-  //         // console.log(event.path[0].clientWidth)
-  //         // console.log(event.path[0].classList)
-  //         // console.log(this.el.nativeElement.getBoundingClientRect().top)
+          console.log('this.router.url', this.router.url)
+          console.log('prev', prev);
+          console.log('index', index);
+          console.log(event)
+          // console.log(event.path[0].clientHeight)
+          // console.log(event.path[0].clientWidth)
+          // console.log(event.path[0].classList)
+          // console.log(this.el.nativeElement.getBoundingClientRect().top)
 
-  //         console.log('this.navigation.nativeElement.clientHeight', this.navigation.nativeElement.clientHeight)
-  //         console.log('this.navigation.nativeElement.clientWidth', this.navigation.nativeElement.clientWidth)
+          console.log('this.navigation.nativeElement.clientHeight', this.navigation.nativeElement.clientHeight)
+          console.log('this.navigation.nativeElement.clientWidth', this.navigation.nativeElement.clientWidth)
 
-  //         console.log('this.navigation.nativeElement.offsetTop', this.navigation.nativeElement.offsetTop)
-  //         console.log('this.navigation.nativeElement.offsetLeft', this.navigation.nativeElement.offsetLeft)
+          console.log('this.navigation.nativeElement.offsetTop', this.navigation.nativeElement.offsetTop)
+          console.log('this.navigation.nativeElement.offsetLeft', this.navigation.nativeElement.offsetLeft)
           
-  //         console.log('event.path[0].offsetTop', event.path[0].offsetTop)
-  //         console.log('event.path[0].offsetLeft', event.path[0].offsetLeft)
+          // console.log('event.path[0].offsetTop', event.path[0].offsetTop)
+          // console.log('event.path[0].offsetLeft', event.path[0].offsetLeft)
 
-  //         console.log('event.path[0].clientHeight', event.path[0].clientHeight)
-  //         console.log('event.path[0].clientWidth', event.path[0].clientWidth)
+          // console.log('event.path[0].clientHeight', event.path[0].clientHeight)
+          // console.log('event.path[0].clientWidth', event.path[0].clientWidth)
 
-  //         console.log('this.selector.nativeElement.clientHeight', this.selector.nativeElement.clientHeight)
-  //         console.log('this.selector.nativeElement.clientWidth', this.selector.nativeElement.clientWidth)
+          console.log('event.target.offsetTop', event.target.offsetTop)
+          console.log('event.target.offsetLeft', event.target.offsetLeft)
 
-  //         console.log('this.selector.nativeElement.offsetTop', this.selector.nativeElement.offsetTop)
-  //         console.log('this.selector.nativeElement.offsetLeft', this.selector.nativeElement.offsetLeft)
-  // }
+          console.log('event.target.clientHeight', event.target.clientHeight)
+          console.log('event.target.clientWidth', event.target.clientWidth)
+
+          console.log('this.selector.nativeElement.clientHeight', this.selector.nativeElement.clientHeight)
+          console.log('this.selector.nativeElement.clientWidth', this.selector.nativeElement.clientWidth)
+
+          console.log('this.selector.nativeElement.offsetTop', this.selector.nativeElement.offsetTop)
+          console.log('this.selector.nativeElement.offsetLeft', this.selector.nativeElement.offsetLeft)
+          
+          this.renderer.setStyle(this.selector.nativeElement, `left`, `${event.target.offsetLeft - 3}px`)
+  }
 
 }
