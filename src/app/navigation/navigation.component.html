@@ -1,6 +1,7 @@
 <nav class="navigation" #navigation>
   <span class="active-move" #selector></span>
   <a 
+    #navigationLink
     *ngFor="let link of routerLinks; let i = index" 
     routerLink="/{{link.link}}" 
     routerLinkActive="active"
