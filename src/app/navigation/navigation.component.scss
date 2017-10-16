@@ -26,7 +26,7 @@
         &.animate-left {
             animation: move-left 0.7s ease 0s forwards;
         }
-        &.animate-righy {
+        &.animate-right {
             animation: move-right 0.7s ease 0s forwards;
         }
     }
@@ -48,14 +48,14 @@
         animation: select-move 0.5s ease 0s forwards;
     }
 }
-// nav a.animate{animation: select-move 0.5s ease 0s forwards;}
+// nav span.animate{animation: select-move 0.5s ease 0s forwards;}
 @keyframes select-move {
 	0%{ transform: scale(1,1);} 
 	20%{ transform: scale(1,0.5);} 
 	40%{ transform: scale(1,0.5);} 
 	100%{ transform: scale(1,1);} 
 }
-nav a.animate-right{animation: move-right 0.7s ease 0s forwards;}
+// nav a.animate-right{animation: move-right 0.7s ease 0s forwards;}
 @keyframes move-right {
 	0%{ transform: translateX(0px);} 
 	20%{ transform: translateX(20px);} 
@@ -64,7 +64,7 @@ nav a.animate-right{animation: move-right 0.7s ease 0s forwards;}
 	80%{ transform: translateX(0px);} 
 	100%{ transform: translateX(0px);} 
 }
-nav a.animate-left{animation: move-left 0.7s ease 0s forwards;}
+// nav a.animate-left{animation: move-left 0.7s ease 0s forwards;}
 @keyframes move-left {
 	0%{ transform: translateX(0px);} 
 	20%{ transform: translateX(-20px);} 

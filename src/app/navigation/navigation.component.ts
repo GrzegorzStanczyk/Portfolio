@@ -15,6 +15,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/pairwise';
 
+import { Subscription }   from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-navigation',
@@ -22,7 +24,14 @@ import 'rxjs/add/operator/pairwise';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit, AfterContentInit, AfterViewInit {
-  activeRoute: string;
+  @ViewChild('navigation') navigation: ElementRef;
+  @ViewChild('selector') selector: ElementRef;
+  @ViewChildren('navigationLink') navigationLink:QueryList<any>;
+
+  subscriptionToSelectorPosition: Subscription;
+  activeUrl: string;
+  activeRoute: Object;
+
   routerLinks = [
     {
       link: 'home',
@@ -42,10 +51,6 @@ export class NavigationComponent implements OnInit, AfterContentInit, AfterViewI
     width: 8,
     height: 8
   }
-  
-  @ViewChild('navigation') navigation: ElementRef;
-  @ViewChild('selector') selector: ElementRef;
-  @ViewChildren('navigationLink') navigationLink:QueryList<any>;
 
   constructor(
     private router: Router,
@@ -63,47 +68,96 @@ export class NavigationComponent implements OnInit, AfterContentInit, AfterViewI
     }
   }
 
+  animateRouterLink(activeRoute, obj) {
+    const links = this.routerLinks.map(data => data.link)
+    const prev = links.indexOf(obj.prev);
+    const curr = links.indexOf(obj.curr);
+    const len = this.routerLinks.length;
+    const diff = curr - prev;
+    const delay = 0.05;
+    let init = 1;
+    let dur = Math.abs(diff);
+    
+    if(diff > 0) {
+      for(let i = prev; i < curr; i++) {
+        dur = delay*init;
+        let element = this.navigationLink["_results"][i].nativeElement;
+        this.animateDirection(dur, 'animate-right', element);
+        init = init+1;
+      }
+    }
+
+    if(diff < 0) {
+      for(let i = prev; i > curr; i--) {
+        dur = delay*init;
+        let element = this.navigationLink["_results"][i].nativeElement;
+        this.animateDirection(dur, 'animate-left', element);
+        init = init+1;
+      }
+    }
+    this.animateMove();
+  }
+
+  animateDirection(dur, anim, elem) {
+    this.renderer.addClass(elem, anim);
+    this.renderer.setStyle(elem, 'animation-delay', `${dur}s`)
+    setTimeout(()=>{
+      this.renderer.removeClass(elem, anim);
+    }, 700)
+  }
+
+  animateMove() {
+    this.renderer.addClass(this.selector.nativeElement, 'animate');
+    setTimeout(()=>{
+      this.renderer.removeClass(this.selector.nativeElement, 'animate');
+    }, 500)
+  }
+
+  findActiveRoute(event): Object {
+    this.activeUrl = event.slice(1);
+    return this.navigationLink.find((value) => {
+      if(value.nativeElement.textContent.toLowerCase() === this.activeUrl.toLowerCase()) {
+        return value;
+      }
+    })
+  }
+
   ngAfterViewInit() {
     // Find initialized route and set selector
-    this.router.events
+    this.subscriptionToSelectorPosition = this.router.events
     .filter((event: Event) => event instanceof NavigationEnd)
-    .subscribe((e: NavigationEnd) => {
-      this.activeRoute = e.urlAfterRedirects.slice(1);
-      let v = this.navigationLink.find((value) => {
-        if(value.nativeElement.textContent.toLowerCase() === this.activeRoute.toLowerCase()) {
-          return value;
-        }
-      })
-      this.setSelectorPosition(v);
+    .map((event: any) => event.urlAfterRedirects)
+    .subscribe((event: NavigationEnd) => {
+        this.activeRoute = this.findActiveRoute(event);
+        this.setSelectorPosition(this.activeRoute);
+
+        // Unsubscribe after setting the selector position 
+        this.subscriptionToSelectorPosition.unsubscribe();
     });
+
+    // Get previous and current route
+    this.router.events
+      .filter((event: Event) => event instanceof NavigationEnd)
+      .map((event: any) => event.urlAfterRedirects)
+      .pairwise()
+      .subscribe((event) => {
+        
+        let obj = {
+          prev: event[0].slice(1),
+          curr: event[1].slice(1)
+        }
+
+        this.activeRoute = this.findActiveRoute(event[1]);
+        this.setSelectorPosition(this.activeRoute);
+        this.animateRouterLink(this.activeRoute, obj);
+      });
   }
 
   ngAfterContentInit() {
-
+        
   }
 
-  // showRoot() {
-  //   console.log('this.router.url', this.router.url)
-    
-  // }
-
-  // getPrevAndCurrRoute() {
-  //   return this.router.events
-  //   .filter((event: Event) => event instanceof NavigationEnd)
-  //   .map((event: any) => event.urlAfterRedirects)
-  //   .pairwise()
-  //   .subscribe((event) => {
-  //     return {
-  //       prev: `${event[0]}`,
-  //       curr: `${event[1]}`
-  //     }
-  //   });
-  // }
-
   ngOnInit() {
-    
-    
-    
     // this.router.events
     // .filter((event) => event instanceof NavigationEnd)
     // .map(() => this.activatedRoute)
@@ -117,75 +171,4 @@ export class NavigationComponent implements OnInit, AfterContentInit, AfterViewI
     //   console.log('NavigationEnd:', event.state);
     // });
   }
-
- 
-
-  selectActive(event, index) {
-    const links = this.routerLinks.map(data => data.link)
-    const prev = links.indexOf(this.router.url.slice(1));
-
-    // const route = this.getPrevAndCurrRoute()
-    // console.log(route)
-    const len = this.routerLinks.length;
-    const diff = index - prev;
-    if(diff === 0) return;
-    const delay = 0.05;
-    const init = 1;
-    const dur = Math.abs(diff);
-
-          if(diff > 0) {
-
-          }
-
-          if(diff < 0) {
-
-          }
-
-          // console.log('this.router.url', this.router.url)
-          // console.log('prev', prev);
-          // console.log('index', index);
-          // console.log(event)
-          // // console.log(event.path[0].clientHeight)
-          // // console.log(event.path[0].clientWidth)
-          // // console.log(event.path[0].classList)
-          // // console.log(this.el.nativeElement.getBoundingClientRect().top)
-
-          // console.log('this.navigation.nativeElement.clientHeight', this.navigation.nativeElement.clientHeight)
-          // console.log('this.navigation.nativeElement.clientWidth', this.navigation.nativeElement.clientWidth)
-
-          // console.log('this.navigation.nativeElement.offsetTop', this.navigation.nativeElement.offsetTop)
-          // console.log('this.navigation.nativeElement.offsetLeft', this.navigation.nativeElement.offsetLeft)
-          
-          // // console.log('event.path[0].offsetTop', event.path[0].offsetTop)
-          // // console.log('event.path[0].offsetLeft', event.path[0].offsetLeft)
-
-          // // console.log('event.path[0].clientHeight', event.path[0].clientHeight)
-          // // console.log('event.path[0].clientWidth', event.path[0].clientWidth)
-
-          // console.log('event.target.offsetTop', event.target.offsetTop)
-          // console.log('event.target.offsetLeft', event.target.offsetLeft)
-
-          // console.log('event.target.clientHeight', event.target.clientHeight)
-          // console.log('event.target.clientWidth', event.target.clientWidth)
-
-          // console.log('this.selector.nativeElement.clientHeight', this.selector.nativeElement.clientHeight)
-          // console.log('this.selector.nativeElement.clientWidth', this.selector.nativeElement.clientWidth)
-
-          // console.log('this.selector.nativeElement.offsetTop', this.selector.nativeElement.offsetTop)
-          // console.log('this.selector.nativeElement.offsetLeft', this.selector.nativeElement.offsetLeft)
-          
-          // // this.renderer.setStyle(this.selector.nativeElement, `left`, `${event.target.offsetLeft - 3}px`)
-          // this.renderer.addClass(event.target, 'animate-right');
-          // setTimeout(()=>{
-          //   this.renderer.removeClass(event.target, 'animate-right');
-          // }, 700)
-
-          // this.renderer.setStyle(this.selector.nativeElement, `left`, `${event.target.offsetLeft - 3}px`)
-          // this.renderer.addClass(this.selector.nativeElement, 'animate');
-          // setTimeout(()=>{
-          //   this.renderer.removeClass(this.selector.nativeElement, 'animate');
-          // }, 700)
-
-  }
-
 }
