@@ -66,7 +66,6 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     p.y = Math.random() * (window.innerHeight - p.r - p.r + 1) + p.r; 
 
     this.particlesArray.push(p);
-    console.log(this.particlesArray.length)
   }
 
   animateParticles(p): any {
