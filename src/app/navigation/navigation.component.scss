@@ -40,12 +40,8 @@
 
 .active-move {
     position: absolute;
-    width: 91px;
-    height: 51px;
-    top: -6px;
-    // left: -3px;
     z-index: 10;
-    border-radius: 20px;
+    border-radius: 50%;
     background-color: rgba(253, 251, 251, 0.8);
     transition: all 0.5s ease;
     &.animate {

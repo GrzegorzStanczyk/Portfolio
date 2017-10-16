@@ -37,6 +37,11 @@ export class NavigationComponent implements OnInit, AfterContentInit, AfterViewI
       name: 'Contact'
     }
   ];
+
+  selectorSize = {
+    width: 8,
+    height: 8
+  }
   
   @ViewChild('navigation') navigation: ElementRef;
   @ViewChild('selector') selector: ElementRef;
@@ -49,9 +54,12 @@ export class NavigationComponent implements OnInit, AfterContentInit, AfterViewI
     private renderer: Renderer2) {
   }
 
-  setSelectorPosition(activeRoute) {
+  setSelectorPosition(activeRoute): void {
     if(activeRoute) {
-      this.renderer.setStyle(this.selector.nativeElement, `left`, `${activeRoute.nativeElement.offsetLeft - 3}px`)
+      this.renderer.setStyle(this.selector.nativeElement, `width`, `${activeRoute.nativeElement.offsetWidth + this.selectorSize.width}px`)
+      this.renderer.setStyle(this.selector.nativeElement, `height`, `${activeRoute.nativeElement.offsetHeight + this.selectorSize.height}px`);
+      this.renderer.setStyle(this.selector.nativeElement, `left`, `${activeRoute.nativeElement.offsetLeft - this.selectorSize.height/2}px`);
+      this.renderer.setStyle(this.selector.nativeElement, `top`, `${activeRoute.nativeElement.offsetTop - this.selectorSize.height/2}px`);
     }
   }
 
