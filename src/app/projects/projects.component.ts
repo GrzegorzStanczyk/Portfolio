@@ -16,7 +16,7 @@ export class ProjectsComponent implements OnInit {
   
   @HostListener('document:keydown.ArrowLeft')
   navigeteToMain() {
-    this.router.navigate(['/main']);
+    this.router.navigate(['/home']);
   }
   @HostListener('document:keydown.ArrowRight')
   navigeteToContact() {
