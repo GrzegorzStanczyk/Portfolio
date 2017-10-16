@@ -6,7 +6,6 @@ import {
   ViewChild,  
   ViewChildren,
   QueryList,
-  AfterContentInit,
   AfterViewInit } from '@angular/core';
 
 import { Router, NavigationStart, NavigationEnd, ActivatedRoute, Event } from '@angular/router';
@@ -23,7 +22,7 @@ import { Subscription }   from 'rxjs/Subscription';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit, AfterContentInit, AfterViewInit {
+export class NavigationComponent implements OnInit, AfterViewInit {
   @ViewChild('navigation') navigation: ElementRef;
   @ViewChild('selector') selector: ElementRef;
   @ViewChildren('navigationLink') navigationLink:QueryList<any>;
@@ -151,10 +150,6 @@ export class NavigationComponent implements OnInit, AfterContentInit, AfterViewI
         this.setSelectorPosition(this.activeRoute);
         this.animateRouterLink(this.activeRoute, obj);
       });
-  }
-
-  ngAfterContentInit() {
-        
   }
 
   ngOnInit() {
