@@ -2,10 +2,9 @@
   <span class="active-move" #selector></span>
   <a 
     #navigationLink
-    *ngFor="let link of routerLinks; let i = index" 
+    *ngFor="let link of routerLinks" 
     routerLink="/{{link.link}}" 
-    routerLinkActive="active"
-    (click)="selectActive($event, i)">{{link.name}}</a>
+    routerLinkActive="active">{{link.name}}</a>
 </nav>
 
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-flt">
