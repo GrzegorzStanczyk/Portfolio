@@ -70,13 +70,15 @@ export class NavigationComponent implements OnInit, AfterViewInit {
   animateRouterLink(activeRoute, obj) {
     const links = this.routerLinks.map(data => data.link)
     const prev = links.indexOf(obj.prev);
+    // if navigate from not-found component do not animate non-existent route
+    if(prev < 0) return;
     const curr = links.indexOf(obj.curr);
     const len = this.routerLinks.length;
     const diff = curr - prev;
     const delay = 0.05;
     let init = 1;
     let dur = Math.abs(diff);
-    
+
     if(diff > 0) {
       for(let i = prev; i < curr; i++) {
         dur = delay*init;
@@ -140,12 +142,10 @@ export class NavigationComponent implements OnInit, AfterViewInit {
       .map((event: any) => event.urlAfterRedirects)
       .pairwise()
       .subscribe((event) => {
-        
         let obj = {
           prev: event[0].slice(1),
           curr: event[1].slice(1)
         }
-
         this.activeRoute = this.findActiveRoute(event[1]);
         this.setSelectorPosition(this.activeRoute);
         this.animateRouterLink(this.activeRoute, obj);
