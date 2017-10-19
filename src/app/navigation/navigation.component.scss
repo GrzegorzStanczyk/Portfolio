@@ -1,8 +1,11 @@
 .navigation {
     filter: url('#goo');
+    width: 100%;
     min-width: 290px;
+    max-width: 320px;
     position: fixed;
     display: flex;
+    flex: 1;
     z-index: 100;
     bottom: 7%;
     left: 50%;
@@ -41,7 +44,7 @@
 .active-move {
     position: absolute;
     z-index: 10;
-    border-radius: 50%;
+    border-radius: 20%;
     background-color: rgba(253, 251, 251, 0.8);
     transition: all 0.5s ease;
     &.animate {
