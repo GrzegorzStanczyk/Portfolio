@@ -96,6 +96,8 @@ ul {
                     right: 0;
                     bottom: 0;
                     background: #fff;
+                    border-bottom-left-radius: 3px;
+                    border-bottom-right-radius: 3px;
                 }
             }
         }
@@ -103,14 +105,50 @@ ul {
             // overflow: hidden;
             border-radius: 5px;
             .desktop-view__address-bar {
+                display: flex;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
                 position: absolute;
                 top: -38px;
                 width: 100%;
                 height: 38px;
-                background-color: red;
+                background-color: #BDBDBD;
                 .address-bar__icons {
+                    width: 100px;
+                    height: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    div {
+                       width: 20px;
+                       height: 20px;
+                       border-radius: 50%;
+                       &:nth-child(1) {
+                            background-color: #F46459;
+                       }
+                       &:nth-child(2) {
+                            background-color: #F4C666;
+                       }
+                       &:nth-child(3) {
+                            background-color: #A9D679;
+                        }
+                    }
                 }
                 .project__address {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    flex: 1;
+                    margin: 5px;
+                    padding: 0 10px;
+                    border-radius: 3px;
+                    background-color: #FFF;
+                    a {
+                        display: inline-block;
+                        vertical-align: middle;
+                        line-height: 29px;
+                        text-decoration: none;
+                    }
                 }
             }
         }
