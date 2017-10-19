@@ -14,7 +14,8 @@ ul {
     height: 100vh;
     width: 100%;
     @extend .center;
-    background: #f093fb linear-gradient(120deg, #f5576c 0%, blue 100%);
+    // background: #f093fb linear-gradient(120deg, #f5576c 0%, blue 100%);
+    background-color: rgba(123, 42, 59, 1);
 }
 
 .projects-container {
@@ -22,7 +23,6 @@ ul {
     max-width: 1440px;
     width: 90%;
     height: 90%;
-    background: #f093fb;
 }
 
 .pagination {
@@ -30,7 +30,6 @@ ul {
     left: 0;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
-    background: gray;
 }
 
 .project {
@@ -39,26 +38,36 @@ ul {
     overflow: hidden;
     width: 100%;
     height: 100%;
-    background: white;
 }
 
 .project__info {
+    color: #fff;
     @extend .center;
     flex-direction: column;
     order: 2;
     width: 30%;
     height: 100%;
-    background: rgba(128, 128, 128, 0.5);
+    // background: rgba(128, 128, 128, 0.5);
+    background-color: rgba(64, 24, 27, 0.5);
+    padding: 0 3%;
     z-index: 100;
+    .project__title {
+        margin-top: 0;
+        font-size: 3vw;
+        text-align: center;
+    }
     .project__technologies {
+        margin: 20px;
         li{
             display: inline;
         }
     }
     .project_description {
-        margin: 0 15%;
+        display: block;
+        width: 100%;
     }
     .project__share {
+        margin: 20px;
         li{
             display: inline;
         }
@@ -66,24 +75,76 @@ ul {
 }
 
 .project__view {
-    order: 1;
     @extend .center;
     width: 70%;
     height: 100%;
-    background: lightgray;
-
-    .project__desktop-view {
+    .showcase-container{
+        @extend .center;
         position: relative;
-        width: 700px;
-        height: 620px;
-        background: blue;
-    }
-    .project__mobile-view {
-        position: absolute;
-        bottom: -20px;
-        left: -20px;
-        width: 262px;
-        height: 523px;
-        background: lightcoral;
+        margin: 0 7%;
+        width: 100%;
+        .project__desktop-view--16-9 {
+            width: 100%;
+            position: relative;
+            .desktop__screen{
+                width: 100%;
+                padding-bottom: 56.25%;
+                .project__desktop-showcase {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: #fff;
+                }
+            }
+        }
+        .project__desktop-view {
+            // overflow: hidden;
+            border-radius: 5px;
+            .desktop-view__address-bar {
+                position: absolute;
+                top: -38px;
+                width: 100%;
+                height: 38px;
+                background-color: red;
+                .address-bar__icons {
+                }
+                .project__address {
+                }
+            }
+        }
+    
+        .project__mobile-view {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            right: -5%;
+            width: 30%;
+            transform: translate3d(0, 10%, 0);
+            background: white;
+            border: 1px solid black; 
+            border-radius: 10px;
+            .phone__top {
+                // width: 100%;
+                // height: 40px;
+            }
+            .phone__screen {
+                width: 100%;
+                padding-bottom: 177.78%; 
+                .project__mobile-showcase {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: blue;
+                }
+            }
+            .phone__bottom {
+                // width: 100%;
+                // height: 50px;
+            }
+        }
     }
 }
