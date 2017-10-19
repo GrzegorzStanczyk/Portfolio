@@ -2,7 +2,7 @@ import { trigger, state, animate, query, group, transition, style } from '@angul
 
 export const slideLeftAnimation = 
     trigger('slideLeftAnimation', [
-        transition('* <=> *', [
+        transition('* => *', [
             query(':enter, :leave', style({ position: 'fixed', width: '100%' })
             , { optional: true }),
             group([
