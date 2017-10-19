@@ -28,22 +28,22 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     this.resizeEvent$.next();
   }
 
-  @HostListener('document:mousedown', ['$event'])
-  speedUp(event) {
-    console.log(event)
-    this.particleInterval = 50;
-    this.particlesSpeed = 10;
-    clearInterval(this.clearInterval);
-    this.particleDrawDelay()
-  }
-  @HostListener('document:mouseup', ['$event'])
-  speedDown(event) {
-    console.log(event)
-    this.particleInterval = 1000;
-    this.particlesSpeed = 2;
-    clearInterval(this.clearInterval);
-    this.particleDrawDelay()
-  }
+  // @HostListener('document:mousedown', ['$event'])
+  // speedUp(event) {
+  //   console.log(event)
+  //   this.particleInterval = 50;
+  //   this.particlesSpeed = 10;
+  //   clearInterval(this.clearInterval);
+  //   this.particleDrawDelay()
+  // }
+  // @HostListener('document:mouseup', ['$event'])
+  // speedDown(event) {
+  //   console.log(event)
+  //   this.particleInterval = 1000;
+  //   this.particlesSpeed = 2;
+  //   clearInterval(this.clearInterval);
+  //   this.particleDrawDelay()
+  // }
 
   setCanvasSize(): void {
     this.canvasEl.width = window.innerWidth;
