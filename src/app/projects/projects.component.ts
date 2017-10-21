@@ -40,8 +40,9 @@ export class ProjectsComponent implements OnInit {
     .debounceTime(200)
     .subscribe(event => {
       if(window.innerWidth > 701) {
-        if(this.infoToggler.nativeElement.getAttribute('aria-expanded') === true) {
+        if(this.infoToggler.nativeElement.getAttribute('aria-expanded') === 'true') {
           this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'false');
+          this.renderer.removeClass(this.projectInfo.nativeElement, 'info-open');
         }
       }
     });
