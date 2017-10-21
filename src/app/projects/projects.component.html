@@ -1,65 +1,89 @@
 <div class="projects-container">
   <nav class="pagination">
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-      </ul>
-    </nav>
-    
-    <section class="project">
-      <div class="project__info">
-        <h2 class="project__title">Key Viewer</h2>
-        <div class="project__technologies">
-          <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-          </ul>
-        </div>
-        <p class="project_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsa non nostrum possimus molestias nemo reprehenderit soluta. Beatae corporis inventore vitae voluptatem, non animi id tenetur ipsum doloribus commodi porro!</p>
-        <div class="project__share">
-          <ul>
-            <li>live</li>
-            <li>git</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="project__view">
-        <div class="showcase-container">
-          <div class="project__desktop-view project__desktop-view--16-9">
-            <div class="desktop-view__address-bar">
-              <div class="address-bar__icons">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <div class="project__address">
-                <a href="">jakiśtamlink</a>
-              </div>
-            </div>
-            <div class="desktop__screen">
-              <div class="project__desktop-showcase">
-                <img src="" alt="">
-              </div>
-            </div>
-          </div> 
+    <div class="selectors">
+        <span class="selector"></span>
+        <span class="selector"></span>
+        <span class="selector"></span>
+        <span class="selector"></span>
+        <span class="selector"></span>
+        <span class="selector"></span>
+        <span class="selector"></span>
+    </div>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+    </ul>
+  </nav>
   
-          <div class="project__mobile-view">
-            <div class="phone__top"></div>
-            <div class="phone__screen">
-              <div class="project__mobile-showcase">
-                <img src="" alt="">
-              </div>
+  <section class="project">
+    <button 
+      #infoToggler
+      class="info-toggler"
+      type="button"
+      aria-label="toggle project information"
+      aria-expanded="false"
+      (click)="toggleInfo()">
+      <span class="info-toggler__icon" aria-hidden="true"></span>
+      <span class="info-toggler__icon" aria-hidden="true"></span>
+      <span class="info-toggler__label">Open/close information</span>  
+    </button>
+    <div class="project__info" #projectInfo>
+      <h2 class="project__title">Key Viewer</h2>
+      <div class="project__technologies">
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+        </ul>
+      </div>
+      <p class="project_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsa non nostrum possimus molestias nemo reprehenderit soluta. Beatae corporis inventore vitae voluptatem, non animi id tenetur ipsum doloribus commodi porro!</p>
+      <div class="project__share">
+        <ul>
+          <li>live</li>
+          <li>git</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project__view">
+      <div class="showcase-container">
+        <div class="project__desktop-view project__desktop-view--16-9">
+          <div class="desktop-view__address-bar">
+            <div class="address-bar__icons">
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
-            <div class="phone__bottom"></div>
+            <div class="project__address">
+              <a href="">jakiśtamlink</a>
+            </div>
           </div>
+          <div class="desktop__screen">
+            <div class="project__desktop-showcase">
+              <img src="" alt="">
+            </div>
+          </div>
+        </div> 
+
+        <div class="project__mobile-view">
+          <div class="phone__top">
+      
+          </div>
+          <div class="phone__screen">
+            <div class="project__mobile-showcase">
+              <img src="" alt="">
+            </div>
+          </div>
+          <div class="phone__bottom"></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 </div>
