@@ -33,12 +33,12 @@ ul {
 .pagination {
 	@extend .center;
 	height: 100%;
-  width: 50px;
+  width: 100%;
   position: absolute;
   left: 0;
   top: 50%;
   transform: translate3d(-500%, -50%, 0);
-  animation: slide-from-left 2.5s .5s cubic-bezier(.25,.8,.25,1) forwards;
+  animation: slide-from-left 1s 1s cubic-bezier(.25,.8,.25,1) forwards;
 	.selectors {
 		height: 100%;
 		position: absolute;
