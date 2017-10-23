@@ -1,6 +1,7 @@
 import { 
   Component, 
-  OnInit, 
+  OnInit,
+  OnDestroy, 
   HostListener, 
   ElementRef,
   Renderer2,
@@ -8,7 +9,9 @@ import {
 
 import { Router } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
+import { ResizeService } from '@app/shared';
+
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
@@ -16,13 +19,17 @@ import 'rxjs/add/operator/debounceTime';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit {
-  private resizeEvent$: Subject<MouseEvent> = new Subject<MouseEvent>();
+export class ProjectsComponent implements OnInit, OnDestroy {
+  private resizeSubscription: Subscription;
+
   @ViewChild('projectInfo') projectInfo: ElementRef;
   @ViewChild('infoToggler') infoToggler: ElementRef;
   infoState: boolean = false;
 
-  constructor(private router: Router, private renderer: Renderer2) { }
+  constructor(
+    private router: Router, 
+    private renderer: Renderer2,
+    private resizeService: ResizeService) { }
 
   toggleInfo() {
     this.infoState = !this.infoState;
@@ -36,16 +43,21 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resizeEvent$
+    // Close the info modal if the window width is greather than 701px
+    this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
     .subscribe(event => {
-      if(window.innerWidth > 701) {
+      if(event.innerWidth > 701) {
         if(this.infoToggler.nativeElement.getAttribute('aria-expanded') === 'true') {
           this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'false');
           this.renderer.removeClass(this.projectInfo.nativeElement, 'info-open');
         }
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
   
   @HostListener('document:keydown.ArrowLeft')
@@ -55,9 +67,5 @@ export class ProjectsComponent implements OnInit {
   @HostListener('document:keydown.ArrowRight')
   navigeteToContact() {
     this.router.navigate(['/contact'])
-  }
-  @HostListener('window:resize')
-  resize(): void {
-    this.resizeEvent$.next();
   }
 }
