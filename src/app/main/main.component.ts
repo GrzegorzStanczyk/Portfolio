@@ -1,8 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
+import { ResizeService } from '@app/shared';
+
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
@@ -10,31 +12,30 @@ import 'rxjs/add/operator/debounceTime';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
-  message: string = "Inspirations are everywhere";
-  showCanvas: boolean = true;
-  private resizeEvent$: Subject<boolean> = new Subject<boolean>();
+export class MainComponent implements OnInit, OnDestroy {
+  public message: string = "Inspirations are everywhere";
+  public showCanvas: boolean = true;
+  private resizeSubscription: Subscription;
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private resizeService: ResizeService) { }
 
   @HostListener('document:keydown.ArrowRight')
   navigeteToTheRoute() {
     this.router.navigate(['/projects']);
   }
 
-  @HostListener('window:resize', ['$event'])
-  canvasState(event): void {
-    event.target.innerWidth <= 700 ? this.resizeEvent$.next(true) : this.resizeEvent$.next(false)
-  }
-
-  canvasInit() {
-    window.innerWidth <= 700 ? this.showCanvas = true : this.showCanvas = false;
+  private canvasState(event = window): boolean {
+    return event.innerWidth <= 700 ? true : false;
   }
 
   ngOnInit() {
-    this.canvasInit();
-    this.resizeEvent$
+    this.showCanvas = this.canvasState();
+    this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
-    .subscribe(event => this.showCanvas = event);
+    .subscribe(event => this.showCanvas = this.canvasState(event));
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 }

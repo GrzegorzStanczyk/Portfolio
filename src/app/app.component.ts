@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { slideLeftAnimation } from './shared/_animations/index';
+import { slideLeftAnimation } from '@app/shared/index';
 
 @Component({
   selector: 'app-root',
