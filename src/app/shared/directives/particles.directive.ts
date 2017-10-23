@@ -1,6 +1,8 @@
-import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, HostListener, Input, NgZone } from '@angular/core';
+import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Input, NgZone } from '@angular/core';
 
-import { Subject } from 'rxjs/Subject';
+import { ResizeService } from '@app/shared';
+
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 
 @Directive({
@@ -8,7 +10,7 @@ import 'rxjs/add/operator/debounceTime';
 })
 
 export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
-  private resizeEvent$: Subject<MouseEvent> = new Subject<MouseEvent>();
+  private resizeSubscription: Subscription;
   private canvasEl: HTMLCanvasElement = this.el.nativeElement;
   private ctx: CanvasRenderingContext2D = this.canvasEl.getContext('2d');
   private maxParticlesAmount: number = 500;
@@ -21,12 +23,10 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       "#00d1cb", "#ff4699", "#fbb63a", "#b3dc5b", "#ffe100"
   ];
 
-  constructor(private el: ElementRef, private ngZone: NgZone) { }
-
-  @HostListener('window:resize')
-  resize(): void {
-    this.resizeEvent$.next();
-  }
+  constructor(
+    private el: ElementRef, 
+    private ngZone: NgZone,
+    private resizeService: ResizeService) { }
 
   // @HostListener('document:mousedown', ['$event'])
   // speedUp(event) {
@@ -126,7 +126,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.resizeEvent$
+    this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
     .subscribe(event => {
       this.stopAnimationFrame();
@@ -147,5 +147,6 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.stopCreatingParticles();
     this.stopAnimationFrame();
+    this.resizeSubscription.unsubscribe();
   }
 }
