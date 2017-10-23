@@ -147,6 +147,10 @@ ul {
   }
   &:focus {
     outline: none;
+    background-color: #000;
+    .info-toggler__icon {
+      background-color: #FFF;
+    }
   }
   &[aria-expanded="true"] {
     transform: rotate(225deg);
