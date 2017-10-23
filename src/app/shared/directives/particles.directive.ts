@@ -133,7 +133,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       this.particlesArray = [];
       this.setCanvasSize();
     // Paint loop run outside the Angular zone
-      this.ngZone.runOutsideAngular(()=>this.loop())
+      this.ngZone.runOutsideAngular(()=>this.loop());
     });
   }
 
