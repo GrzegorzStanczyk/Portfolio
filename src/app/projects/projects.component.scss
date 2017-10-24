@@ -143,7 +143,11 @@ ul {
   background-color: #FFF;
   opacity: 1;
   &:hover {
-    opacity: 0.8;
+    // opacity: 0.8;
+    background-color: #000;
+    .info-toggler__icon {
+      background-color: #FFF;
+    }
   }
   &:focus {
     outline: none;
@@ -313,11 +317,13 @@ ul {
           white-space: nowrap;
           flex: 1;
           margin: 5px;
-          padding: 0 10px;
           border-radius: 3px;
           background-color: #FFF;
           a {
             display: inline-block;
+            padding: 0 10px;
+            width: 100%;
+            height: 100%;
             vertical-align: middle;
             line-height: 29px;
             text-decoration: none;

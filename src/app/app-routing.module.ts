@@ -7,10 +7,12 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { PROJECTS } from "@app/shared";
+
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: MainComponent, data: { state: 'home' } },
-  { path: 'projects', component: ProjectsComponent, data: { state: 'projects' } },
+  { path: 'projects', component: ProjectsComponent, data: { state: 'projects', project: PROJECTS[0] } },
   { path: 'contact', component: ContactComponent, data: { state: 'contact' } },
   { path: '**', component: NotFoundComponent }
 ];

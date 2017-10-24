@@ -20,7 +20,7 @@
     </ul>
   </nav>
   
-  <section class="project">
+  <section class="project" *ngIf="project$ | async as project">
     <button 
       #infoToggler
       class="info-toggler"
@@ -33,21 +33,17 @@
       <span class="info-toggler__label">Open/close information</span>  
     </button>
     <div class="project__info" #projectInfo>
-      <h2 class="project__title">Key Viewer</h2>
+      <h2 class="project__title">{{project.title}}</h2>
       <div class="project__technologies">
         <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
+          <li *ngFor="let tech of project.tech">{{tech}}</li>
         </ul>
       </div>
-      <p class="project_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsa non nostrum possimus molestias nemo reprehenderit soluta. Beatae corporis inventore vitae voluptatem, non animi id tenetur ipsum doloribus commodi porro!</p>
+      <p class="project_description">{{project.desc}}</p>
       <div class="project__share">
         <ul>
-          <li>live</li>
-          <li>git</li>
+          <li>{{project.live}}</li>
+          <li>{{project.git}}</li>
         </ul>
       </div>
     </div>
@@ -88,4 +84,4 @@
   </section>
 </div>
 
-<div class="mask"></div>
+<!-- <div class="mask"></div> -->
