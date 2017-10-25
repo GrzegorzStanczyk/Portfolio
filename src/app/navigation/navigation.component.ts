@@ -115,7 +115,8 @@ export class NavigationComponent implements OnInit, AfterViewInit {
   }
 
   findActiveRoute(event): Object {
-    this.activeUrl = event.slice(1);
+    // this.activeUrl = event.slice(1);
+    this.activeUrl = event.lastIndexOf('/') > 1 ? event.slice(1, event.lastIndexOf('/')) : event.slice(1);
     return this.navigationLink.find((value) => {
       if(value.nativeElement.textContent.toLowerCase() === this.activeUrl.toLowerCase()) {
         return value;
