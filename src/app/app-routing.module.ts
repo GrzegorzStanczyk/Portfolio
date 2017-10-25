@@ -12,9 +12,11 @@ import { PROJECTS } from "@app/shared";
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: MainComponent, data: { state: 'home' } },
-  { path: 'projects', component: ProjectsComponent, data: { state: 'projects', project: PROJECTS[0] } },
+  { path: 'projects', redirectTo: `projects/${PROJECTS[0].path}`, data: { state: 'projects' }, pathMatch: 'full' },
+  { path: 'projects/:id', component: ProjectsComponent, data: { state: 'projects' }, pathMatch: 'full' },
   { path: 'contact', component: ContactComponent, data: { state: 'contact' } },
-  { path: '**', component: NotFoundComponent }
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: '/not-found' }
 ];
 
 @NgModule({

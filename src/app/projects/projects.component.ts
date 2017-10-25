@@ -7,7 +7,7 @@ import {
   Renderer2,
   ViewChild } from '@angular/core';
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ResizeService } from '@app/shared';
 import { PROJECTS } from "@app/shared";
@@ -24,7 +24,8 @@ import 'rxjs/add/operator/debounceTime';
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
   private resizeSubscription: Subscription;
-  private project$: Observable<Project>
+  private project: Project;
+  
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
   @ViewChild('infoToggler') infoToggler: ElementRef;
@@ -46,9 +47,20 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'false');
     }
   }
+  
+  // Match the path, to render correct project
+  matchPath() {
+    this.route.params.subscribe((params: Params) => {
+      this.project = PROJECTS.find(project => project.path === params.id);
+      if(!this.project) {
+        this.router.navigate(['not-found']);
+      }
+    })
+  }
 
   ngOnInit() {
-    this.project$ = this.route.data.map(data => data.project)
+    this.matchPath();
+    
     // Close the info modal if the window width is greather than 701px
     this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
