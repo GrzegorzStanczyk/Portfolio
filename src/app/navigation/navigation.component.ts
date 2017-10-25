@@ -115,13 +115,16 @@ export class NavigationComponent implements OnInit, AfterViewInit {
   }
 
   findActiveRoute(event): Object {
-    // this.activeUrl = event.slice(1);
-    this.activeUrl = event.lastIndexOf('/') > 1 ? event.slice(1, event.lastIndexOf('/')) : event.slice(1);
+    this.activeUrl = this.sliceRoute(event);
     return this.navigationLink.find((value) => {
       if(value.nativeElement.textContent.toLowerCase() === this.activeUrl.toLowerCase()) {
         return value;
       }
     })
+  }
+
+  sliceRoute(e) {
+    return e.lastIndexOf('/') > 1 ? e.slice(1, e.lastIndexOf('/')) : e.slice(1);
   }
 
   ngAfterViewInit() {
@@ -143,9 +146,11 @@ export class NavigationComponent implements OnInit, AfterViewInit {
       .map((event: any) => event.urlAfterRedirects)
       .pairwise()
       .subscribe((event) => {
+        let previousRoute = this.sliceRoute(event[0]);
+        let currentRoute = this.sliceRoute(event[1]);
         let obj = {
-          prev: event[0].slice(1),
-          curr: event[1].slice(1)
+          prev: previousRoute,
+          curr: currentRoute
         }
         this.activeRoute = this.findActiveRoute(event[1]);
         this.setSelectorPosition(this.activeRoute);
