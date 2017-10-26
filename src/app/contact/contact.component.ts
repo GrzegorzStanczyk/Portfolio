@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { NavigateService } from '@app/shared';
+
 
 @Component({
   selector: 'app-contact',
@@ -9,14 +11,14 @@ import { Router } from '@angular/router';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private navigateService: NavigateService) { }
 
   ngOnInit() {
   }
 
   @HostListener('document:keydown.ArrowLeft')
-  navigateToProjects() {
-    this.router.navigate(['/projects']);
+  navigate() {
+    this.navigateService.navigateToProjects();
   }
 
 }

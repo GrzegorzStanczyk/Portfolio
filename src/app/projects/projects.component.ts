@@ -10,6 +10,7 @@ import {
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ResizeService } from '@app/shared';
+import { StorageService } from '@app/shared';
 import { PROJECTS } from "@app/shared";
 import { Project } from "@app/shared";
 
@@ -35,7 +36,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     private router: Router, 
     private route: ActivatedRoute,
     private renderer: Renderer2,
-    private resizeService: ResizeService) { }
+    private resizeService: ResizeService,
+    private storageService: StorageService) { }
 
   toggleInfo() {
     this.infoState = !this.infoState;
@@ -52,9 +54,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   matchPath() {
     this.route.params.subscribe((params: Params) => {
       this.project = PROJECTS.find(project => project.path === params.id);
-      if(!this.project) {
-        this.router.navigate(['not-found']);
-      }
+      if(!this.project) return this.router.navigate(['not-found']);
+      this.storageService.lastProject = this.project;
     })
   }
 

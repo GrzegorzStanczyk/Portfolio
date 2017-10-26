@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ResizeService } from '@app/shared';
+import { NavigateService } from '@app/shared';
 
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -17,11 +18,14 @@ export class MainComponent implements OnInit, OnDestroy {
   public showCanvas: boolean = true;
   private resizeSubscription: Subscription;
   
-  constructor(private router: Router, private resizeService: ResizeService) { }
+  constructor(
+    private router: Router, 
+    private resizeService: ResizeService,
+    private navigateService: NavigateService) { }
 
   @HostListener('document:keydown.ArrowRight')
-  navigeteToTheRoute() {
-    this.router.navigate(['/projects']);
+  navigate() {
+    this.navigateService.navigateToProjects();
   }
 
   private canvasState(event = window): boolean {
