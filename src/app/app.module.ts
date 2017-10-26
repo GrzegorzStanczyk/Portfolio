@@ -11,6 +11,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ParticlesDirective } from './shared/directives/particles.directive';
 import { ResizeService } from './shared/services/resize.service';
+import { StorageService } from './shared/services/storage.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ResizeService } from './shared/services/resize.service';
     BrowserModule.withServerTransition({appId: 'universal-portfolio'}),
     AppRoutingModule
   ],
-  providers: [ResizeService],
+  providers: [ResizeService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
