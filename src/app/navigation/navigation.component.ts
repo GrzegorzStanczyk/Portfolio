@@ -34,18 +34,9 @@ export class NavigationComponent implements OnInit, AfterViewInit {
   activeRoute: Object;
 
   routerLinks = [
-    {
-      link: 'home',
-      name: 'Home'
-    },
-    {
-      link: 'projects',
-      name: 'Projects'
-    }, 
-    {
-      link: 'contact',
-      name: 'Contact'
-    }
+    { link: 'home' },
+    { link: 'projects' }, 
+    { link: 'contact' }
   ];
 
   selectorSize = {
