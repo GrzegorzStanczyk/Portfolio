@@ -1,6 +1,7 @@
 // Services
 export * from './services/resize.service';
 export * from './services/storage.service';
+export * from './services/navigate.service';
 
 // Animations
 export * from './animations/slide-left.animation';
