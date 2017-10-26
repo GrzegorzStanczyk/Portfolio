@@ -1,10 +1,5 @@
 <nav class="navigation" #navigation>
   <span class="active-move" #selector></span>
-  <!-- <a 
-    #navigationLink
-    *ngFor="let link of routerLinks" 
-    routerLink="/{{link.link}}" 
-    routerLinkActive="active">{{link.name}}</a> -->
     <a #navigationLink routerLink="/home" routerLinkActive="active">home</a>
     <a #navigationLink (click)="navigateToProject()" routerLinkActive="active">projects</a>
     <a #navigationLink routerLink="/contact" routerLinkActive="active">contact</a>
