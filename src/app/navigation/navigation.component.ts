@@ -16,6 +16,8 @@ import 'rxjs/add/operator/pairwise';
 
 import { Subscription }   from 'rxjs/Subscription';
 
+import { NavigateService } from '@app/shared';
+
 
 @Component({
   selector: 'app-navigation',
@@ -55,7 +57,12 @@ export class NavigationComponent implements OnInit, AfterViewInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private el: ElementRef,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private navigateService: NavigateService) {
+  }
+
+  navigateToProject() {
+    this.navigateService.navigateToProjects();
   }
 
   setSelectorPosition(activeRoute): void {
