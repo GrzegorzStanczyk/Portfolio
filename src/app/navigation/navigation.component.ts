@@ -94,7 +94,7 @@ export class NavigationComponent implements OnInit, AfterViewInit {
         init = init+1;
       }
     }
-    this.animateMove();
+    if(diff !== 0)this.animateMove();
   }
 
   animateDirection(dur, anim, elem) {
