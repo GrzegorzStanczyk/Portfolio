@@ -1,6 +1,7 @@
 import { 
   Component, 
   OnInit, 
+  OnDestroy,
   ElementRef,
   Renderer2, 
   ViewChild,  
@@ -15,8 +16,10 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/pairwise';
 
 import { Subscription }   from 'rxjs/Subscription';
+import 'rxjs/add/operator/debounceTime';
 
 import { NavigateService } from '@app/shared';
+import { ResizeService } from '@app/shared';
 
 
 @Component({
@@ -24,14 +27,15 @@ import { NavigateService } from '@app/shared';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit, AfterViewInit {
+export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('navigation') navigation: ElementRef;
   @ViewChild('selector') selector: ElementRef;
   @ViewChildren('navigationLink') navigationLink:QueryList<any>;
-
-  subscriptionToSelectorPosition: Subscription;
-  activeUrl: string;
-  activeRoute: Object;
+  private subscriptionToSelectorPosition: Subscription;
+  private resizeSubscription: Subscription;
+  
+  private activeUrl: string;
+  private activeRoute: Object;
 
   routerLinks = [
     { link: 'home' },
@@ -49,7 +53,8 @@ export class NavigationComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private el: ElementRef,
     private renderer: Renderer2,
-    private navigateService: NavigateService) {
+    private navigateService: NavigateService,
+    private resizeService: ResizeService) {
   }
 
   navigateToProject() {
@@ -140,21 +145,32 @@ export class NavigationComponent implements OnInit, AfterViewInit {
 
     // Get previous and current route
     this.router.events
-      .filter((event: Event) => event instanceof NavigationEnd)
-      .map((event: any) => event.urlAfterRedirects)
-      .pairwise()
-      .subscribe((event) => {
-        let previousRoute = this.sliceRoute(event[0]);
-        let currentRoute = this.sliceRoute(event[1]);
-        let obj = {
-          prev: previousRoute,
-          curr: currentRoute
-        }
-        this.activeRoute = this.findActiveRoute(event[1]);
-        this.setSelectorPosition(this.activeRoute);
-        this.animateRouterLink(this.activeRoute, obj);
-      });
+    .filter((event: Event) => event instanceof NavigationEnd)
+    .map((event: any) => event.urlAfterRedirects)
+    .pairwise()
+    .subscribe((event) => {
+      let previousRoute = this.sliceRoute(event[0]);
+      let currentRoute = this.sliceRoute(event[1]);
+      let obj = {
+        prev: previousRoute,
+        curr: currentRoute
+      }
+      this.activeRoute = this.findActiveRoute(event[1]);
+      this.setSelectorPosition(this.activeRoute);
+      this.animateRouterLink(this.activeRoute, obj);
+    });
+    
+    // Adjust selector position when window resize
+    this.resizeSubscription = this.resizeService.resizeSubject$
+    .debounceTime(200)
+    .subscribe(event => {
+      this.setSelectorPosition(this.activeRoute);
+    })
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
+  }
 }
