@@ -1,7 +1,7 @@
 <nav class="navigation" #navigation>
   <span class="active-move" #selector></span>
     <a #navigationLink routerLink="/home" routerLinkActive="active">home</a>
-    <a #navigationLink (click)="navigateToProject()" routerLinkActive="active">projects</a>
+    <a #navigationLink routerLink="/projects" (click)="navigateToProject()" routerLinkActive="active">projects</a>
     <a #navigationLink routerLink="/contact" routerLinkActive="active">contact</a>
 </nav>
 
