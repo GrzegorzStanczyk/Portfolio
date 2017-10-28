@@ -13,7 +13,7 @@
       <li>1</li>
       <li>2</li>
       <li>3</li>
-      <li>4</li>
+      <li (click)="toggleProject()">4</li>
       <li>5</li>
       <li>6</li>
       <li>7</li>
@@ -50,7 +50,7 @@
 
     <div class="project__view">
       <div class="showcase-container">
-        <div class="project__desktop-view project__desktop-view--16-9">
+        <div class="project__desktop-view project__desktop-view--16-9" *ngIf="project.desktopView">
           <div class="desktop-view__address-bar">
             <div class="address-bar__icons">
               <div></div>
@@ -58,7 +58,7 @@
               <div></div>
             </div>
             <div class="project__address">
-              <a href="">jakiśtamlink</a>
+              <a href="{{project.shortUrl}}">{{project.liveUrl}}</a>
             </div>
           </div>
           <div class="desktop__screen">
@@ -68,7 +68,7 @@
           </div>
         </div> 
 
-        <div class="project__mobile-view">
+        <div class="project__mobile-view" *ngIf="project.mobileView">
           <div class="phone__top">
       
           </div>
