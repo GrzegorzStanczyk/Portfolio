@@ -5,6 +5,7 @@
 /dist-server
 /tmp
 /out-tsc
+/src/static/img/full size
 
 # dependencies
 /node_modules
