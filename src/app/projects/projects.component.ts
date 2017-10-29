@@ -55,7 +55,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       this.project = PROJECTS.find(project => project.path.toLowerCase() === params.id.toLowerCase());
       if(!this.project) return this.router.navigate(['not-found']);
       this.storageService.lastProject = this.project;
-    })
+    }, error => console.log(error));
   }
 
   toggleProject() {
