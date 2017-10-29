@@ -4,34 +4,34 @@
     max-width: 320px;
     position: fixed;
     display: flex;
+    justify-content: space-between;
     z-index: 100;
     bottom: 7%;
     left: 50%;
     transform: translateX(-50%);
-    a {
-        color: #0A0A0A;
-        font-weight: 700;
-        text-align: center;
-        text-decoration: none;
+    .navigation-link__container {
         z-index: 100;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         width: 85px;
         height: 39px;
         border-radius: 20px;
         background-color: rgba(253, 251, 251, 0.8);
-        cursor: pointer;
-        text-transform: uppercase;
-        &:nth-child(3) {
-            margin: 0 auto;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
         &.animate-left {
             animation: move-left 0.7s ease 0s forwards;
         }
         &.animate-right {
             animation: move-right 0.7s ease 0s forwards;
         }
+    }
+    a {
+        color: #0A0A0A;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        text-transform: uppercase;
     }
 }
 
