@@ -478,17 +478,15 @@ ul {
     width: 100%;
   }
 }
-
+    // animation: slide-from-right 1.3s .8s cubic-bezier(.19,1,.22,1) forwards;
+    // animation: slide-from-right 1.3s .5s ease-in-out forwards;
+    // animation: slide-from-right 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
 @media screen and (min-width: 701px) {
 	.project__info {
     &::before {
       transform: translate3d(150%, 0, 0);
       animation: slide-from-right 2s .45s cubic-bezier(.19,1,.22,1) forwards;
     }
-    // animation: slide-from-right 1.3s .5s ease-in-out forwards;
-    // transform 2s cubic-bezier(.19,1,.22,1)
-
-    // animation: slide-from-right 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
 		.project__title {
       font-size: 3vw;
     }
@@ -500,18 +498,10 @@ ul {
   //   }
   .project::before.move {
       animation: transform-to-left 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
-    
   }
-
   :host.move::before {
     animation: transform-to-left 1.3s cubic-bezier(.8,0,0,1) forwards;
-  
-}
-    // transform: translate3d(150%, 0, 0);
-    // animation: slide-from-right 1.3s .8s cubic-bezier(.19,1,.22,1) forwards;
-    // animation: slide-from-right 1.3s .5s ease-in-out forwards;
-
-    // animation: slide-from-right 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
+  }
 }
 
 @media screen and (max-height: 600px) and (orientation: landscape) {
