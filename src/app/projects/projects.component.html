@@ -78,7 +78,11 @@
           </div>
           <div class="phone__screen">
             <div class="project__mobile-showcase">
-              <img src="" alt="">
+              <picture>
+                <source srcset="{{project.mobileViewWEBP}}" type="image/webp">
+                <source srcset="{{project.mobileViewJPG}}" type="image/jpeg"> 
+                <img src="{{project.mobileViewJPG}}" alt="">
+              </picture>
             </div>
           </div>
           <div class="phone__bottom"></div>
