@@ -14,7 +14,6 @@ import { StorageService } from '@app/shared';
 import { PROJECTS } from "@app/shared";
 import { Project } from "@app/shared";
 
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 
@@ -25,23 +24,23 @@ import 'rxjs/add/operator/debounceTime';
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
   private resizeSubscription: Subscription;
-  private project: Project;
-  
+  public project: Project;
+  togglerInfoState: boolean = false;
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
   @ViewChild('infoToggler') infoToggler: ElementRef;
-  infoState: boolean = false;
 
   constructor(
     private router: Router, 
     private route: ActivatedRoute,
     private renderer: Renderer2,
     private resizeService: ResizeService,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    private el: ElementRef) { }
 
   toggleInfo() {
-    this.infoState = !this.infoState;
-    if(this.infoState) {
+    this.togglerInfoState = !this.togglerInfoState;
+    if(this.togglerInfoState) {
       this.renderer.addClass(this.projectInfo.nativeElement, 'info-open');
       this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'true');
     } else {
@@ -57,6 +56,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       if(!this.project) return this.router.navigate(['not-found']);
       this.storageService.lastProject = this.project;
     })
+  }
+
+  toggleProject() {
+    this.project.path === "dottipelotti" ? this.router.navigate(['/projects', 'key-viewer']) : this.router.navigate(['/projects', 'dottipelotti']);
+    // this.renderer.setStyle(this.el.nativeElement, 'transform', 'translate3d(-100%,0,0)');
+    this.renderer.addClass(this.el.nativeElement, 'move');
   }
 
   ngOnInit() {
