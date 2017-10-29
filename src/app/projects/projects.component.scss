@@ -284,6 +284,7 @@ ul {
         width: 100%;
         padding-bottom: 56.25%;
         .project__desktop-showcase {
+          box-sizing: border-box;
           overflow: hidden;
           position: absolute;
           width: 100%;
@@ -295,6 +296,10 @@ ul {
           background: #fff;
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
+          border-width: 0 0.35vw;
+          border-left: 0.35vw solid #BDBDBD;
+          border-right: 0.35vw solid #BDBDBD;
+          border-bottom: 0.35vw solid #BDBDBD;
           img {
             width: 100%;
             height: 100%;
@@ -410,7 +415,6 @@ ul {
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: blue;
           img {
             width: 100%;
             height: 100%;
