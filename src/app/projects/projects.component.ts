@@ -52,7 +52,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   // Match the path, to render correct project
   matchPath() {
     this.route.params.subscribe((params: Params) => {
-      this.project = PROJECTS.find(project => project.path === params.id);
+      this.project = PROJECTS.find(project => project.path.toLowerCase() === params.id.toLowerCase());
       if(!this.project) return this.router.navigate(['not-found']);
       this.storageService.lastProject = this.project;
     })
