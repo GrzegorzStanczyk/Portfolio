@@ -7,9 +7,9 @@ export interface Project {
     desktopView: boolean;
     desktopViewJPG: string;
     desktopViewWEBP: string;
-    path: string,
-    title: string,
-    tech: Array<string>,
-    desc: string,
-    git: string 
-};
+    path: string;
+    title: string;
+    tech: Array<string>;
+    desc: string;
+    git: string;
+}
