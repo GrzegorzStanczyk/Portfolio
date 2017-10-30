@@ -1,8 +1,8 @@
 <nav class="navigation" #navigation>
   <span class="active-move" #selector></span>
-    <div #navigationLink class="navigation-link__container"><a routerLink="/home" routerLinkActive="active">home</a></div>  
-    <div #navigationLink class="navigation-link__container"><a routerLink="/projects" (click)="navigateToProject()" routerLinkActive="active">projects</a></div> 
-    <div #navigationLink class="navigation-link__container"><a routerLink="/contact" routerLinkActive="active">contact</a></div>
+    <span #navigationLink class="navigation-link__container"><a routerLink="/home" routerLinkActive="active">home</a></span>  
+    <span #navigationLink class="navigation-link__container"><a routerLink="/projects" (click)="navigateToProject()" routerLinkActive="active">projects</a></span> 
+    <span #navigationLink class="navigation-link__container"><a routerLink="/contact" routerLinkActive="active">contact</a></span>
 </nav>
 
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-flt">
