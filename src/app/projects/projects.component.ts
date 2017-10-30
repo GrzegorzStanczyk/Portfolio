@@ -100,4 +100,21 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   navigeteToContact() {
     this.router.navigate(['/contact']);
   }
+  @HostListener('document:keydown.ArrowDown')
+  navigeteUp() {
+    if (this.storageService.projectCounter >= PROJECTS.length - 1) {
+      this.storageService.projectCounter = -1;
+    }
+    this.router.navigate(['/projects', PROJECTS[this.storageService.projectCounter + 1].path]);
+  }
+  @HostListener('document:keydown.ArrowUp')
+  navigeteDown() {
+    if (this.storageService.projectCounter <= 0) {
+      this.storageService.projectCounter = PROJECTS.length;
+    }
+    this.router.navigate(['/projects', PROJECTS[this.storageService.projectCounter - 1].path]);
+  }
 }
+
+
+
