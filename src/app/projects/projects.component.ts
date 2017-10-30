@@ -1,8 +1,10 @@
 import {
   Component,
   OnInit,
+  AfterViewInit,
   OnDestroy,
   HostListener,
+  EventEmitter,
   ElementRef,
   Renderer2,
   ViewChild } from '@angular/core';
@@ -16,16 +18,19 @@ import { Project } from '@app/shared';
 
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/first';
+
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit, OnDestroy {
+export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeSubscription: Subscription;
   private togglerInfoState: boolean = false;
-  private projectCounter: number = null;
+  private mousewheel: EventEmitter<MouseWheelEvent> = new EventEmitter();
+  public projectCounter: number = null || 1;
   public project: Project;
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
@@ -55,7 +60,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params: Params) => {
       this.project = PROJECTS.find((project, index) => {
         if (project.path.toLowerCase() === params.id.toLowerCase()) {
-          this.storageService.projectCounter = index;
+          this.storageService.projectCounter = index + 1;
           return true;
         }
       });
@@ -66,9 +71,34 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     }, error => console.log(error));
   }
 
+  navigeteToProject(counter: number) {
+    this.projectCounter += counter;
+    if (this.projectCounter < 1) {
+      this.projectCounter = PROJECTS.length;
+    }
+    if (this.projectCounter > PROJECTS.length) {
+      this.projectCounter = 1;
+    }
+    this.router.navigate(['/projects', PROJECTS[this.projectCounter - 1].path]);
+  }
+
   ngOnInit() {
-    this.projectCounter = this.storageService.projectCounter;
     this.matchPath();
+    this.projectCounter = this.storageService.projectCounter;
+  }
+
+  ngAfterViewInit() {
+    this.mousewheel
+    .debounceTime(200)
+    .subscribe(event => {
+      if (event.deltaY > 0) {
+        this.navigeteToProject(1);
+      }
+      if (event.deltaY < 0) {
+        this.navigeteToProject(-1);
+      }
+    });
+
     // Close the info modal if the window width is greather than 701px
     this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
@@ -82,19 +112,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     });
   }
 
-  navigeteToProject(counter: number) {
-    this.projectCounter += counter;
-    if (this.projectCounter < 0) {
-      this.projectCounter = PROJECTS.length - 1;
-    }
-    if (this.projectCounter > PROJECTS.length - 1) {
-      this.projectCounter = 0;
-    }
-    this.router.navigate(['/projects', PROJECTS[this.projectCounter].path]);
-  }
-
   ngOnDestroy() {
     this.resizeSubscription.unsubscribe();
+    this.mousewheel.unsubscribe();
   }
 
   @HostListener('document:keydown.ArrowLeft')
@@ -112,5 +132,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   @HostListener('document:keydown.ArrowUp')
   navigeteDown() {
     this.navigeteToProject(-1);
+  }
+  @HostListener('mousewheel', ['$event'])
+  onMouseWheelChrome(event: MouseWheelEvent) {
+    this.mousewheel.next(event);
   }
 }
