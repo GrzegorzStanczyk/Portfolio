@@ -25,6 +25,7 @@ import 'rxjs/add/operator/debounceTime';
 export class ProjectsComponent implements OnInit, OnDestroy {
   private resizeSubscription: Subscription;
   private togglerInfoState: boolean = false;
+  private projectCounter: number = null;
   public project: Project;
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
@@ -65,16 +66,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     }, error => console.log(error));
   }
 
-  toggleProject() {
-    if (this.storageService.projectCounter >= PROJECTS.length - 1) {
-      this.storageService.projectCounter = -1;
-    }
-    this.router.navigate(['/projects', PROJECTS[this.storageService.projectCounter + 1].path]);
-  }
-
   ngOnInit() {
+    this.projectCounter = this.storageService.projectCounter;
     this.matchPath();
-
     // Close the info modal if the window width is greather than 701px
     this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
@@ -86,6 +80,17 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  navigeteToProject(counter: number) {
+    this.projectCounter += counter;
+    if (this.projectCounter < 0) {
+      this.projectCounter = PROJECTS.length - 1;
+    }
+    if (this.projectCounter > PROJECTS.length - 1) {
+      this.projectCounter = 0;
+    }
+    this.router.navigate(['/projects', PROJECTS[this.projectCounter].path]);
   }
 
   ngOnDestroy() {
@@ -102,19 +107,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
   @HostListener('document:keydown.ArrowDown')
   navigeteUp() {
-    if (this.storageService.projectCounter >= PROJECTS.length - 1) {
-      this.storageService.projectCounter = -1;
-    }
-    this.router.navigate(['/projects', PROJECTS[this.storageService.projectCounter + 1].path]);
+    this.navigeteToProject(1);
   }
   @HostListener('document:keydown.ArrowUp')
   navigeteDown() {
-    if (this.storageService.projectCounter <= 0) {
-      this.storageService.projectCounter = PROJECTS.length;
-    }
-    this.router.navigate(['/projects', PROJECTS[this.storageService.projectCounter - 1].path]);
+    this.navigeteToProject(-1);
   }
 }
-
-
-
