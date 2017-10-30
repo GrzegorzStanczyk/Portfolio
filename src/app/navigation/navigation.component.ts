@@ -1,10 +1,10 @@
-import { 
-  Component, 
-  OnInit, 
+import {
+  Component,
+  OnInit,
   OnDestroy,
   ElementRef,
-  Renderer2, 
-  ViewChild,  
+  Renderer2,
+  ViewChild,
   ViewChildren,
   QueryList,
   AfterViewInit } from '@angular/core';
@@ -15,7 +15,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/pairwise';
 
-import { Subscription }   from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 
 import { NavigateService } from '@app/shared';
@@ -30,23 +30,23 @@ import { ResizeService } from '@app/shared';
 export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('navigation') navigation: ElementRef;
   @ViewChild('selector') selector: ElementRef;
-  @ViewChildren('navigationLink') navigationLink:QueryList<any>;
+  @ViewChildren('navigationLink') navigationLink: QueryList<any>;
   private subscriptionToSelectorPosition: Subscription;
   private resizeSubscription: Subscription;
-  
+
   private activeUrl: string;
   private activeRoute: Object;
 
   routerLinks = [
     { link: 'home' },
-    { link: 'projects' }, 
+    { link: 'projects' },
     { link: 'contact' }
   ];
 
   selectorSize = {
     width: 8,
     height: 8
-  }
+  };
 
   constructor(
     private router: Router,
@@ -62,19 +62,19 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   setSelectorPosition(activeRoute): void {
-    if(activeRoute) {
-      this.renderer.setStyle(this.selector.nativeElement, `width`, `${activeRoute.nativeElement.offsetWidth + this.selectorSize.width}px`)
+    if (activeRoute) {
+      this.renderer.setStyle(this.selector.nativeElement, `width`, `${activeRoute.nativeElement.offsetWidth + this.selectorSize.width}px`);
       this.renderer.setStyle(this.selector.nativeElement, `height`, `${activeRoute.nativeElement.offsetHeight + this.selectorSize.height}px`);
-      this.renderer.setStyle(this.selector.nativeElement, `left`, `${activeRoute.nativeElement.offsetLeft - this.selectorSize.height/2}px`);
-      this.renderer.setStyle(this.selector.nativeElement, `top`, `${activeRoute.nativeElement.offsetTop - this.selectorSize.height/2}px`);
+      this.renderer.setStyle(this.selector.nativeElement, `left`, `${activeRoute.nativeElement.offsetLeft - this.selectorSize.height / 2}px`);
+      this.renderer.setStyle(this.selector.nativeElement, `top`, `${activeRoute.nativeElement.offsetTop - this.selectorSize.height / 2}px`);
     }
   }
 
   animateRouterLink(activeRoute, obj) {
-    const links = this.routerLinks.map(data => data.link)
+    const links = this.routerLinks.map(data => data.link);
     const prev = links.indexOf(obj.prev);
     // if navigate from not-found component do not animate non-existent route
-    if(prev < 0) return;
+    if (prev < 0) return;
     const curr = links.indexOf(obj.curr);
     const len = this.routerLinks.length;
     const diff = curr - prev;
@@ -82,48 +82,48 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
     let init = 1;
     let dur = Math.abs(diff);
 
-    if(diff > 0) {
-      for(let i = prev; i < curr; i++) {
-        dur = delay*init;
-        let element = this.navigationLink["_results"][i].nativeElement;
+    if (diff > 0) {
+      for (let i = prev; i < curr; i++) {
+        dur = delay * init;
+        const element = this.navigationLink['_results'][i].nativeElement;
         this.animateDirection(dur, 'animate-right', element);
-        init = init+1;
+        init = init + 1;
       }
     }
 
-    if(diff < 0) {
-      for(let i = prev; i > curr; i--) {
-        dur = delay*init;
-        let element = this.navigationLink["_results"][i].nativeElement;
+    if (diff < 0) {
+      for (let i = prev; i > curr; i--) {
+        dur = delay * init;
+        const element = this.navigationLink['_results'][i].nativeElement;
         this.animateDirection(dur, 'animate-left', element);
-        init = init+1;
+        init = init + 1;
       }
     }
-    if(diff !== 0)this.animateMove();
+    if (diff !== 0) this.animateMove();
   }
 
   animateDirection(dur, anim, elem) {
     this.renderer.addClass(elem, anim);
-    this.renderer.setStyle(elem, 'animation-delay', `${dur}s`)
-    setTimeout(()=>{
+    this.renderer.setStyle(elem, 'animation-delay', `${dur}s`);
+    setTimeout(() => {
       this.renderer.removeClass(elem, anim);
-    }, 700)
+    }, 700);
   }
 
   animateMove() {
     this.renderer.addClass(this.selector.nativeElement, 'animate');
-    setTimeout(()=>{
+    setTimeout(() => {
       this.renderer.removeClass(this.selector.nativeElement, 'animate');
-    }, 500)
+    }, 500);
   }
 
   findActiveRoute(event): Object {
     this.activeUrl = this.sliceRoute(event);
     return this.navigationLink.find((value) => {
-      if(value.nativeElement.textContent.toLowerCase() === this.activeUrl.toLowerCase()) {
+      if (value.nativeElement.textContent.toLowerCase() === this.activeUrl.toLowerCase()) {
         return value;
       }
-    })
+    });
   }
 
   sliceRoute(e) {
@@ -139,7 +139,7 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
         this.activeRoute = this.findActiveRoute(event);
         this.setSelectorPosition(this.activeRoute);
 
-        // Unsubscribe after setting the selector position 
+        // Unsubscribe after setting the selector position
         this.subscriptionToSelectorPosition.unsubscribe();
     });
 
@@ -149,23 +149,23 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
     .map((event: any) => event.urlAfterRedirects)
     .pairwise()
     .subscribe((event) => {
-      let previousRoute = this.sliceRoute(event[0]);
-      let currentRoute = this.sliceRoute(event[1]);
-      let obj = {
+      const previousRoute = this.sliceRoute(event[0]);
+      const currentRoute = this.sliceRoute(event[1]);
+      const obj = {
         prev: previousRoute,
         curr: currentRoute
-      }
+      };
       this.activeRoute = this.findActiveRoute(event[1]);
       this.setSelectorPosition(this.activeRoute);
       this.animateRouterLink(this.activeRoute, obj);
     });
-    
+
     // Adjust selector position when window resize
     this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
     .subscribe(event => {
       this.setSelectorPosition(this.activeRoute);
-    })
+    });
   }
 
   ngOnInit() {}
