@@ -52,7 +52,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   // Match the path, to render correct project
   matchPath() {
     this.route.params.subscribe((params: Params) => {
-      this.project = PROJECTS.find(project => project.path.toLowerCase() === params.id.toLowerCase());
+      this.project = PROJECTS.find((project, index) => {
+        if (project.path.toLowerCase() === params.id.toLowerCase()) {
+          this.storageService.projectCounter = index;
+          return true;
+        }
+      });
       if (!this.project) {
         return this.router.navigate(['not-found']);
       }
@@ -61,11 +66,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   toggleProject() {
-    this.project.path === 'dottipelotti'
-    ? this.router.navigate(['/projects', 'key-viewer'])
-    : this.router.navigate(['/projects', 'dottipelotti']);
-    // this.renderer.setStyle(this.el.nativeElement, 'transform', 'translate3d(-100%,0,0)');
-    this.renderer.addClass(this.el.nativeElement, 'move');
+    if (this.storageService.projectCounter >= PROJECTS.length - 1) {
+      this.storageService.projectCounter = -1;
+    }
+    this.router.navigate(['/projects', PROJECTS[this.storageService.projectCounter + 1].path]);
   }
 
   ngOnInit() {
