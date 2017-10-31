@@ -46,11 +46,25 @@ ul {
   }
 }
 
+.btn {
+  // position: absolute;
+  // left: 50%;
+  // transform: translate3d(-50%,0,0);
+  width: 200px;
+  height: 50px;
+  &.btn--up {
+    // top: 10%;
+  }
+  &.btn--down {
+    // bottom: 10%;
+  }
+}
+
 .pagination {
-  z-index: 1;
+  z-index: 100;
 	@extend .center;
 	height: 100%;
-  width: 100%;
+  // width: 100%;
   position: absolute;
   left: 0;
   top: 50%;

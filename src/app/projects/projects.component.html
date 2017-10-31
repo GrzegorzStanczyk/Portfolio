@@ -10,13 +10,17 @@
         <span class="selector"></span>
     </div>
     <ul>
-      <li>1</li>
+      <!-- <li>1</li> -->
+      <button class="btn btn--up" (click)="navigeteToProject(-1)">UP</button>
+      
       <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
+      <li>{{projectCounter - 1}}</li>
+      <li>{{projectCounter}}</li>
+      <li>{{projectCounter + 1}}</li>
       <li>6</li>
-      <li>7</li>
+      <!-- <li>7</li> -->
+<button class="btn btn--down" (click)="navigeteToProject(1)">DOWN</button>
+
     </ul>
   </nav>
   
