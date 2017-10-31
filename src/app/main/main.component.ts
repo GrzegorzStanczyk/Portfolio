@@ -14,12 +14,12 @@ import 'rxjs/add/operator/debounceTime';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit, OnDestroy {
-  public message: string = "Inspirations are everywhere";
+  public message: string = 'Inspirations are everywhere';
   public showCanvas: boolean = true;
   private resizeSubscription: Subscription;
-  
+
   constructor(
-    private router: Router, 
+    private router: Router,
     private resizeService: ResizeService,
     private navigateService: NavigateService) { }
 
