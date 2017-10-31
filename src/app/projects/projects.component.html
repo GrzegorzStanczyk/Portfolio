@@ -1,27 +1,15 @@
 <div class="projects-container">
   <nav class="pagination">
-    <div class="selectors">
-        <span class="selector"></span>
-        <span class="selector"></span>
-        <span class="selector"></span>
-        <span class="selector"></span>
-        <span class="selector"></span>
-        <span class="selector"></span>
-        <span class="selector"></span>
-    </div>
+    <span class="selector"></span>
+    <button class="btn btn--up" (click)="navigeteToProject(-1)"></button>
     <ul>
-      <!-- <li>1</li> -->
-      <button class="btn btn--up" (click)="navigeteToProject(-1)">UP</button>
-      
-      <li>2</li>
-      <li>{{projectCounter - 1}}</li>
-      <li>{{projectCounter}}</li>
-      <li>{{projectCounter + 1}}</li>
-      <li>6</li>
-      <!-- <li>7</li> -->
-<button class="btn btn--down" (click)="navigeteToProject(1)">DOWN</button>
-
+      <li 
+        *ngFor="let project of projects; let i = index">
+        <!-- <a href="navigeteToProject(null, project)" class="project-link">{{i + 1}}</a>         -->
+        <a href="#/projects/{{project.path}}" class="project-link">{{i + 1}}</a>        
+      </li>
     </ul>
+    <button class="btn btn--down" (click)="navigeteToProject(1)"></button>
   </nav>
   
   <section class="project" *ngIf="project">

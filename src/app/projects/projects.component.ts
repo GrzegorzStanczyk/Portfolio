@@ -30,9 +30,10 @@ import 'rxjs/add/operator/debounceTime';
 export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeSubscription: Subscription;
   private togglerInfoState: boolean = false;
+  private mouseWheelSubscription = new Subject<MouseWheelEvent>();
   public projectCounter: number = null || 1;
   public project: Project;
-  private mouseWheelSubscription = new Subject<MouseWheelEvent>();
+  public projects: Project[] = PROJECTS;
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
   @ViewChild('infoToggler') infoToggler: ElementRef;
