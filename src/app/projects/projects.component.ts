@@ -17,8 +17,9 @@ import { PROJECTS } from '@app/shared';
 import { Project } from '@app/shared';
 
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/first';
 
 
 @Component({
@@ -29,9 +30,9 @@ import 'rxjs/add/operator/first';
 export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeSubscription: Subscription;
   private togglerInfoState: boolean = false;
-  private mousewheel: EventEmitter<MouseWheelEvent> = new EventEmitter();
   public projectCounter: number = null || 1;
   public project: Project;
+  private mouseWheelSubscription = new Subject<MouseWheelEvent>();
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
   @ViewChild('infoToggler') infoToggler: ElementRef;
@@ -88,17 +89,6 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.mousewheel
-    .debounceTime(200)
-    .subscribe(event => {
-      if (event.deltaY > 0) {
-        this.navigeteToProject(1);
-      }
-      if (event.deltaY < 0) {
-        this.navigeteToProject(-1);
-      }
-    });
-
     // Close the info modal if the window width is greather than 701px
     this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
@@ -110,11 +100,22 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     });
+    // Navigate to project by the mousewheel
+    this.mouseWheelSubscription.asObservable()
+      .debounceTime(200)
+      .subscribe((event: MouseWheelEvent) => {
+        if (event.deltaY > 0) {
+          this.navigeteToProject(1);
+        }
+        if (event.deltaY < 0) {
+          this.navigeteToProject(-1);
+        }
+    });
   }
 
   ngOnDestroy() {
     this.resizeSubscription.unsubscribe();
-    this.mousewheel.unsubscribe();
+    this.mouseWheelSubscription.unsubscribe();
   }
 
   @HostListener('document:keydown.ArrowLeft')
@@ -135,6 +136,6 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   @HostListener('mousewheel', ['$event'])
   onMouseWheelChrome(event: MouseWheelEvent) {
-    this.mousewheel.next(event);
+    this.mouseWheelSubscription.next(event);
   }
 }
