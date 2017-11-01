@@ -1,17 +1,4 @@
 <div class="projects-container">
-  <nav class="pagination">
-    <span class="selector"></span>
-    <button class="btn btn--up" (click)="navigeteToProject(-1)"></button>
-    <ul>
-      <li 
-        *ngFor="let project of projects; let i = index">
-        <!-- <a href="navigeteToProject(null, project)" class="project-link">{{i + 1}}</a>         -->
-        <a href="#/projects/{{project.path}}" class="project-link">{{i + 1}}</a>        
-      </li>
-    </ul>
-    <button class="btn btn--down" (click)="navigeteToProject(1)"></button>
-  </nav>
-  
   <section class="project" *ngIf="project">
     <button 
       #infoToggler
@@ -82,6 +69,26 @@
       </div>
     </div>
   </section>
-</div>
 
-<!-- <div class="mask"></div> -->
+  <nav class="pagination">
+    <span class="selector"></span>
+    <button 
+      appRipple
+      type="button"
+      aria-label="Navigate to next project"
+      class="btn btn--up ripple"
+      (click)="navigeteToProject(-1)"></button>
+    <ul>
+      <li 
+        *ngFor="let project of projects; let i = index">
+        <a href="#/projects/{{project.path}}" class="project-link">{{i + 1}}</a>        
+      </li>
+    </ul>
+    <button
+      appRipple
+      type="button"
+      aria-label="Navigate to next project"
+      class="btn btn--down ripple"
+      (click)="navigeteToProject(1)"></button>
+  </nav>
+</div>
