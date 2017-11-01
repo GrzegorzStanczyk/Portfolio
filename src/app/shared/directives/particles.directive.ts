@@ -20,30 +20,13 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   private clearInterval;
   private animationFrame;
   private colorsArray: Array<string> = [
-      "#00d1cb", "#ff4699", "#fbb63a", "#b3dc5b", "#ffe100"
+      '#00d1cb', '#ff4699', '#fbb63a', '#b3dc5b', '#ffe100'
   ];
 
   constructor(
-    private el: ElementRef, 
+    private el: ElementRef,
     private ngZone: NgZone,
     private resizeService: ResizeService) { }
-
-  // @HostListener('document:mousedown', ['$event'])
-  // speedUp(event) {
-  //   console.log(event)
-  //   this.particleInterval = 50;
-  //   this.particlesSpeed = 10;
-  //   clearInterval(this.clearInterval);
-  //   this.particleDrawDelay()
-  // }
-  // @HostListener('document:mouseup', ['$event'])
-  // speedDown(event) {
-  //   console.log(event)
-  //   this.particleInterval = 1000;
-  //   this.particlesSpeed = 2;
-  //   clearInterval(this.clearInterval);
-  //   this.particleDrawDelay()
-  // }
 
   setCanvasSize(): void {
     this.canvasEl.width = window.innerWidth;
@@ -62,17 +45,17 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
 
   createParticle(): void {
     // If particle is outside of canvas filter it outside
-    let particlesInRange = this.whetherCanvasIsFull();
+    const particlesInRange = this.whetherCanvasIsFull();
     // Do not create new particle if canvas is full
-    if(particlesInRange.length >= this.maxParticlesAmount) return;
-    
-    let p = {
+    if (particlesInRange.length >= this.maxParticlesAmount) return;
+
+    const p = {
       y: null,
       r: Math.floor(Math.random() * 20) + 3,
       x: window.innerWidth,
       direction: 0.1,
       color: this.colorsArray[Math.floor(Math.random() * this.colorsArray.length)]
-    }
+    };
 
     // Prevent delete particles from canvas if they are in it
     this.particlesArray = particlesInRange;
@@ -80,17 +63,17 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     // Set initial particles outside the canvas
     p.x += p.r;
     // Set initial particles on y axis in range
-    p.y = Math.random() * (window.innerHeight - p.r - p.r + 1) + p.r; 
+    p.y = Math.random() * (window.innerHeight - p.r - p.r + 1) + p.r;
 
     this.particlesArray.push(p);
   }
 
   animateParticles(p): any {
       // Set particle speed depend on its size
-      p.x -= this.particlesSpeed/p.r;
-      // Change particle direction || Bounce from horizontal lines 
-      if(Math.floor(Math.random()*500) === 250 || p.y >= window.innerHeight - p.r || p.y <= 0 + p.r) {
-        p.direction = p.direction * -1
+      p.x -= this.particlesSpeed / p.r;
+      // Change particle direction || Bounce from horizontal lines
+      if (Math.floor(Math.random() * 500) === 250 || p.y >= window.innerHeight - p.r || p.y <= 0 + p.r) {
+        p.direction = p.direction * -1;
       }
       p.y += p.direction;
   }
@@ -103,9 +86,9 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   particleDrawDelay(): void {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.clearInterval = setInterval(() => this.createParticle(), this.particleInterval);
-    }, 2000)
+    }, 2000);
   }
 
   loop() {
@@ -113,7 +96,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     this.particlesArray.forEach(p => {
       this.animateParticles(p);
       this.drawParticles(p);
-    })
+    });
     this.animationFrame = requestAnimationFrame(() => this.loop());
   }
 
@@ -133,7 +116,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
       this.particlesArray = [];
       this.setCanvasSize();
     // Paint loop run outside the Angular zone
-      this.ngZone.runOutsideAngular(()=>this.loop());
+      this.ngZone.runOutsideAngular(() => this.loop());
     });
   }
 
@@ -141,7 +124,7 @@ export class ParticlesDirective implements OnInit, AfterViewInit, OnDestroy {
     this.setCanvasSize();
     this.particleDrawDelay();
     // Paint loop run outside the Angular zone
-    this.ngZone.runOutsideAngular(()=>this.loop());
+    this.ngZone.runOutsideAngular(() => this.loop());
   }
 
   ngOnDestroy() {
