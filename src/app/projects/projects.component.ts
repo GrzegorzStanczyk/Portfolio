@@ -19,7 +19,7 @@ import { Project } from '@app/shared';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
 
 
 @Component({
@@ -103,8 +103,9 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     // Navigate to project by the mousewheel
     this.mouseWheelSubscription.asObservable()
-      .debounceTime(200)
+      .throttleTime(500)
       .subscribe((event: MouseWheelEvent) => {
+        console.log(event);
         if (event.deltaY > 0) {
           this.navigeteToProject(1);
         }
