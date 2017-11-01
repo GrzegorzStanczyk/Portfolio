@@ -105,7 +105,6 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mouseWheelSubscription.asObservable()
       .throttleTime(500)
       .subscribe((event: MouseWheelEvent) => {
-        console.log(event);
         if (event.deltaY > 0) {
           this.navigeteToProject(1);
         }
