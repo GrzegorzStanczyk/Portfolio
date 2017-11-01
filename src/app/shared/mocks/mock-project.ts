@@ -12,7 +12,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/KeyViewer-desktop.webp',
         path: 'key-viewer',
         title: 'Key Viewer',
-        tech: ['Firebase', 'Angular', 'Rest'],
+        tech: ['Firebase', 'Angular', 'googlemaps', 'material', 'sass'],
         desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsa non nostrum possimus molestias nemo reprehenderit soluta. Beatae corporis inventore vitae voluptatem, non animi id tenetur ipsum doloribus commodi porro!',
         git: 'https://github.com/GrzegorzStanczyk/keyViewer'
     },
@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/dottipelotti-desktop.webp',
         path: 'dottipelotti',
         title: 'dottipelotti',
-        tech: ['firebase'],
+        tech: ['vue', 'wordpress', 'sass'],
         desc: 'dottipelotti',
         git: 'https://github.com/GrzegorzStanczyk/Dottipelotti'
     },
@@ -42,8 +42,8 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/Twitchtv-JSON-API-desktop.webp',
         path: 'Twitchtv-JSON-API',
         title: 'Twitchtv JSON API',
-        tech: ['firebase'],
-        desc: 'The-New-York-Times-Project',
+        tech: ['bootstrap', 'js', 'sass'],
+        desc: 'Twitchtv-JSON-API',
         git: 'https://github.com/GrzegorzStanczyk/The-New-York-Times-Project'
     },
     {
@@ -57,8 +57,8 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/TheNewYorkTimesProject-desktop.webp',
         path: 'The-New-York-Times-Project',
         title: 'TNYT News',
-        tech: ['jquery'],
-        desc: 'Twitchtv JSON API',
+        tech: ['angular', 'bootstrap', 'sass'],
+        desc: 'The New York Times Project',
         git: null
     },
     {
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/Show-the-Local-Weather-desktop.webp',
         path: 'Show-the-Local-Weather',
         title: 'Show the Local Weather',
-        tech: ['jquery'],
+        tech: ['js'],
         desc: 'Show the Local Weather',
         git: null
     },
@@ -102,7 +102,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/Random-Quote-desktop.webp',
         path: 'Random-Quote-Generator',
         title: 'Random Quote Generator',
-        tech: ['jquery'],
+        tech: ['js'],
         desc: 'Random Quote Generator',
         git: 'https://github.com/GrzegorzStanczyk/random-quote-generator'
     },
@@ -116,7 +116,7 @@ export const PROJECTS: Project[] = [
         desktopViewJPG: 'static/img/Magic-the-Exercise-desktop.jpg',
         desktopViewWEBP: 'static/img/Magic-the-Exercise-desktop.webp',
         path: 'Magic-The-Gathering-AJAX',
-        title: 'Magic-The-Gathering-AJAX',
+        title: 'Magic The Gathering AJAX',
         tech: ['jquery'],
         desc: 'Magic-The-Gathering-AJAX',
         git: 'https://github.com/GrzegorzStanczyk/Magic-The-Gathering-AJAX.github.io'
@@ -132,7 +132,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/OS-X-Command-Line-desktop.webp',
         path: 'OS-X-Command-Line',
         title: 'OS X Command Line',
-        tech: ['jquery'],
+        tech: ['sass'],
         desc: 'OS X Command Line',
         git: null
     }
