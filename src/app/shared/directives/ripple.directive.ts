@@ -9,7 +9,6 @@ export class RippleDirective implements OnInit {
     private el: ElementRef,
     private renderer: Renderer2) { }
     private rippleContainer: HTMLDivElement;
-    private ripple: HTMLSpanElement;
 
   ngOnInit() {
     this.createRippleContainer();
@@ -54,8 +53,5 @@ export class RippleDirective implements OnInit {
   @HostListener('click', ['$event'])
   click(event) {
     this.createRipple(event);
-    setTimeout(() => {
-      // this.removeRipple();
-    }, 2000);
   }
 }
