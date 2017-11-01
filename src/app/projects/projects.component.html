@@ -24,17 +24,17 @@
       <div class="project__share">
         <ul>
           <li>
-            <a 
+            <a *ngIf="project.git"
               class="project__tech"
               target="_blank" 
-              href="{{project.shortUrl}}"
+              href="{{project.git}}"
               project-github="github"></a>
           </li>
           <li>
-            <a 
+            <a *ngIf="project.shortUrl"
               class="project__tech"
               target="_blank"
-              href="{{project.git}}"
+              href="{{project.shortUrl}}"
               project-live="live"></a>
           </li>
         </ul>
