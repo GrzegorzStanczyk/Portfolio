@@ -13,6 +13,7 @@ import { ParticlesDirective } from './shared/directives/particles.directive';
 import { ResizeService } from './shared/services/resize.service';
 import { StorageService } from './shared/services/storage.service';
 import { NavigateService } from './shared/services/navigate.service';
+import { RippleDirective } from './shared/directives/ripple.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavigateService } from './shared/services/navigate.service';
     ContactComponent,
     NotFoundComponent,
     NavigationComponent,
-    ParticlesDirective
+    ParticlesDirective,
+    RippleDirective
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'universal-portfolio'}),
