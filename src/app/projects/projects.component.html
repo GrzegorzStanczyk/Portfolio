@@ -15,14 +15,28 @@
       <h2 class="project__title">{{project.title}}</h2>
       <div class="project__technologies">
         <ul>
-          <li *ngFor="let tech of project.tech">{{tech}}</li>
+          <li class="project__tech"
+          [attr.project-tech]="tech.toLowerCase()"
+          *ngFor="let tech of project.tech"></li>
         </ul>
       </div>
       <p class="project_description">{{project.desc}}</p>
       <div class="project__share">
         <ul>
-          <li>{{project.live}}</li>
-          <li>{{project.git}}</li>
+          <li>
+            <a 
+              class="project__tech"
+              target="_blank" 
+              href="{{project.shortUrl}}"
+              project-github="github"></a>
+          </li>
+          <li>
+            <a 
+              class="project__tech"
+              target="_blank"
+              href="{{project.git}}"
+              project-live="live"></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -37,7 +51,7 @@
               <div></div>
             </div>
             <div class="project__address">
-              <a href="{{project.shortUrl}}">{{project.liveUrl}}</a>
+              <a target="_blank" href="{{project.shortUrl}}">{{project.liveUrl}}</a>
             </div>
           </div>
           <div class="desktop__screen">

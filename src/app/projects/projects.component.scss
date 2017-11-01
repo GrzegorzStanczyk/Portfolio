@@ -1,31 +1,15 @@
+@import url('../shared/styles/tech.scss');
+
 @keyframes slide-from-right {
-  to {
-    transform: translate3d(0, 0, 0);
-  }
+  to {transform: translate3d(0, 0, 0);}
 }
 
 @keyframes slide-from-left {
-  to {
-  transform: translate3d(-50%, -50%, 0);
-  }
+  to {transform: translate3d(-50%, -50%, 0);}
 }
 
 @keyframes transform-to-left {
-  to {
-    transform: translate3d(0,0,0);
-  }
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  to {transform: translate3d(0,0,0);}
 }
 
 :host {
@@ -44,6 +28,26 @@ ul {
     background-color: #000;
     transform: translate3d(100%,0,0);
   }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project__tech {
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-size: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .btn {
@@ -83,6 +87,7 @@ ul {
     }
   }
 }
+
 
 .pagination {
   z-index: 100;
@@ -130,13 +135,13 @@ ul {
 	}
 }
 
+
 .projects-container {
   position: relative;
   max-width: 1440px;
   width: 90%;
   height: 90%;
 }
-
 .project {
   overflow: hidden;
   @extend .center;
@@ -155,14 +160,10 @@ ul {
 }
 
 
-
-
-// Info toggler
 .info-toggler[aria-expanded="true"] ~ .project__view  {
   transform: scale(0.7) translate3d(50%, 50%, 0);
   filter: blur(2px);
 }
-
 .info-toggler {
   position: absolute;
   top: 0;
@@ -232,7 +233,6 @@ ul {
   background-color: #000;
   transform: translate3d(-50%, 0, 0);
 }
-
 .info-toggler__label {
   border: 0;
   clip: rect(0 0 0 0);
@@ -242,10 +242,6 @@ ul {
   padding: 0;
   position: absolute;
 }
-// Info toggler end
-
-
-
 
 
 .project__info {
@@ -273,14 +269,13 @@ ul {
     background-color: rgba(64,24,27,.5);
   }
   .project__title {
+    display: block;
+    width: 100%;
     margin-top: 0;
     text-align: center;
   }
   .project__technologies {
     margin: 20px;
-    li {
-      display: inline;
-    }
   }
   .project_description {
     display: block;
@@ -289,10 +284,11 @@ ul {
   .project__share {
     margin: 20px;
     li {
-      display: inline;
+      display: inline-block;
     }
   }
 }
+
 
 .project__view {
   position: relative;
@@ -542,11 +538,6 @@ ul {
       font-size: 3vw;
     }
   }
-  // .project__view {
-  //   ::before {
-  //     transform: translate3d(150%, 0, 0);
-  //     animation: slide-from-right 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
-  //   }
   .project::before.move {
       animation: transform-to-left 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
   }
