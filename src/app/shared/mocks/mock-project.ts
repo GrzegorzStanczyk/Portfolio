@@ -13,7 +13,7 @@ export const PROJECTS: Project[] = [
         path: 'key-viewer',
         title: 'Key Viewer',
         tech: ['Firebase', 'Angular', 'googlemaps', 'material', 'sass'],
-        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsa non nostrum possimus molestias nemo reprehenderit soluta. Beatae corporis inventore vitae voluptatem, non animi id tenetur ipsum doloribus commodi porro!',
+        desc: 'App has been created to help me with my work. In short words. I create a note based on location. And app shows me the note/key which is nearest to my current location. And that is it. App is simple, good looking, and save my time.',
         git: 'https://github.com/GrzegorzStanczyk/keyViewer'
     },
     {
@@ -28,7 +28,7 @@ export const PROJECTS: Project[] = [
         path: 'dottipelotti',
         title: 'dottipelotti',
         tech: ['vue', 'wordpress', 'sass'],
-        desc: 'dottipelotti',
+        desc: 'The page I modified for my friend. It was moved to <strong>wordpress</strong>, and added <strong>mobile view.</strong> All it has been done with <strong>Vue2</strong>',
         git: 'https://github.com/GrzegorzStanczyk/Dottipelotti'
     },
     {
@@ -42,7 +42,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/Twitchtv-JSON-API-desktop.webp',
         path: 'Twitchtv-JSON-API',
         title: 'Twitchtv JSON API',
-        tech: ['bootstrap', 'js', 'sass'],
+        tech: ['bootstrap', 'javascript', 'sass'],
         desc: 'Twitchtv-JSON-API',
         git: 'https://github.com/GrzegorzStanczyk/The-New-York-Times-Project'
     },
@@ -56,10 +56,10 @@ export const PROJECTS: Project[] = [
         desktopViewJPG: 'static/img/TheNewYorkTimesProject-desktop.jpg',
         desktopViewWEBP: 'static/img/TheNewYorkTimesProject-desktop.webp',
         path: 'The-New-York-Times-Project',
-        title: 'TNYT News',
+        title: 'NY Times News',
         tech: ['angular', 'bootstrap', 'sass'],
-        desc: 'The New York Times Project',
-        git: null
+        desc: 'Project which i made for recruitment task with <strong>Angular</strong>. It use NY Times Developer API to get article snippets. There is field to search articles. We can pick date range. The page support infinite scroll to find next articles, thanks to <strong>RxJS</strong>',
+        git: 'https://github.com/GrzegorzStanczyk/The-New-York-Times-Project'
     },
     {
         liveUrl: 'https://codepen.io/niepozorny/full/dNvxZe/',
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/Show-the-Local-Weather-desktop.webp',
         path: 'Show-the-Local-Weather',
         title: 'Show the Local Weather',
-        tech: ['js'],
+        tech: ['javascript'],
         desc: 'Show the Local Weather',
         git: null
     },
@@ -102,7 +102,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/Random-Quote-desktop.webp',
         path: 'Random-Quote-Generator',
         title: 'Random Quote Generator',
-        tech: ['js'],
+        tech: ['javascript'],
         desc: 'Random Quote Generator',
         git: 'https://github.com/GrzegorzStanczyk/random-quote-generator'
     },
