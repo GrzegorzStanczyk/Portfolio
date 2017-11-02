@@ -285,6 +285,10 @@ ul {
     margin: 20px;
     li {
       display: inline-block;
+      border-radius: 2px;
+      &:hover {
+        background-color: rgba(221, 221, 221, 0.4);
+      }
     }
   }
 }
@@ -482,8 +486,8 @@ ul {
 	}
 	.project__info {
 		order: 1;
-		width: 60%;
-    height: auto;
+    width: 60%;
+    height: 70%;
 	}
 }
 
