@@ -1,16 +1,16 @@
-import { Directive, ElementRef, Renderer2, OnInit, HostListener } from '@angular/core';
+import { Directive, ElementRef, Renderer2, AfterViewInit, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appRipple]'
 })
-export class RippleDirective implements OnInit {
+export class RippleDirective implements AfterViewInit {
+  private rippleContainer: HTMLDivElement;
 
   constructor(
     private el: ElementRef,
     private renderer: Renderer2) { }
-    private rippleContainer: HTMLDivElement;
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.createRippleContainer();
   }
 
@@ -20,15 +20,18 @@ export class RippleDirective implements OnInit {
   }
 
   createRipple(event) {
+    event.stopPropagation();
     if (this.rippleContainer.firstChild) {
       this.removeRipple();
     }
-    const width = event.target.offsetWidth;
-    const height = event.target.offsetHeight;
+
+    const width = this.el.nativeElement.offsetWidth;
+    const height = this.el.nativeElement.offsetHeight;
     const size = width > height ? width : height;
-    const pos = event.target.getBoundingClientRect();
+    const pos = this.el.nativeElement.getBoundingClientRect();
     const x = event.pageX - pos.left - (size / 2);
     const y = event.pageY - pos.top - (size / 2);
+
     const ripple = this.renderer.createElement('span');
     const style = {
       'top': y,
@@ -36,6 +39,7 @@ export class RippleDirective implements OnInit {
       'height': size,
       'width': size
     };
+
     this.setRippleStyle(style, ripple);
     this.renderer.appendChild(this.rippleContainer, ripple);
   }
