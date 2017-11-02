@@ -39,19 +39,31 @@
     background: url('/static/icons/live.svg');
 }
 
-[project-tech] {
+[project-tech],
+a[aria-label] {
     position: relative;
 }
+
+a[aria-label]:hover::after {
+    content: attr(aria-label);
+}
+
 [project-tech]:hover::after {
     content: attr(project-tech);
+}
+
+[project-tech]:hover::after,
+a[aria-label]:hover::after {
     position: absolute;
+    white-space: nowrap;
     top: -45px;
     left: 0;
     background: #444;
     color: #fff;
     padding: 10px;
 }
-[project-tech]:hover::before {
+[project-tech]:hover::before,
+a[aria-label]:hover::before {
     content: "";
     position: absolute;
     border-top: 10px solid #444;
