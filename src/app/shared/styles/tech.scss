@@ -28,7 +28,7 @@
 [project-tech="material"] {
     background: url('/static/icons/material.svg');
 }
-[project-tech="js"] {
+[project-tech="javascript"] {
     background: url('/static/icons/js.svg');
 }
 
@@ -38,3 +38,25 @@
 [project-live="live"] {
     background: url('/static/icons/live.svg');
 }
+
+[project-tech] {
+    position: relative;
+}
+[project-tech]:hover::after {
+    content: attr(project-tech);
+    position: absolute;
+    top: -45px;
+    left: 0;
+    background: #444;
+    color: #fff;
+    padding: 10px;
+}
+[project-tech]:hover::before {
+    content: "";
+    position: absolute;
+    border-top: 10px solid #444;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+    top: -6px;
+}
+
