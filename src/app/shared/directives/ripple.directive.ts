@@ -20,7 +20,6 @@ export class RippleDirective implements AfterViewInit {
   }
 
   createRipple(event) {
-    event.stopPropagation();
     if (this.rippleContainer.firstChild) {
       this.removeRipple();
     }

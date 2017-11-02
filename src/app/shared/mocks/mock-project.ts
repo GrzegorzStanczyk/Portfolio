@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
         desktopViewJPG: 'static/img/dottipelotti-desktop.jpg',
         desktopViewWEBP: 'static/img/dottipelotti-desktop.webp',
         path: 'dottipelotti',
-        title: 'dottipelotti',
+        title: 'DottiPelotti',
         tech: ['vue', 'wordpress', 'sass'],
         desc: 'The page I modified for my friend. It was moved to <strong>wordpress</strong>, and added <strong>mobile view.</strong> All it has been done with <strong>Vue2</strong>',
         git: 'https://github.com/GrzegorzStanczyk/Dottipelotti'
