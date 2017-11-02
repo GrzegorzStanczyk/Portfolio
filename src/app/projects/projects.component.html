@@ -24,16 +24,16 @@
       <div class="project__share">
         <ul>
           <li>
-            <a *ngIf="project.git"
+            <a aria-label="Go to project repository"
+              *ngIf="project.git"
               class="project__tech"
-              target="_blank" 
               href="{{project.git}}"
               project-github="github"></a>
           </li>
           <li>
-            <a *ngIf="project.shortUrl"
+            <a aria-label="Go to live preview"
+              *ngIf="project.shortUrl"
               class="project__tech"
-              target="_blank"
               href="{{project.shortUrl}}"
               project-live="live"></a>
           </li>
@@ -51,7 +51,7 @@
               <div></div>
             </div>
             <div class="project__address">
-              <a target="_blank" href="{{project.shortUrl}}">{{project.liveUrl}}</a>
+              <a aria-label="Go to live preview" href="{{project.shortUrl}}">{{project.liveUrl}}</a>
             </div>
           </div>
           <div class="desktop__screen">
