@@ -20,7 +20,7 @@
           *ngFor="let tech of project.tech"></li>
         </ul>
       </div>
-      <p class="project_description">{{project.desc}}</p>
+      <p class="project_description" [innerHTML]="project.desc"></p>
       <div class="project__share">
         <ul>
           <li>
