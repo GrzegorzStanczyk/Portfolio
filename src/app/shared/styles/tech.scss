@@ -39,21 +39,19 @@
     background: url('/static/icons/live.svg');
 }
 
-[project-tech],
-a[aria-label] {
+.project__icon {
     position: relative;
 }
 
-a[aria-label]:hover::after {
+a.project__icon:hover::after {
     content: attr(aria-label);
 }
 
-[project-tech]:hover::after {
+.project__icon:hover::after {
     content: attr(project-tech);
 }
 
-[project-tech]:hover::after,
-a[aria-label]:hover::after {
+.project__icon:hover::after {
     position: absolute;
     white-space: nowrap;
     top: -45px;
@@ -62,8 +60,7 @@ a[aria-label]:hover::after {
     color: #fff;
     padding: 10px;
 }
-[project-tech]:hover::before,
-a[aria-label]:hover::before {
+.project__icon:hover::before {
     content: "";
     position: absolute;
     border-top: 10px solid #444;

@@ -16,7 +16,7 @@
       <div class="project__technologies">
         <ul>
           <li *ngFor="let tech of project.tech"
-            class="project__tech"
+            class="project__icon"
             [attr.project-tech]="tech.toLowerCase()"
             aria-hidden="true">
             <span class="info__label">Used {{tech}} technology</span>  
@@ -29,14 +29,14 @@
           <li>
             <a aria-label="Go to project repository"
               *ngIf="project.git"
-              class="project__tech"
+              class="project__icon"
               href="{{project.git}}"
               project-github="github"></a>
           </li>
           <li>
             <a aria-label="Go to live preview"
               *ngIf="project.shortUrl"
-              class="project__tech"
+              class="project__icon"
               href="{{project.shortUrl}}"
               project-live="live"></a>
           </li>
