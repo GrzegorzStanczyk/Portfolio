@@ -8,7 +8,7 @@ export class ResizeService {
   private resizeSubject: Subject<Window> = new Subject<Window>();
   resizeSubject$ = this.resizeSubject.asObservable();
 
-  constructor(private eventManager: EventManager) { 
+  constructor(private eventManager: EventManager) {
     this.eventManager.addGlobalEventListener('window', 'resize', this.onResize.bind(this));
   }
 

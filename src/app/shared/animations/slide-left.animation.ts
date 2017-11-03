@@ -1,6 +1,6 @@
 import { trigger, state, animate, query, group, transition, style } from '@angular/animations';
 
-export const slideLeftAnimation = 
+export const slideLeftAnimation =
     trigger('slideLeftAnimation', [
         transition('* <=> *', [
             query(':enter, :leave', style({ position: 'fixed', width: '100%' })
@@ -16,4 +16,4 @@ export const slideLeftAnimation =
                 ], { optional: true })
             ])
         ])
-    ])
+    ]);
