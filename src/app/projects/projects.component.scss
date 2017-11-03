@@ -1,24 +1,29 @@
 @import url('../shared/styles/tech.scss');
-
 @keyframes slide-from-right {
-  to {transform: translate3d(0, 0, 0);}
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes slide-from-left {
-  to {transform: translate3d(-50%, -50%, 0);}
+  to {
+    transform: translate3d(-50%, -50%, 0);
+  }
 }
 
 @keyframes transform-to-left {
-  to {transform: translate3d(0,0,0);}
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 :host {
   overflow: hidden;
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
   @extend .center;
   background-color: rgba(123, 42, 59, 1);
-  transition: 2s cubic-bezier(.19,1,.22,1);
+  transition: 2s cubic-bezier(.19, 1, .22, 1);
   &::before {
     content: '';
     z-index: 1;
@@ -26,7 +31,7 @@
     width: 100%;
     height: 100%;
     background-color: #000;
-    transform: translate3d(100%,0,0);
+    transform: translate3d(100%, 0, 0);
   }
 }
 
@@ -83,42 +88,40 @@ ul {
       font-weight: bold;
       transform: rotate(90deg);
       color: #000;
-      
     }
   }
 }
-
 
 .pagination {
   z-index: 100;
   @extend .center;
   flex-direction: column;
-	height: 100%;
+  height: 70%;
   width: auto;
   position: absolute;
-  left: 0;
+  left: 5%;
   top: 50%;
   transform: translate3d(-150%, -50%, 0);
-  animation: slide-from-left 2s .1s cubic-bezier(.19,1,.22,1) forwards;
+  animation: slide-from-left 2s .1s cubic-bezier(.19, 1, .22, 1) forwards;
   .selector {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%, -50%, 0);
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background-color: #FFF;
   }
-	ul {
-		z-index: 2;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		flex-direction: column;
-		height: 100%;
-		width: 100%;
-		li {
+  ul {
+    z-index: 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    li {
       @extend .center;
       width: 30px;
       height: 30px;
@@ -131,10 +134,9 @@ ul {
         text-decoration: none;
         font-weight: bold;
       }
-		}
-	}
+    }
+  }
 }
-
 
 .projects-container {
   position: relative;
@@ -142,6 +144,7 @@ ul {
   width: 90%;
   height: 90%;
 }
+
 .project {
   overflow: hidden;
   @extend .center;
@@ -155,15 +158,15 @@ ul {
     width: 100%;
     height: 100%;
     background-color: #000;
-    transform: translate3d(100%,0,0);
+    transform: translate3d(100%, 0, 0);
   }
 }
 
-
-.info-toggler[aria-expanded="true"] ~ .project__view  {
+.info-toggler[aria-expanded="true"]~.project__view {
   transform: scale(0.7) translate3d(50%, 50%, 0);
   filter: blur(2px);
 }
+
 .info-toggler {
   position: absolute;
   top: 0;
@@ -174,7 +177,7 @@ ul {
   border-radius: 50%;
   border: 0;
   cursor: pointer;
-  transition: all .4s cubic-bezier(.25,.8,.25,1);
+  transition: all .4s cubic-bezier(.25, .8, .25, 1);
   background-color: #FFF;
   opacity: 1;
   &:hover {
@@ -210,9 +213,11 @@ ul {
     }
   }
 }
+
 .info-toggler__icon {
-  transition: all .4s cubic-bezier(.25,.8,.25,1);
+  transition: all .4s cubic-bezier(.25, .8, .25, 1);
 }
+
 .info-toggler__icon:nth-child(1) {
   position: absolute;
   top: 10px;
@@ -223,6 +228,7 @@ ul {
   background-color: #000;
   transform: translate3d(-50%, 0, 0);
 }
+
 .info-toggler__icon:nth-child(2) {
   position: absolute;
   bottom: 10px;
@@ -233,7 +239,8 @@ ul {
   background-color: #000;
   transform: translate3d(-50%, 0, 0);
 }
-.info-toggler__label {
+
+.info__label {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -242,7 +249,6 @@ ul {
   padding: 0;
   position: absolute;
 }
-
 
 .project__info {
   position: relative;
@@ -253,7 +259,7 @@ ul {
   flex-direction: column;
   order: 2;
   width: 30%;
-	height: 100%;
+  height: 100%;
   padding: 0 3%;
   z-index: 100;
   &::before {
@@ -265,8 +271,8 @@ ul {
     display: block;
     width: 100%;
     height: 100%;
-    transform: translate3d(0,0,0);
-    background-color: rgba(64,24,27,.5);
+    transform: translate3d(0, 0, 0);
+    background-color: rgba(64, 24, 27, .5);
   }
   .project__title {
     display: block;
@@ -293,7 +299,6 @@ ul {
   }
 }
 
-
 .project__view {
   position: relative;
   z-index: 3;
@@ -302,7 +307,7 @@ ul {
   width: 70%;
   height: 100%;
   transform: translate3d(0, 0, 0);
-  transition: filter, transform 0.4s cubic-bezier(.25,.8,.25,1);
+  transition: filter, transform 0.4s cubic-bezier(.25, .8, .25, 1);
   .showcase-container {
     @extend .center;
     position: relative;
@@ -477,18 +482,18 @@ ul {
 }
 
 @media screen and (max-width: 990px) {
-	.project {
-		flex-direction: column;
-	}
-	.project__view {
-		width: 100%;
+  .project {
+    flex-direction: column;
+  }
+  .project__view {
+    width: 100%;
     order: 2;
-	}
-	.project__info {
-		order: 1;
+  }
+  .project__info {
+    order: 1;
     width: 60%;
     height: 70%;
-	}
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -499,7 +504,7 @@ ul {
     display: flex;
     z-index: 100;
   }
-	.project__info {
+  .project__info {
     opacity: 0;
     position: absolute;
     z-index: 10;
@@ -510,15 +515,12 @@ ul {
     box-sizing: border-box;
     height: auto;
     width: 100%;
-    transform: translate3d(-150%,0,0);
-    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    transform: translate3d(-150%, 0, 0);
+    transition: all .4s cubic-bezier(.25, .8, .25, 1);
     &.info-open {
       opacity: 1;
-      transform: translate3d(0%,0,0);
+      transform: translate3d(0%, 0, 0);
     }
-  }
-  .project__mobile-view {
-    display: none;
   }
 }
 
@@ -529,25 +531,24 @@ ul {
   .projects-container {
     width: 100%;
   }
-}
-    // animation: slide-from-right 1.3s .8s cubic-bezier(.19,1,.22,1) forwards;
-    // animation: slide-from-right 1.3s .5s ease-in-out forwards;
-    // animation: slide-from-right 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
+} // animation: slide-from-right 1.3s .8s cubic-bezier(.19,1,.22,1) forwards;
+// animation: slide-from-right 1.3s .5s ease-in-out forwards;
+// animation: slide-from-right 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
 @media screen and (min-width: 701px) {
-	.project__info {
+  .project__info {
     &::before {
       transform: translate3d(100%, 0, 0);
-      animation: slide-from-right 2s .45s cubic-bezier(.19,1,.22,1) forwards;
+      animation: slide-from-right 2s .45s cubic-bezier(.19, 1, .22, 1) forwards;
     }
-		.project__title {
+    .project__title {
       font-size: 3vw;
     }
   }
   .project::before.move {
-      animation: transform-to-left 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
+    animation: transform-to-left 1.3s .5s cubic-bezier(.8, 0, 0, 1) forwards;
   }
-  :host.move::before {
-    animation: transform-to-left 1.3s cubic-bezier(.8,0,0,1) forwards;
+   :host.move::before {
+    animation: transform-to-left 1.3s cubic-bezier(.8, 0, 0, 1) forwards;
   }
 }
 
