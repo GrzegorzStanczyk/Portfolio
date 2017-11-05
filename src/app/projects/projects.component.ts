@@ -123,10 +123,20 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   navigeteToMain() {
     this.router.navigate(['/home']);
   }
+  @HostListener('swiperight')
+  swipeRight() {
+    this.router.navigate(['/home']);
+  }
+
   @HostListener('document:keydown.ArrowRight')
   navigeteToContact() {
     this.router.navigate(['/contact']);
   }
+  @HostListener('swipeleft')
+  swipeLeft() {
+    this.router.navigate(['/contact']);
+  }
+
   @HostListener('document:keydown.ArrowDown')
   navigeteUp() {
     this.navigeteToProject(1);

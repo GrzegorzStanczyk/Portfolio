@@ -28,6 +28,11 @@ export class MainComponent implements OnInit, OnDestroy {
     this.navigateService.navigateToProjects();
   }
 
+  @HostListener('swipeleft')
+  swipe() {
+    this.navigateService.navigateToProjects();
+  }
+
   private canvasState(event = window): boolean {
     return event.innerWidth <= 700 ? true : false;
   }

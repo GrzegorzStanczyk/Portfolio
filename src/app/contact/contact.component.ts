@@ -21,4 +21,9 @@ export class ContactComponent implements OnInit {
     this.navigateService.navigateToProjects();
   }
 
+  @HostListener('swiperight')
+  swipe() {
+    this.navigateService.navigateToProjects();
+  }
+
 }

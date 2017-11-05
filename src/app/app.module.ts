@@ -17,6 +17,9 @@ import { ResizeService } from './shared/services/resize.service';
 import { StorageService } from './shared/services/storage.service';
 import { NavigateService } from './shared/services/navigate.service';
 
+import 'hammerjs';
+import 'hammer-timejs';
+
 @NgModule({
   declarations: [
     AppComponent,
