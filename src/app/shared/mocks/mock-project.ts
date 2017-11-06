@@ -12,7 +12,7 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'static/img/KeyViewer-desktop.webp',
         path: 'key-viewer',
         title: 'Key Viewer',
-        tech: ['Firebase', 'Angular', 'googlemaps', 'material', 'sass'],
+        tech: ['Firebase', 'Angular', 'googlemaps', 'material', 'sass', 'hammerjs'],
         desc: 'App has been created to help me with my work. In short words. I create a note based on location. And app shows me the note/key which is nearest to my current location. And that is it. App is simple, good looking, and save my time.',
         git: 'https://github.com/GrzegorzStanczyk/keyViewer'
     },
