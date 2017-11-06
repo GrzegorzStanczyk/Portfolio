@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -17,6 +18,7 @@ import { RippleDirective } from './shared/directives/ripple.directive';
 import { ResizeService } from './shared/services/resize.service';
 import { StorageService } from './shared/services/storage.service';
 import { NavigateService } from './shared/services/navigate.service';
+import { StateService } from './shared/services/state.service';
 
 import 'hammerjs';
 import 'hammer-timejs';
@@ -40,14 +42,16 @@ export class MyHammerConfig extends HammerGestureConfig  {
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'universal-portfolio'}),
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [ResizeService,
     StorageService,
     NavigateService,
+    StateService,
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig
+      useClass: MyHammerConfig,
   }],
   bootstrap: [AppComponent]
 })
