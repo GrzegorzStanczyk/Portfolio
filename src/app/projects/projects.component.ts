@@ -16,6 +16,7 @@ import { StorageService } from '@app/shared';
 import { StateService } from '@app/shared';
 import { PROJECTS } from '@app/shared';
 import { Project } from '@app/shared';
+import { slideDownAnimation } from '@app/shared';
 
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -25,6 +26,7 @@ import 'rxjs/add/operator/throttleTime';
 
 @Component({
   selector: 'app-projects',
+  animations: [slideDownAnimation],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })

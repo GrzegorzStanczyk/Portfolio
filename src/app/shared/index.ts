@@ -7,6 +7,7 @@ export * from './services/state.service';
 // Animations
 export * from './animations/slide-left.animation';
 export * from './animations/toggle-navigation.animation';
+export * from './animations/slide-down.animation';
 
 // Interfaces
 export * from './interfaces/project';
