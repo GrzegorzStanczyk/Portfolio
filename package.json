@@ -24,6 +24,7 @@
     "@angular/router": "^5.0.0",
     "@nguniversal/express-engine": "^5.0.0-beta.1",
     "@nguniversal/module-map-ngfactory-loader": "^5.0.0-beta.1",
+    "@types/hammerjs": "^2.0.35",
     "core-js": "^2.4.1",
     "express": "^4.16.1",
     "hammer-timejs": "^1.1.0",
