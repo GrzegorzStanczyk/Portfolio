@@ -1,4 +1,4 @@
-<nav class="navigation" #navigation>
+<nav [@toggleNavigation]="navigationState" class="navigation" #navigation>
   <span class="active-move" #selector></span>
     <span #navigationLink class="navigation-link__container"><a routerLink="/home" routerLinkActive="active">home</a></span>  
     <span #navigationLink class="navigation-link__container"><a routerLink="/projects" (click)="navigateToProject()" routerLinkActive="active">projects</a></span> 

@@ -13,6 +13,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ResizeService } from '@app/shared';
 import { StorageService } from '@app/shared';
+import { StateService } from '@app/shared';
 import { PROJECTS } from '@app/shared';
 import { Project } from '@app/shared';
 
@@ -44,6 +45,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     private renderer: Renderer2,
     private resizeService: ResizeService,
     private storageService: StorageService,
+    private stateService: StateService,
     private el: ElementRef) { }
 
   toggleInfo() {
@@ -55,6 +57,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.renderer.removeClass(this.projectInfo.nativeElement, 'info-open');
       this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'false');
     }
+    this.stateService.toggleNavigation();
   }
 
   // Match the path, to render correct project

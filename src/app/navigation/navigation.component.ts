@@ -20,22 +20,27 @@ import 'rxjs/add/operator/debounceTime';
 
 import { NavigateService } from '@app/shared';
 import { ResizeService } from '@app/shared';
+import { StateService } from '@app/shared';
+import { toggleNavigation } from '@app/shared';
 
 
 @Component({
   selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
+  animations: [toggleNavigation],
+    templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
+
 export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('navigation') navigation: ElementRef;
   @ViewChild('selector') selector: ElementRef;
   @ViewChildren('navigationLink') navigationLink: QueryList<any>;
   private subscriptionToSelectorPosition: Subscription;
   private resizeSubscription: Subscription;
-
+  private navStateSubscription: Subscription;
   private activeUrl: string;
   private activeRoute: Object;
+  public navigationState: string = 'show';
 
   routerLinks = [
     { link: 'home' },
@@ -54,7 +59,8 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
     private el: ElementRef,
     private renderer: Renderer2,
     private navigateService: NavigateService,
-    private resizeService: ResizeService) {
+    private resizeService: ResizeService,
+    private stateService: StateService) {
   }
 
   navigateToProject() {
@@ -166,11 +172,17 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
     .subscribe(event => {
       this.setSelectorPosition(this.activeRoute);
     });
+
+    this.navStateSubscription = this.stateService.navigationState$
+      .subscribe(() => {
+        this.navigationState = this.navigationState === 'show' ? 'hide' : 'show';
+      });
   }
 
   ngOnInit() {}
 
   ngOnDestroy() {
     this.resizeSubscription.unsubscribe();
+    this.navStateSubscription.unsubscribe();
   }
 }
