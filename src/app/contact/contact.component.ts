@@ -17,10 +17,6 @@ export class ContactComponent implements OnInit {
   }
 
   @HostListener('document:keydown.ArrowLeft')
-  navigate() {
-    this.navigateService.navigateToProjects();
-  }
-
   @HostListener('swiperight')
   swipe() {
     this.navigateService.navigateToProjects();

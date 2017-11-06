@@ -24,10 +24,6 @@ export class MainComponent implements OnInit, OnDestroy {
     private navigateService: NavigateService) { }
 
   @HostListener('document:keydown.ArrowRight')
-  navigate() {
-    this.navigateService.navigateToProjects();
-  }
-
   @HostListener('swipeleft')
   swipe() {
     this.navigateService.navigateToProjects();
