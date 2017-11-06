@@ -77,3 +77,32 @@
 	80%{ transform: translateX(0px);} 
 	100%{ transform: translateX(0px);} 
 }
+
+@media screen and (max-width: 700px) {
+    .navigation {
+        justify-content: space-around;
+        .navigation-link__container {
+            width: 60px;
+            height: 60px;
+            a {
+                display: block;
+                font-size: 0;
+                width: 65%;
+                height: 65%;
+                margin: 0;
+                &[routerLink*="home"] {
+                    background:url('/static/icons/home.svg');
+                    background-size: 100%;
+                }
+                &[routerLink*="projects"] {
+                    background: url('/static/icons/list.svg');
+                    background-size: 100%;
+                }
+                &[routerLink*="contact"] {
+                    background: url('/static/icons/contact.svg');
+                    background-size: 100%;
+                }
+            }
+        }
+    }
+}
