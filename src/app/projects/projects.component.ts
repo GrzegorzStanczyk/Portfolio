@@ -122,6 +122,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.resizeSubscription.unsubscribe();
     this.mouseWheelSubscription.unsubscribe();
+    if (this.togglerInfoState) this.stateService.toggleNavigation();
   }
 
   @HostListener('document:keydown.ArrowLeft')
