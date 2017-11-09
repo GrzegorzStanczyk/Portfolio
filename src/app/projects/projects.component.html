@@ -1,5 +1,6 @@
 <!-- <app-instruction-modal></app-instruction-modal> -->
-<div class="projects-container" [@slideDownAnimation]="project">
+<div class="ripple-project--effect" #rippleProject></div>
+<div class="projects-container">
   <section class="project" *ngIf="project">
     <button 
       #infoToggler
