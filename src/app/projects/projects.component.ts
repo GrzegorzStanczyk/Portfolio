@@ -40,6 +40,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
   @ViewChild('infoToggler') infoToggler: ElementRef;
+  @ViewChild('rippleProject') rippleProject: ElementRef;
 
   constructor(
     private router: Router,
@@ -86,7 +87,39 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.projectCounter > PROJECTS.length) {
       this.projectCounter = 1;
     }
+    if (counter === -1) this.createRipple('up');
+    if (counter === 1) this.createRipple('down');
     this.router.navigate(['/projects', PROJECTS[this.projectCounter - 1].path]);
+  }
+
+  createRipple(direction: string) {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const size = width > height ? width : height;
+    let x;
+    if (direction === 'up') x = -size / 2;
+    if (direction === 'down') x = size / 2;
+    const y = x;
+    const ripple = this.renderer.createElement('span');
+    const style = {
+      'top': y,
+      'left': x,
+      'height': size,
+      'width': size
+    };
+    this.setRippleStyle(style, ripple);
+    this.renderer.appendChild(this.rippleProject.nativeElement, ripple);
+  }
+
+  setRippleStyle(style, ripple: HTMLSpanElement) {
+    Object.keys(style).forEach(key => {
+      this.renderer.setStyle(ripple, `${key}`, `${style[key]}px`);
+    });
+    setTimeout(() => this.removeRipple(), 500);
+  }
+
+  removeRipple() {
+    this.renderer.removeChild(this.rippleProject.nativeElement, this.rippleProject.nativeElement.firstChild);
   }
 
   ngOnInit() {

@@ -1,5 +1,6 @@
-<app-instruction-modal></app-instruction-modal>
-<div class="projects-container" [@slideDownAnimation]="project">
+<!-- <app-instruction-modal></app-instruction-modal> -->
+<div class="ripple-project--effect" #rippleProject></div>
+<div class="projects-container">
   <section class="project" *ngIf="project">
     <button 
       #infoToggler
@@ -94,7 +95,7 @@
     appRipple
     type="button"
     aria-label="Navigate to next project"
-    class="btn btn--up ripple"
+    class="btn btn--up"
     (click)="navigeteToProject(-1)"></button>
   <ul>
     <li 
@@ -106,6 +107,6 @@
     appRipple
     type="button"
     aria-label="Navigate to next project"
-    class="btn btn--down ripple"
+    class="btn btn--down"
     (click)="navigeteToProject(1)"></button>
 </nav>

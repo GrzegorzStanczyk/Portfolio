@@ -12,6 +12,7 @@ export class RippleDirective implements AfterViewInit {
 
   ngAfterViewInit() {
     this.createRippleContainer();
+    this.renderer.addClass(this.el.nativeElement, 'ripple');
   }
 
   createRippleContainer() {

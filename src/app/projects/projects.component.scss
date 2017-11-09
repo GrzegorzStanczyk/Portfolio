@@ -17,6 +17,13 @@
   }
 }
 
+@keyframes ripple-animation {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
 :host {
   overflow: hidden;
   width: 100%;
@@ -54,6 +61,27 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+.ripple-project--effect {
+  z-index: 10;
+  overflow: hidden;
+  position: fixed;
+  top     : 0;
+  right   : 0;
+  bottom  : 0;
+  left    : 0;
+}
+
+.ripple-project--effect span {
+  box-sizing: border-box;
+  transform       : scale(0);
+  border-radius   : 50%;
+  border          : 200px solid rgba(0, 0, 0, 1);
+  position        : absolute;
+  opacity         : 0.75;
+  background-color: rgba(221, 221, 221, 1);
+  animation       : ripple-animation 500ms;
+ }
 
 .btn {
   overflow: hidden;
