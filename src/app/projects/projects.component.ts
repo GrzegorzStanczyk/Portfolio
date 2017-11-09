@@ -145,6 +145,10 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (event.innerWidth > 701) {
         this.showRipple = true;
         if (this.infoToggler.nativeElement.getAttribute('aria-expanded') === 'true') {
+          if (this.togglerInfoState) {
+            this.stateService.toggleNavigation();
+            this.togglerInfoState = false;
+          }
           this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'false');
           this.renderer.removeClass(this.projectInfo.nativeElement, 'info-open');
         }
