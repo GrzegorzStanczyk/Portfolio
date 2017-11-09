@@ -520,6 +520,10 @@ ul {
     order: 1;
     width: 60%;
     height: 70%;
+    .project__title { margin: 0; }
+    .project__technologies { margin: 0; }
+    .project_description { margin: 0; }
+    .project__share { margin-top: 10px; }
   }
 }
 
