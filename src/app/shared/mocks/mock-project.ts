@@ -83,12 +83,12 @@ export const PROJECTS: Project[] = [
         mobileViewJPG: '',
         mobileViewWEBP: '',
         desktopView: true,
-        desktopViewJPG: 'Otore-list-desktop.jpg',
-        desktopViewWEBP: 'Otore-list-desktop.webp',
-        path: 'Order-list',
-        title: 'Order List',
+        desktopViewJPG: 'Store-list-desktop.jpg',
+        desktopViewWEBP: 'Store-list-desktop.webp',
+        path: 'Store-list',
+        title: 'Store List',
         tech: ['jquery'],
-        desc: 'Order List',
+        desc: 'Store List',
         git: 'https://github.com/GrzegorzStanczyk/Order-list.github.io'
     },
     {
