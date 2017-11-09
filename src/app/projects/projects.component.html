@@ -1,5 +1,3 @@
-<!-- <app-instruction-modal></app-instruction-modal> -->
-<div class="ripple-project--effect" #rippleProject></div>
 <div class="projects-container">
   <section class="project" *ngIf="project">
     <button 
@@ -110,3 +108,6 @@
     class="btn btn--down"
     (click)="navigeteToProject(1)"></button>
 </nav>
+
+<!-- <app-instruction-modal></app-instruction-modal> -->
+<div class="ripple-project--effect" *ngIf="showRipple" #rippleProject></div>

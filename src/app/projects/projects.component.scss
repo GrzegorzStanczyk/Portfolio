@@ -19,7 +19,7 @@
 
 @keyframes ripple-animation {
   to {
-    transform: scale(2);
+    transform: scale(3);
     opacity: 0;
   }
 }
@@ -63,7 +63,6 @@ ul {
 }
 
 .ripple-project--effect {
-  z-index: 10;
   overflow: hidden;
   position: fixed;
   top     : 0;

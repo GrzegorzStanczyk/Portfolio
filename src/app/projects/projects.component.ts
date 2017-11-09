@@ -37,6 +37,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   public projectCounter: number = null || 1;
   public project: Project;
   public projects: Project[] = PROJECTS;
+  public showRipple = true;
 
   @ViewChild('projectInfo') projectInfo: ElementRef;
   @ViewChild('infoToggler') infoToggler: ElementRef;
@@ -93,13 +94,19 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createRipple(direction: string) {
+    this.renderer.setStyle(this.rippleProject.nativeElement, 'z-index', '10');
     const width = window.innerWidth;
     const height = window.innerHeight;
     const size = width > height ? width : height;
-    let x;
-    if (direction === 'up') x = -size / 2;
-    if (direction === 'down') x = size / 2;
-    const y = x;
+    let x, y;
+
+    if (direction === 'up') {
+      x = size / 2; y = size / 2;
+    }
+    if (direction === 'down') {
+      x = size / 2; y = -size / 2;
+    }
+
     const ripple = this.renderer.createElement('span');
     const style = {
       'top': y,
@@ -115,7 +122,10 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     Object.keys(style).forEach(key => {
       this.renderer.setStyle(ripple, `${key}`, `${style[key]}px`);
     });
-    setTimeout(() => this.removeRipple(), 500);
+    setTimeout(() => {
+      this.removeRipple();
+      this.renderer.setStyle(this.rippleProject.nativeElement, 'z-index', '-1');
+    }, 500);
   }
 
   removeRipple() {
@@ -133,6 +143,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     .debounceTime(200)
     .subscribe(event => {
       if (event.innerWidth > 701) {
+        this.showRipple = true;
         if (this.infoToggler.nativeElement.getAttribute('aria-expanded') === 'true') {
           this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'false');
           this.renderer.removeClass(this.projectInfo.nativeElement, 'info-open');
