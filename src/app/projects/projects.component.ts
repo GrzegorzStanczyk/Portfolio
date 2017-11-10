@@ -101,10 +101,12 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     let x, y;
 
     if (direction === 'up') {
-      x = size / 2; y = size / 2;
+      x = size / 2;
+      y = size / 2;
     }
     if (direction === 'down') {
-      x = size / 2; y = -size / 2;
+      x = size / 2;
+      y = -size / 2;
     }
 
     const ripple = this.renderer.createElement('span');
