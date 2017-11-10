@@ -126,10 +126,10 @@ ul {
   height: 70%;
   width: auto;
   position: absolute;
-  left: 5%;
+  left: 3%;
   top: 50%;
-  transform: translate3d(-150%, -50%, 0);
-  animation: slide-from-left 2s .1s cubic-bezier(.19, 1, .22, 1) forwards;
+  transform: translate3d(0%, -50%, 0);
+  // animation: slide-from-left 2s .1s cubic-bezier(.19, 1, .22, 1) forwards;
   .selector {
     position: absolute;
     top: 50%;
@@ -574,12 +574,6 @@ ul {
     .project__title {
       font-size: 3vw;
     }
-  }
-  .project::before.move {
-    animation: transform-to-left 1.3s .5s cubic-bezier(.8, 0, 0, 1) forwards;
-  }
-   :host.move::before {
-    animation: transform-to-left 1.3s cubic-bezier(.8, 0, 0, 1) forwards;
   }
 }
 
