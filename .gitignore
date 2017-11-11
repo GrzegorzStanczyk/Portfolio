@@ -6,6 +6,7 @@
 /tmp
 /out-tsc
 /src/static/img/full size
+/src/static/icons/org
 
 # dependencies
 /node_modules

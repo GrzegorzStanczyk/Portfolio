@@ -1,3 +1,5 @@
+<!-- <app-svg-sprite></app-svg-sprite> -->
+
 <div class="projects-container" [@slideDownAnimation]="project">
   <section class="project" *ngIf="project">
     <button 
@@ -14,6 +16,20 @@
     
     <div class="project__info" #projectInfo>
       <h2 class="project__title">{{project.title}}</h2>
+
+      <!-- <div class="project__technologies">
+        <ul>
+          <li *ngFor="let tech of project.tech"
+            class="tech-icon__container"
+            aria-hidden="true">
+            <svg class="tech-icon">
+              <use [attr.xlink:href]="'#' + tech.toLowerCase()"></use>
+            </svg>
+            <span class="info__label">Used {{tech}} technology</span>  
+          </li>
+        </ul>
+      </div> -->
+
       <div class="project__technologies">
         <ul>
           <li *ngFor="let tech of project.tech"
@@ -24,7 +40,30 @@
           </li>
         </ul>
       </div>
+
       <p class="project_description" [innerHTML]="project.desc"></p>
+
+      <!-- <div class="project__share">
+        <ul>
+          <li class="tech-icon__container">
+            <svg class="tech-icon icon-github">
+              <use xlink:href="#github"></use>
+            </svg>
+            <a aria-label="Go to project repository"
+              *ngIf="project.git"
+              class="project__icon"
+              href="{{project.git}}"></a>
+          </li>
+          <li>
+            <a aria-label="Go to live preview"
+              *ngIf="project.shortUrl"
+              class="project__icon"
+              href="{{project.shortUrl}}"
+              project-live="live"></a>
+          </li>
+        </ul>
+      </div> -->
+
       <div class="project__share">
         <ul>
           <li>
@@ -43,6 +82,7 @@
           </li>
         </ul>
       </div>
+
     </div>
 
     <div class="project__view">
@@ -142,18 +182,18 @@
       aria-label="Navigate to next project"
       class="btn btn--up"
       (click)="navigeteToProject(-1)"></button>
-    <ul>
-      <li 
-        *ngFor="let project of projects; let i = index">
-        <a routerLink="/projects/{{project.path}}" routerLinkActive="active" class="project-link">{{i + 1}}</a>        
-      </li>
-    </ul>
     <button
       appRipple
       type="button"
       aria-label="Navigate to next project"
       class="btn btn--down"
       (click)="navigeteToProject(1)"></button>
+    <ul>
+      <li 
+        *ngFor="let project of projects; let i = index">
+        <a routerLink="/projects/{{project.path}}" routerLinkActive="active" class="project-link">{{i + 1}}</a>        
+      </li>
+    </ul>
   </nav>
 
 <!-- <app-instruction-modal></app-instruction-modal> -->
