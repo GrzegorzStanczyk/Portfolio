@@ -1,4 +1,4 @@
-<!-- <app-svg-sprite></app-svg-sprite> -->
+<app-svg-sprite></app-svg-sprite>
 
 <div class="projects-container" [@slideDownAnimation]="project">
   <section class="project" *ngIf="project">
@@ -17,7 +17,7 @@
     <div class="project__info" #projectInfo>
       <h2 class="project__title">{{project.title}}</h2>
 
-      <!-- <div class="project__technologies">
+      <div class="project__technologies">
         <ul>
           <li *ngFor="let tech of project.tech"
             class="tech-icon__container"
@@ -28,9 +28,9 @@
             <span class="info__label">Used {{tech}} technology</span>  
           </li>
         </ul>
-      </div> -->
+      </div>
 
-      <div class="project__technologies">
+      <!-- <div class="project__technologies">
         <ul>
           <li *ngFor="let tech of project.tech"
             class="project__icon"
@@ -39,11 +39,11 @@
             <span class="info__label">Used {{tech}} technology</span>  
           </li>
         </ul>
-      </div>
+      </div> -->
 
       <p class="project_description" [innerHTML]="project.desc"></p>
 
-      <!-- <div class="project__share">
+      <div class="project__share">
         <ul>
           <li class="tech-icon__container">
             <svg class="tech-icon icon-github">
@@ -62,9 +62,9 @@
               project-live="live"></a>
           </li>
         </ul>
-      </div> -->
+      </div>
 
-      <div class="project__share">
+      <!-- <div class="project__share">
         <ul>
           <li>
             <a aria-label="Go to project repository"
@@ -81,7 +81,7 @@
               project-live="live"></a>
           </li>
         </ul>
-      </div>
+      </div> -->
 
     </div>
 
