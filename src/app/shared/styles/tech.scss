@@ -1,42 +1,42 @@
 [project-tech="angular"] {
-    // background: url('/static/icons/angular.svg');
+    background: url('/static/icons/angular.svg');
 }
 [project-tech="firebase"] {
-    // background: url('/static/icons/firebase.svg');
+    background: url('/static/icons/firebase.svg');
 }
 [project-tech="bootstrap"] {
-    // background: url('/static/icons/bootstrap.svg');
+    background: url('/static/icons/bootstrap.svg');
 }
 [project-tech="jquery"] {
-    // background: url('/static/icons/jquery.svg');
+    background: url('/static/icons/jquery.svg');
 }
 [project-tech="googlemaps"] {
-    // background: url('/static/icons/googlemaps.svg');
+    background: url('/static/icons/googlemaps.svg');
 }
 [project-tech="vue"] {
-    // background: url('/static/icons/vue.svg');
+    background: url('/static/icons/vue.svg');
 }
 [project-tech="sass"] {
-    // background: url('/static/icons/sass.svg');
+    background: url('/static/icons/sass.svg');
 }
 [project-tech="webpack"] {
-    // background: url('/static/icons/webpack.svg');
+    background: url('/static/icons/webpack.svg');
 }
 [project-tech="wordpress"] {
-    // background: url('/static/icons/wordpress.svg');
+    background: url('/static/icons/wordpress.svg');
 }
 [project-tech="material"] {
-    // background: url('/static/icons/material.svg');
+    background: url('/static/icons/material.svg');
 }
 [project-tech="javascript"] {
-    // background: url('/static/icons/js.svg');
+    background: url('/static/icons/js.svg');
 }
 [project-tech="hammerjs"] {
-    // background: url('/static/icons/hammerjs.png');
+    background: url('/static/icons/hammerjs.png');
 }
 
 [project-github="github"] {
-    // background: url('/static/icons/github.svg');
+    background: url('/static/icons/github.svg');
 }
 [project-live="live"] {
     background: url('/static/icons/live.svg');
@@ -47,19 +47,14 @@
 }
 
 a.project__icon:hover::after {
-    // content: attr(aria-label);
+    content: attr(aria-label);
 }
 
-.tech-icon__container:hover::after {
+.project__icon:hover::after {
     content: attr(project-tech);
 }
 
 .project__icon:hover::after {
-    // content: attr(project-tech);
-}
-
-.project__icon:hover::after,
-.tech-icon__container:hover::after {
     position: absolute;
     white-space: nowrap;
     top: -45px;
@@ -68,8 +63,7 @@ a.project__icon:hover::after {
     color: #fff;
     padding: 10px;
 }
-.project__icon:hover::before,
-.tech-icon__container:hover::before {
+.project__icon:hover::before{
     content: "";
     position: absolute;
     border-top: 10px solid #444;
