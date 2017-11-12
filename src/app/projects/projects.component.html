@@ -21,6 +21,7 @@
         <ul>
           <li *ngFor="let tech of project.tech"
             class="tech-icon__container"
+            [attr.project-tech]="tech.toLowerCase()"
             aria-hidden="true">
             <svg class="tech-icon">
               <use [attr.xlink:href]="'#' + tech.toLowerCase()"></use>
