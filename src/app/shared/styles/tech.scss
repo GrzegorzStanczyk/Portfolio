@@ -63,7 +63,7 @@ a.project__icon:hover::after {
     color: #fff;
     padding: 10px;
 }
-.project__icon:hover::before {
+.project__icon:hover::before{
     content: "";
     position: absolute;
     border-top: 10px solid #444;
