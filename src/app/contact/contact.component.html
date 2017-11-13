@@ -1,3 +1,33 @@
-<p>
-  contact works!
-</p>
+<h2 class="title">Contact</h2>
+<form class="form">
+  <div class="form__row">
+    <label for="field__title">Title*</label>
+    <input 
+      type="text" 
+      name="title" 
+      required
+      id="field__title">
+  </div>
+  <div class="form__row">
+    <label for="field__name">Email*</label>
+    <input 
+      type="email" 
+      name="email" 
+      required
+      id="field__email">
+  </div>
+  <div class="form__row form__row-message">
+    <label for="field__message">Email*</label>
+    <textarea  
+      name="message" 
+      required
+      id="field__message"
+      pattern=".+"></textarea>
+  </div>
+  <button 
+    appRipple
+    type="submit" 
+    class="submit__btn" >
+      Get in touch
+  </button>
+</form>
