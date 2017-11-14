@@ -21,3 +21,13 @@ export const slideLeftAnimation =
             ])
         ])
     ]);
+
+
+export const slideBackgroundAnimation =
+    trigger('slideBackgroundAnimation', [
+        state('out', style({transform: 'translate3d(100%,0,0)'})),
+        state('in', style({transform: 'translate3d(0,0,0)'})),
+        transition('out => in', [
+            animate('2s 450ms cubic-bezier(0.19, 1, 0.22, 1)')
+          ]),
+    ]);
