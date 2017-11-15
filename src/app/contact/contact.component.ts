@@ -13,10 +13,16 @@ import { slideBackgroundAnimation } from '@app/shared';
 })
 export class ContactComponent implements OnInit, AfterViewChecked {
   public animState: string = 'out';
-
+  public title: string = '';
+  public email: string = '';
+  public message: string = '';
   constructor(private router: Router, private navigateService: NavigateService) { }
 
   ngOnInit() {
+  }
+
+  log() {
+    console.log(this.title)
   }
 
   ngAfterViewChecked() {
