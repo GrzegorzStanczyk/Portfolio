@@ -28,6 +28,9 @@
   color: #ffffff;
   z-index: 10;
   background-color: rgba(64, 24, 27, 0.5);
+  .honey__row {
+    display: none;
+  }
 }
 
 .input__row {
