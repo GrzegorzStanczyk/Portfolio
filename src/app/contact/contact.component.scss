@@ -6,8 +6,6 @@
   height: 100vh;
   display: flex;
   align-items: center; 
-  // background-color: rgba($color: #E57661, $alpha: 1.0);
-  // background-color: #000;
   flex-direction: column;
 }
 
@@ -25,23 +23,11 @@
 
 .form {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
   font-size: 150%;
   color: #ffffff;
   z-index: 10;
-  &::before {
-    content: '';
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(64, 24, 27, 0.5); // background: rgba($color: #005932, $alpha: 0.5);
-    // background: rgba($color: #E54A0A, $alpha: 0.5);
-  }
+  background-color: rgba(64, 24, 27, 0.5);
 }
 
 .input__row {
@@ -51,18 +37,13 @@
   max-width: 350px;
   width: calc(100% - 40px);
   padding-top: 20px;
-  margin: 20px 20px 0;
-  //  vertical-align: top;
-  //  display: inline-block;
+  margin: 20px auto 0;
 }
 
 .input__field {
-  // position: relative;
-  display: block; // float: right;
-  // padding: 0.8em;
-  // width: 60%;
-  border: none; // border-radius: 0;
-  width: 100%; // background: #f0f0f0;
+  display: block; 
+  border: none;
+  width: 100%;
   background: transparent;
   color: #6b9bc5;
   font-size: 20px;
@@ -122,29 +103,19 @@ textarea~.graphic {
   transform: translate3d(-66.6%, 0, 0);
 }
 
-.form__row-message {
-  // height: 50%;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  textarea {
-    // height: 70%;
-    display: flex;
-    flex: 1 1 auto;
-  }
-}
-
 .submit__btn {
   cursor: pointer;
   align-self: flex-end;
   width: 100px;
   height: 50px;
   margin: 20px;
+  float: right;
   background-color: rgba(221, 221, 221, 0);
   color: #ffffff;
   border: 0;
   border-radius: 2px;
-  &:hover {
+  &:hover, &:focus {
+    outline: none;
     background-color: rgba(221, 221, 221, 0.4);
   }
 }
@@ -156,12 +127,21 @@ textarea~.graphic {
 }
 
 @media screen and (min-width: 600px) {
-  .form {
+ .form {
     overflow: hidden;
     width: 70%;
     max-width: 600px;
+    background-color: transparent;
     &::before {
-      transform: translate3d(100%, 0, 0); // animation: slide-left 2s 0.45s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      content: '';
+      z-index: -1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: translate3d(100%, 0, 0); 
+      background-color: rgba(64, 24, 27, 0.5); 
+      animation: slide-left 2s 0.45s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      
     }
   }
   .input__field {
@@ -184,6 +164,17 @@ textarea~.graphic {
     width: 60%;
   }
   .input__row {
-    margin: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-height: 615px) {
+  .form {
+    overflow-y: scroll;
+    margin-bottom: 120px;
+    background-color: rgba(64, 24, 27, 0.5); 
+    &::before {
+      background-color: transparent;
+    }
   }
 }
