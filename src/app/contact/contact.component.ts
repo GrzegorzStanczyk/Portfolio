@@ -1,28 +1,58 @@
-import { Component, OnInit, AfterViewChecked, HostListener, HostBinding  } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  HostBinding,
+  ViewChild,
+  ElementRef,
+  Renderer2 } from '@angular/core';
 
 import { NavigateService } from '@app/shared';
+import { StateService } from '@app/shared';
+import { slideContactForm } from '@app/shared';
+
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  animations: [slideContactForm]
 })
-export class ContactComponent implements OnInit, AfterViewChecked {
-  public title: string = '';
-  public email: string = '';
-  public message: string = '';
+export class ContactComponent implements OnInit, OnDestroy {
+  private togglerInfoState: boolean = true;
+  private formSubscription: Subscription;
 
-  constructor(private navigateService: NavigateService) { }
+  @ViewChild('infoToggler') infoToggler: ElementRef;
+
+  constructor(
+    private navigateService: NavigateService,
+    private stateService: StateService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2) { }
 
   ngOnInit() {
+    this.formSubscription = this.stateService.contactFormState$
+      .subscribe(() => this.closeForm());
   }
 
-  log() {
-    console.log(this.title)
+  ngOnDestroy() {
+    this.formSubscription.unsubscribe();
+    if (this.togglerInfoState) this.stateService.toggleNavigation();
   }
 
-  ngAfterViewChecked() {
+  openForm() {
+    this.togglerInfoState = true;
+    this.stateService.toggleNavigation();
+    this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'true');
   }
+
+  closeForm() {
+    this.togglerInfoState = false;
+    this.renderer.setAttribute(this.infoToggler.nativeElement, 'aria-expanded', 'false');
+  }
+
 
   @HostListener('document:keydown.ArrowLeft')
   @HostListener('swiperight')

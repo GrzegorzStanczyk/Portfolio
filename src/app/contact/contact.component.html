@@ -1,56 +1,21 @@
 <h2 class="title">Contact</h2>
-<form class="form">
-  <div class="input__row">
-    <input 
-    [(ngModel)]="title"
-    [class.input__filled]="title.length"
-    class="input__field"
-    type="text" 
-    name="title" 
-    required
-    id="field__title">
-    <label class="input__label" for="field__title">Title*</label>
-    <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-      <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-    </svg>
-  </div>
-  <div class="input__row">
-    <input 
-    [(ngModel)]='email'
-    [class.input__filled]="email.length"
-    class="input__field"
-    type="email" 
-    name="email" 
-    required
-    id="field__title">
-    <label class="input__label" for="field__title">Email*</label>
-    <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-      <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-    </svg>
-  </div>
-  <div class="input__row">
-    <textarea 
-    [(ngModel)]='message'
-    [class.input__filled]="message.length"
-    rows="3" 
-    class="input__field"
-    name="message" 
-    required
-    id="field__message"
-    pattern=".+"></textarea>
-    <label class="input__label" for="field__message">Message*</label>
-    <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-      <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-    </svg>
-  </div>
-  <div class="input__row honey__row">
-    <label for="honey">If you are a human, do not fill this field</label>
-    <input type="text" name="honey">
-  </div>
-  <button 
-    appRipple
-    type="submit" 
-    class="submit__btn" >
-      Get in touch
-  </button>
-</form>
+<app-contact-form [@slideContactForm] *ngIf="togglerInfoState"></app-contact-form>
+<div class="social-links">
+  <a 
+    class="social__link"
+    href="https://github.com/GrzegorzStanczyk"
+    appRipple>Visit: GitHub</a>
+  <a 
+    class="social__link"
+    href="https://www.linkedin.com/in/grzegorzstanczyk/"
+    appRipple>Visit: LinkedIn</a>
+</div>
+<button 
+  appRipple
+  #infoToggler
+  class="contact-form__toggler"
+  type="button"
+  aria-label="Open contact form"
+  aria-expanded="false"
+  (click)="openForm()">Open contact form
+</button>
