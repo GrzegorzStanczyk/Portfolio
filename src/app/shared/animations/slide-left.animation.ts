@@ -31,3 +31,15 @@ export const slideBackgroundAnimation =
             animate('2s 450ms cubic-bezier(0.19, 1, 0.22, 1)')
           ]),
     ]);
+
+export const slideContactForm =
+    trigger('slideContactForm', [
+        transition(':enter', [
+            style({transform: 'translate3d(100%, 0, 0)'}),
+            animate('400ms cubic-bezier(.25,.8,.25,1)', style({transform: 'translate3d(0, 0, 0)'}))
+        ]),
+        transition(':leave', [
+            style({transform: 'translate3d(0, 0, 0)'}),
+            animate('400ms cubic-bezier(.25,.8,.25,1)', style({transform: 'translate3d(100%, 0, 0)'}))
+        ])
+    ]);
