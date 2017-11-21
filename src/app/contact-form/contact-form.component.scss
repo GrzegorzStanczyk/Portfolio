@@ -48,6 +48,9 @@
   font-weight: 400;
   font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-appearance: none; /* for box shadows to show on iOS */
+  &::placeholder {
+    color: transparent;
+  }
 }
 
 .input__field:focus {

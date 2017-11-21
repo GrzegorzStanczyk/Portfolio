@@ -7,6 +7,7 @@
     type="text" 
     name="title" 
     required
+    placeholder="Title"
     id="field__title">
     <label class="input__label" for="field__title">Title*</label>
     <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
@@ -21,6 +22,7 @@
     type="email" 
     name="email" 
     required
+    placeholder="email"
     id="field__title">
     <label class="input__label" for="field__title">Email*</label>
     <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
@@ -35,6 +37,7 @@
     class="input__field"
     name="message" 
     required
+    placeholder="message"
     id="field__message"
     pattern=".+"></textarea>
     <label class="input__label" for="field__message">Message*</label>
@@ -56,7 +59,7 @@
       aria-expanded="false"
       (click)="closeForm()">Close contact form
       <span class="form-close__icon" aria-hidden="true"></span>
-      <span class="form__label">Close contact form</span>  
+      <span class="visuallyhidden">Close contact form</span>  
     </button>
     <button 
       appRipple
