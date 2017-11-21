@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs/Subscription';
   animations: [slideContactForm]
 })
 export class ContactComponent implements OnInit, OnDestroy {
-  private togglerInfoState: boolean = true;
+  public togglerInfoState: boolean = true;
   private formSubscription: Subscription;
 
   @ViewChild('infoToggler') infoToggler: ElementRef;
