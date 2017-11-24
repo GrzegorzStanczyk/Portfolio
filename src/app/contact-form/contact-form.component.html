@@ -1,14 +1,14 @@
 <form class="form">
   <div class="input__row">
     <input 
-    [(ngModel)]="title"
-    [class.input__filled]="title.length"
-    class="input__field"
-    type="text" 
-    name="title" 
-    required
-    placeholder="Title"
-    id="field__title">
+      [(ngModel)]="title"
+      [class.input__filled]="title.length"
+      class="input__field"
+      type="text" 
+      name="title" 
+      required
+      placeholder="Title"
+      id="field__title">
     <label class="input__label" for="field__title">Title*</label>
     <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
       <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
@@ -16,30 +16,30 @@
   </div>
   <div class="input__row">
     <input 
-    [(ngModel)]='email'
-    [class.input__filled]="email.length"
-    class="input__field"
-    type="email" 
-    name="email" 
-    required
-    placeholder="email"
-    id="field__title">
-    <label class="input__label" for="field__title">Email*</label>
+      [(ngModel)]='email'
+      [class.input__filled]="email.length"
+      class="input__field"
+      type="email" 
+      name="email" 
+      required
+      placeholder="email"
+      id="field__email">
+    <label class="input__label" for="field__email">Email*</label>
     <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
       <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
     </svg>
   </div>
   <div class="input__row">
     <textarea 
-    [(ngModel)]='message'
-    [class.input__filled]="message.length"
-    rows="5" 
-    class="input__field"
-    name="message" 
-    required
-    placeholder="message"
-    id="field__message"
-    pattern=".+"></textarea>
+      [(ngModel)]='message'
+      [class.input__filled]="message.length"
+      rows="5" 
+      class="input__field"
+      name="message" 
+      required
+      placeholder="message"
+      id="field__message"
+      pattern=".+"></textarea>
     <label class="input__label" for="field__message">Message*</label>
     <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
       <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
@@ -53,12 +53,12 @@
     <button 
       appRipple
       #infoToggler
-      class="btn form__close"
+      class="btn form--close"
       type="button"
       aria-label="Close contact form"
       aria-expanded="false"
       (click)="closeForm()">Close contact form
-      <span class="form-close__icon" aria-hidden="true"></span>
+      <span class="close__icon" aria-hidden="true"></span>
       <span class="visuallyhidden">Close contact form</span>  
     </button>
     <button 

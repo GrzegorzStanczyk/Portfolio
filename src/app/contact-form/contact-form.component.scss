@@ -129,14 +129,6 @@ textarea~.graphic {
   }
 }
 
-.form__close {
-
-}
-
-.form__submit {
-
-}
-
 .submit__btn {
   cursor: pointer;
   align-self: flex-end;
@@ -210,5 +202,11 @@ textarea~.graphic {
     &::before {
       background-color: transparent;
     }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  :host {
+    position: relative;
   }
 }
