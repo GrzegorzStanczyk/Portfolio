@@ -15,4 +15,8 @@ export class ResizeService {
   private onResize(event: UIEvent) {
     this.resizeSubject.next(<Window>event.target);
   }
+
+  public isMobile() {
+    return window.innerWidth < 600;
+  }
 }

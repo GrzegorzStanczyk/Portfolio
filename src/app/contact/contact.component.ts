@@ -10,9 +10,13 @@ import {
 
 import { NavigateService } from '@app/shared';
 import { StateService } from '@app/shared';
+import { ResizeService } from '@app/shared';
 import { slideContactForm } from '@app/shared';
 
 import { Subscription } from 'rxjs/Subscription';
+// import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/operator/debounceTime';
+
 
 @Component({
   selector: 'app-contact',
@@ -21,24 +25,38 @@ import { Subscription } from 'rxjs/Subscription';
   animations: [slideContactForm]
 })
 export class ContactComponent implements OnInit, OnDestroy {
-  public togglerInfoState: boolean = true;
+  public togglerInfoState: boolean = false;
+  public isMobile: boolean = true;
   private formSubscription: Subscription;
+  private resizeSubscription: Subscription;
 
   @ViewChild('infoToggler') infoToggler: ElementRef;
 
   constructor(
     private navigateService: NavigateService,
     private stateService: StateService,
+    private resizeService: ResizeService,
     private elementRef: ElementRef,
     private renderer: Renderer2) { }
 
   ngOnInit() {
+    this.isMobile = this.resizeService.isMobile();
     this.formSubscription = this.stateService.contactFormState$
       .subscribe(() => this.closeForm());
+    this.resizeSubscription = this.resizeService.resizeSubject$
+      .debounceTime(100)
+      .subscribe((event) => {
+        this.isMobile = event.innerWidth < 600 ? true : false;
+        if (!this.isMobile && this.togglerInfoState) {
+          this.togglerInfoState = false;
+          this.stateService.toggleNavigation();
+        }
+      });
   }
 
   ngOnDestroy() {
     this.formSubscription.unsubscribe();
+    this.resizeSubscription.unsubscribe();
     if (this.togglerInfoState) this.stateService.toggleNavigation();
   }
 

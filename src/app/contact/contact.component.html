@@ -1,5 +1,5 @@
 <h2 class="title">Contact</h2>
-<app-contact-form [@slideContactForm] *ngIf="togglerInfoState"></app-contact-form>
+<app-contact-form [@slideContactForm] *ngIf="togglerInfoState || !isMobile"></app-contact-form>
 <div class="social-links">
   <a 
     class="social__link"
@@ -11,6 +11,7 @@
     appRipple>Visit: LinkedIn</a>
 </div>
 <button 
+  *ngIf="isMobile"
   appRipple
   #infoToggler
   class="contact-form__toggler"
