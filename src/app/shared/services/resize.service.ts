@@ -16,7 +16,7 @@ export class ResizeService {
     this.resizeSubject.next(<Window>event.target);
   }
 
-  public isMobile() {
-    return window.innerWidth < 600;
+  public isMobile(event) {
+    return event.innerWidth < 600 || event.innerHeight < 850;
   }
 }

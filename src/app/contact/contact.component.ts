@@ -14,7 +14,6 @@ import { ResizeService } from '@app/shared';
 import { slideContactForm } from '@app/shared';
 
 import { Subscription } from 'rxjs/Subscription';
-// import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/debounceTime';
 
 
@@ -40,13 +39,13 @@ export class ContactComponent implements OnInit, OnDestroy {
     private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.isMobile = this.resizeService.isMobile();
+    this.isMobile = this.resizeService.isMobile(window);
     this.formSubscription = this.stateService.contactFormState$
       .subscribe(() => this.closeForm());
     this.resizeSubscription = this.resizeService.resizeSubject$
       .debounceTime(100)
       .subscribe((event) => {
-        this.isMobile = event.innerWidth < 600 ? true : false;
+        this.isMobile = this.resizeService.isMobile(event);
         if (!this.isMobile && this.togglerInfoState) {
           this.togglerInfoState = false;
           this.stateService.toggleNavigation();
