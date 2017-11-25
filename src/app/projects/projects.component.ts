@@ -188,13 +188,13 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @HostListener('document:keydown.ArrowDown')
-  @HostListener('swipeup')
+  @HostListener('swipedown')
   navigeteUp() {
     this.navigeteToProject(1);
   }
 
   @HostListener('document:keydown.ArrowUp')
-  @HostListener('swipedown')
+  @HostListener('swipeup')
   navigeteDown() {
     this.navigeteToProject(-1);
   }
