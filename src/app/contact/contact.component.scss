@@ -42,3 +42,12 @@
     padding: 40px;
   }
 }
+
+@media screen and (max-height: 500px) {
+  .title {
+    margin: 0;
+  }
+  .social-links {
+    padding: 10px;
+  }
+}
