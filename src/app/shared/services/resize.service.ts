@@ -17,6 +17,6 @@ export class ResizeService {
   }
 
   public isMobile(event) {
-    return event.innerWidth < 600 || event.innerHeight < 850;
+    return event.innerWidth < 600 || event.innerHeight < 900;
   }
 }
