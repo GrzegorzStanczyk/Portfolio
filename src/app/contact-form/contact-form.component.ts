@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { NavigateService } from '@app/shared';
 import { StateService } from '@app/shared';
@@ -9,13 +10,22 @@ import { StateService } from '@app/shared';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-  public title: string = '';
-  public email: string = '';
-  public message: string = '';
+  contactForm: FormGroup;
 
   constructor(
     private navigateService: NavigateService,
-    private stateService: StateService) { }
+    private stateService: StateService,
+    private fb: FormBuilder) {
+      this.createForm();
+    }
+
+  createForm() {
+    this.contactForm = this.fb.group({
+      title: ['', Validators.required ],
+      email: ['', Validators.required ],
+      message: ['', Validators.required ]
+    });
+  }
 
   ngOnInit() {
   }

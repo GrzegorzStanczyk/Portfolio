@@ -1,6 +1,50 @@
-<form class="form">
+<form [formGroup]="contactForm" class="form" novalidate>
   <div class="input__row">
     <input 
+      formControlName="title"
+      [class.input__filled]="contactForm.value.title"
+      class="input__field"
+      type="text" 
+      placeholder="Title"
+      id="field__title">
+    <label class="input__label" for="field__title">Title*</label>
+    <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
+    </svg>
+  </div>
+  <div class="input__row">
+    <input 
+      formControlName="email"
+      [class.input__filled]="contactForm.value.email"      
+      class="input__field"
+      type="email" 
+      placeholder="email"
+      id="field__email">
+    <label class="input__label" for="field__email">Email*</label>
+    <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
+    </svg>
+  </div>
+  <div class="input__row">
+    <textarea 
+      formControlName="message"
+      [class.input__filled]="contactForm.value.message"      
+      rows="5" 
+      class="input__field"
+      placeholder="message"
+      id="field__message"
+      pattern=".+"></textarea>
+    <label class="input__label" for="field__message">Message*</label>
+    <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
+    </svg>
+  </div>
+  <div class="input__row honey__row">
+    <label for="honey">If you are a human, do not fill this field</label>
+    <input type="text" name="honey">
+  </div>
+
+    <!-- <input 
       [(ngModel)]="title"
       [class.input__filled]="title.length"
       class="input__field"
@@ -48,7 +92,7 @@
   <div class="input__row honey__row">
     <label for="honey">If you are a human, do not fill this field</label>
     <input type="text" name="honey">
-  </div>
+  </div> -->
   <div class="submit-container">
     <button 
       appRipple
@@ -62,6 +106,7 @@
       <span class="visuallyhidden">Close contact form</span>  
     </button>
     <button 
+      [disabled]="contactForm.invalid"
       appRipple
       type="submit" 
       aria-label="Submin to the form"
@@ -70,3 +115,5 @@
     </button>
   </div>
 </form>
+<p>Form title: {{ contactForm.value | json }}</p>
+<p>Form title: {{ contactForm.status | json }}</p>
