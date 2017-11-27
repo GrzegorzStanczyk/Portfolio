@@ -124,9 +124,17 @@ textarea~.graphic {
   color: #ffffff;
   border: 0;
   border-radius: 2px;
+  transition: color .4s cubic-bezier(.25,.8,.25,1);
   &:hover, &:focus {
     outline: none;
     background-color: rgba(221, 221, 221, 0.4);
+  }
+  &[disabled] {
+      color: rgba(221, 221, 221, 0.9);
+    &:hover {
+      cursor: not-allowed;
+      background-color: rgba(221, 221, 221, 0.0);
+    }
   }
 }
 
@@ -175,6 +183,7 @@ textarea~.graphic {
     display: none;
   }
   .submit-container {
+    width: 100%;
     justify-content: flex-end;
   }
   .graphic {
