@@ -1,5 +1,11 @@
 $primary-color: #2E3568;
 $secondary-color: #77B3FD;
+@mixin mat($property, $delay:"") {
+  transition-property: $property;
+  transition-duration: .4s;
+  transition-timing-function: cubic-bezier(.25,.8,.25,1);
+  transition-delay: unquote($delay);
+}
 
 * {
   box-sizing: border-box;
@@ -76,6 +82,10 @@ $secondary-color: #77B3FD;
   transition-timing-function: ease-out;
 }
 
+// .required--color {
+//   @include mat(color);
+// }
+
 .graphic {
   position: absolute;
   top: 0;
@@ -91,12 +101,17 @@ $secondary-color: #77B3FD;
   transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
 }
 
+.input__field.ng-invalid.ng-touched + .input__label .required--color {
+  color: rgb(245, 49, 49);
+}
+
 textarea~.graphic {
   top: 4px;
 }
 
 .input__field:focus+.input__label,
-.input__filled+.input__label {
+.input__filled+.input__label, 
+.input__filled.required--color {
   color: $secondary-color;
   transform: translate3d(0, -20px, 0) scale3d(0.75, 0.75, 1);
 }
@@ -124,7 +139,7 @@ textarea~.graphic {
   color: #ffffff;
   border: 0;
   border-radius: 2px;
-  transition: color .4s cubic-bezier(.25,.8,.25,1);
+  @include mat(color);
   &:hover, &:focus {
     outline: none;
     background-color: rgba(221, 221, 221, 0.4);
