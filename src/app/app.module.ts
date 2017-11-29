@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -18,10 +19,12 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ParticlesDirective } from './shared/directives/particles.directive';
 import { RippleDirective } from './shared/directives/ripple.directive';
 
-import { ResizeService } from './shared/services/resize.service';
-import { StorageService } from './shared/services/storage.service';
-import { NavigateService } from './shared/services/navigate.service';
-import { StateService } from './shared/services/state.service';
+import {
+  ResizeService,
+  StateService,
+  StorageService,
+  NavigateService,
+  SendMessageService } from '@app/shared';
 
 import 'hammerjs';
 import 'hammer-timejs';
@@ -50,15 +53,17 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [ResizeService,
     StorageService,
     NavigateService,
     StateService,
+    SendMessageService,
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig,
+      useClass: MyHammerConfig
   }],
   bootstrap: [AppComponent]
 })
