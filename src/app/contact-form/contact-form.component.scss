@@ -14,6 +14,13 @@ $secondary-color: #77B3FD;
   z-index: 10;
 }
 
+.message-close {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 101;
+}
+
 .form {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;

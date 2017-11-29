@@ -74,6 +74,15 @@
     </button>
   </div>
 </form>
+<button 
+  *ngIf="showSuccess || showError"
+  class="btn message-close"
+  appRipple
+  type="button"
+  aria-label="Close response message"
+  aria-expanded="true"
+  (click)="closeMessage()">Close
+</button>
 <button class="btn-show" (click)="show()">Show!</button>
 <app-loader *ngIf="showLoader" [@fadeAnimation]></app-loader>
 <app-success-message *ngIf="showSuccess" [@fadeAnimation]></app-success-message>

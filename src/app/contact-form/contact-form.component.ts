@@ -72,6 +72,11 @@ export class ContactFormComponent implements OnInit {
     this.stateService.toggleNavigation();
   }
 
+  closeMessage() {
+    if (this.showSuccess) this.showSuccess = false;
+    if (this.showError) this.showError = false;
+  }
+
   ngOnInit() {
   }
 }
