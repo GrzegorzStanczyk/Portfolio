@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 @import url('https://fonts.googleapis.com/css?family=Oswald:700');
 @import url('./app/shared/styles/ripple.scss');
+@import url('./app/shared/styles/mat-btn.scss');
 
 html {
   font-family: 'Montserrat', sans-serif;
@@ -18,4 +19,37 @@ body {
   margin: -1px; 
   padding: 0; 
   border: 0; 
+}
+
+@mixin mat($property, $delay:"") {
+  transition-property: $property;
+  transition-duration: .4s;
+  transition-timing-function: cubic-bezier(.25,.8,.25,1);
+  transition-delay: unquote($delay);
+}
+
+.btn {
+  cursor: pointer;
+  align-self: flex-end;
+  width: 140px;
+  height: 50px;
+  margin: 20px;
+  background-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  border: 0;
+  border-radius: 2px;
+  @include mat(color);
+  &:hover, &:focus {
+    outline: none;
+    background-color: rgba(221, 221, 221, 0.4);
+  }
+  &[disabled] {
+      color: rgba(221, 221, 221, 0.9);
+    &:hover {
+      cursor: not-allowed;
+      background-color: rgba(221, 221, 221, 0.0);
+    }
+  }
 }
