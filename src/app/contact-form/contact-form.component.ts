@@ -7,10 +7,12 @@ import { FormControl } from '@angular/forms/src/model';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Message } from '@app/shared';
+import { fadeAnimation } from '@app/shared';
 
 
 @Component({
   selector: 'app-contact-form',
+  animations: [fadeAnimation],
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })

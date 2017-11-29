@@ -9,6 +9,7 @@ export * from './services/send-message.service';
 export * from './animations/slide-left.animation';
 export * from './animations/toggle-navigation.animation';
 export * from './animations/slide-down.animation';
+export * from './animations/fade.animation';
 
 // Interfaces
 export * from './interfaces/project';
