@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { NavigateService } from '@app/shared';
-import { StateService } from '@app/shared';
+import { NavigateService, StateService, SendMessageService } from '@app/shared';
 import { FormControl } from '@angular/forms/src/model';
+
+import { Subscription } from 'rxjs/Subscription';
+
+import { Message } from '@app/shared';
+
 
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit {
-  contactForm: FormGroup;
+export class ContactFormComponent implements OnInit, OnDestroy {
+  private sendMailSubscription: Subscription;
+  public contactForm: FormGroup;
 
   constructor(
     private navigateService: NavigateService,
     private stateService: StateService,
+    private sendMessageService: SendMessageService,
     private fb: FormBuilder) {
       this.createForm();
     }
@@ -30,16 +36,25 @@ export class ContactFormComponent implements OnInit {
   }
 
   sendMessage() {
-    this.contactForm.reset();
-    console.log('message');
-  }
-
-  ngOnInit() {
+    this.sendMailSubscription = this.sendMessageService.sendEmail(this.contactForm.value)
+      .subscribe(res => {
+        console.log('app response succes', res);
+      }, error => {
+        console.log('app response error', error);
+      });
+    // this.contactForm.reset();
   }
 
   closeForm() {
     this.stateService.toggleContactForm();
     this.stateService.toggleNavigation();
+  }
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.sendMailSubscription.unsubscribe();
   }
 
 }
