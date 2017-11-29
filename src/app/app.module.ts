@@ -16,6 +16,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { InstructionModalComponent } from './instruction-modal/instruction-modal.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { LoaderComponent } from './loader/loader.component';
+import { SuccessMessageComponent } from './success-message/success-message.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 import { ParticlesDirective } from './shared/directives/particles.directive';
 import { RippleDirective } from './shared/directives/ripple.directive';
@@ -48,7 +50,9 @@ export class MyHammerConfig extends HammerGestureConfig  {
     RippleDirective,
     InstructionModalComponent,
     ContactFormComponent,
-    LoaderComponent
+    LoaderComponent,
+    SuccessMessageComponent,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'universal-portfolio'}),

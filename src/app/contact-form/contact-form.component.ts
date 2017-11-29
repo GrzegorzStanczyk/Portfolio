@@ -19,6 +19,8 @@ import { fadeAnimation } from '@app/shared';
 export class ContactFormComponent implements OnInit {
   public contactForm: FormGroup;
   public showLoader: boolean = false;
+  public showSuccess: boolean = false;
+  public showError: boolean = true;
 
   constructor(
     private navigateService: NavigateService,
@@ -36,6 +38,10 @@ export class ContactFormComponent implements OnInit {
     this.stateService.toggleFocusState(false);
   }
 
+  show() {
+    this.showLoader = !this.showLoader;
+  }
+
   createForm() {
     this.contactForm = this.fb.group({
       title: ['', Validators.required ],
@@ -51,11 +57,13 @@ export class ContactFormComponent implements OnInit {
       .subscribe(res => {
         console.log('app response succes', res);
         this.showLoader = false;
+        this.showSuccess = true;
+        setTimeout(() => { this.showSuccess = false; }, 3000);
         this.contactForm.reset();
       }, error => {
         console.log('app response error', error);
         this.showLoader = false;
-        this.contactForm.reset();
+        this.showError = true;
       });
   }
 
