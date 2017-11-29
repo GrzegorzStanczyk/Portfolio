@@ -26,8 +26,10 @@ import 'rxjs/add/operator/debounceTime';
 export class ContactComponent implements OnInit, OnDestroy {
   public togglerInfoState: boolean = false;
   public isMobile: boolean = true;
+  private formFocusState: boolean = false;
   private formSubscription: Subscription;
   private resizeSubscription: Subscription;
+  private formFocusSubscription: Subscription;
 
   @ViewChild('infoToggler') infoToggler: ElementRef;
 
@@ -51,11 +53,14 @@ export class ContactComponent implements OnInit, OnDestroy {
           this.stateService.toggleNavigation();
         }
       });
+    this.formFocusSubscription = this.stateService.formFocusState$
+      .subscribe((state: boolean) => this.formFocusState = state);
   }
 
   ngOnDestroy() {
     this.formSubscription.unsubscribe();
     this.resizeSubscription.unsubscribe();
+    this.formFocusSubscription.unsubscribe();
     if (this.togglerInfoState) this.stateService.toggleNavigation();
   }
 
@@ -74,7 +79,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   @HostListener('document:keydown.ArrowLeft')
   @HostListener('swiperight')
   swipe() {
-    this.navigateService.navigateToProjects();
+    if (!this.formFocusState) this.navigateService.navigateToProjects();
   }
 
 }

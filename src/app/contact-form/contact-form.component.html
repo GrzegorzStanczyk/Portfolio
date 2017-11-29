@@ -2,6 +2,8 @@
   [formGroup]="contactForm" 
   class="form" 
   (ngSubmit)="sendMessage()"
+  (focusin)="focusFunction()" 
+  (focusout)="focusOutFunction()"
   novalidate>
   <div class="input__row">
     <input 

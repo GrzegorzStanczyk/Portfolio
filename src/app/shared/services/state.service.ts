@@ -7,8 +7,10 @@ import { Subject } from 'rxjs/Subject';
 export class StateService {
   private navigationStateSource = new Subject();
   private contactFormStateSource = new Subject();
+  private formFocusStateSource = new Subject();
   public navigationState$ = this.navigationStateSource.asObservable();
   public contactFormState$ = this.contactFormStateSource.asObservable();
+  public formFocusState$ = this.formFocusStateSource.asObservable();
 
   constructor() { }
 
@@ -19,4 +21,9 @@ export class StateService {
   toggleContactForm() {
     this.contactFormStateSource.next();
   }
+
+  toggleFocusState(state: boolean) {
+    this.formFocusStateSource.next(state);
+  }
+
 }

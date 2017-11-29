@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { NavigateService, StateService, SendMessageService } from '@app/shared';
@@ -14,8 +14,7 @@ import { Message } from '@app/shared';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit, OnDestroy {
-  private sendMailSubscription: Subscription;
+export class ContactFormComponent implements OnInit {
   public contactForm: FormGroup;
 
   constructor(
@@ -25,6 +24,14 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder) {
       this.createForm();
     }
+
+  focusFunction() {
+    this.stateService.toggleFocusState(true);
+  }
+
+  focusOutFunction() {
+    this.stateService.toggleFocusState(false);
+  }
 
   createForm() {
     this.contactForm = this.fb.group({
@@ -36,7 +43,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    this.sendMailSubscription = this.sendMessageService.sendEmail(this.contactForm.value)
+    this.sendMessageService.sendEmail(this.contactForm.value)
       .subscribe(res => {
         console.log('app response succes', res);
       }, error => {
@@ -52,9 +59,4 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
-
-  ngOnDestroy() {
-    this.sendMailSubscription.unsubscribe();
-  }
-
 }
