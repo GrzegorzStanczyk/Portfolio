@@ -74,5 +74,4 @@
     </button>
   </div>
 </form>
-<p>Form title: {{ contactForm.value | json }}</p>
-<p>Form title: {{ contactForm.status | json }}</p>
+<app-loader *ngIf="showLoader"></app-loader>

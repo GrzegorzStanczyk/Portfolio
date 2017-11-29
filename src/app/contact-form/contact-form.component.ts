@@ -16,6 +16,7 @@ import { Message } from '@app/shared';
 })
 export class ContactFormComponent implements OnInit {
   public contactForm: FormGroup;
+  public showLoader: boolean = false;
 
   constructor(
     private navigateService: NavigateService,
@@ -43,13 +44,17 @@ export class ContactFormComponent implements OnInit {
   }
 
   sendMessage() {
+    this.showLoader = true;
     this.sendMessageService.sendEmail(this.contactForm.value)
       .subscribe(res => {
         console.log('app response succes', res);
+        this.showLoader = false;
+        this.contactForm.reset();
       }, error => {
         console.log('app response error', error);
+        this.showLoader = false;
+        this.contactForm.reset();
       });
-    // this.contactForm.reset();
   }
 
   closeForm() {
