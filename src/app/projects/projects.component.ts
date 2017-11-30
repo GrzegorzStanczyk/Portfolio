@@ -1,13 +1,15 @@
 import {
   Component,
   OnInit,
-  AfterViewInit,
   OnDestroy,
+  AfterViewInit,
   HostListener,
   EventEmitter,
   ElementRef,
   Renderer2,
-  ViewChild } from '@angular/core';
+  ViewChild,
+  ViewChildren,
+  QueryList, } from '@angular/core';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -31,6 +33,13 @@ import 'rxjs/add/operator/throttleTime';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('projectInfo') projectInfo: ElementRef;
+  @ViewChild('infoToggler') infoToggler: ElementRef;
+  @ViewChild('rippleProject') rippleProject: ElementRef;
+  @ViewChild('navigation') navigation: ElementRef;
+  @ViewChild('selector') selector: ElementRef;
+  @ViewChildren('navigationLink') navigationLink: QueryList<any>;
+
   private resizeSubscription: Subscription;
   private togglerInfoState: boolean = false;
   private mouseWheelSubscription = new Subject<MouseWheelEvent>();
@@ -38,10 +47,6 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   public project: Project;
   public projects: Project[] = PROJECTS;
   public showRipple = true;
-
-  @ViewChild('projectInfo') projectInfo: ElementRef;
-  @ViewChild('infoToggler') infoToggler: ElementRef;
-  @ViewChild('rippleProject') rippleProject: ElementRef;
 
   constructor(
     private router: Router,

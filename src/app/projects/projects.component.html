@@ -134,29 +134,43 @@
       </div>
     </div>
   </section>
-</div>
-
-<nav class="pagination">
-    <span class="selector"></span>
+  <div class="pagination">
     <button 
       appRipple
       type="button"
       aria-label="Navigate to next project"
       class="btn btn--up"
       (click)="navigeteToProject(-1)"></button>
+    <nav class="navigation">
+      <span class="selector" #selector></span>
+      <ul #navigation>
+        <li
+          #navigationLink 
+          *ngFor="let project of projects; let i = index">
+          <a routerLink="/projects/{{project.path}}" routerLinkActive="active" class="project-link">{{i + 1}}</a>        
+        </li>
+      </ul>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-flt">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+          </filter>
+        </defs>
+      </svg>
+    </nav>
     <button
       appRipple
       type="button"
       aria-label="Navigate to next project"
       class="btn btn--down"
       (click)="navigeteToProject(1)"></button>
-    <ul>
-      <li 
-        *ngFor="let project of projects; let i = index">
-        <a routerLink="/projects/{{project.path}}" routerLinkActive="active" class="project-link">{{i + 1}}</a>        
-      </li>
-    </ul>
-  </nav>
+  </div>
+  
+</div>
+
+
 
 <!-- <app-instruction-modal></app-instruction-modal> -->
 <div class="ripple-project--effect" *ngIf="showRipple" #rippleProject></div>

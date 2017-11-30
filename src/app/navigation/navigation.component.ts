@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('navigation') navigation: ElementRef;
   @ViewChild('selector') selector: ElementRef;
   @ViewChildren('navigationLink') navigationLink: QueryList<any>;
+
   private subscriptionToSelectorPosition: Subscription;
   private resizeSubscription: Subscription;
   private navStateSubscription: Subscription;
