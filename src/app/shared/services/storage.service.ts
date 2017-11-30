@@ -6,14 +6,18 @@ import { Message } from '@app/shared';
 export class StorageService {
   public lastProject: Project = null;
   public projectCounter: number = null;
-  public contactMessage: Message;
+  public contactMessage: Message = {
+    title: '',
+    email: '',
+    message: '',
+    honey: ''
+  };
 
   storeMessage(message: Message) {
     this.contactMessage = message;
   }
 
   getMessage(): Message {
-    if (this.contactMessage) return this.contactMessage;
-    return { title: '', email: '', message: '', honey: ''};
+    return this.contactMessage;
   }
 }
