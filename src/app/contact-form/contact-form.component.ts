@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { NavigateService, StateService, SendMessageService } from '@app/shared';
+import { NavigateService, StateService, SendMessageService, StorageService } from '@app/shared';
 import { FormControl } from '@angular/forms/src/model';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -16,16 +16,17 @@ import { fadeAnimation } from '@app/shared';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent implements OnInit, OnDestroy {
   public contactForm: FormGroup;
   public showLoader: boolean = false;
   public showSuccess: boolean = false;
-  public showError: boolean = true;
+  public showError: boolean = false;
 
   constructor(
     private navigateService: NavigateService,
     private stateService: StateService,
     private sendMessageService: SendMessageService,
+    private storageService: StorageService,
     private fb: FormBuilder) {
       this.createForm();
     }
@@ -38,16 +39,13 @@ export class ContactFormComponent implements OnInit {
     this.stateService.toggleFocusState(false);
   }
 
-  show() {
-    this.showLoader = !this.showLoader;
-  }
-
   createForm() {
+    const message = this.storageService.getMessage();
     this.contactForm = this.fb.group({
-      title: ['', Validators.required ],
-      email: ['', Validators.required ],
-      message: ['', Validators.required ],
-      honey: ['', Validators.maxLength(0) ]
+      title: [message.title, Validators.required ],
+      email: [message.email, Validators.required ],
+      message: [message.message, Validators.required ],
+      honey: [message.honey, Validators.maxLength(0) ]
     });
   }
 
@@ -55,13 +53,11 @@ export class ContactFormComponent implements OnInit {
     this.showLoader = true;
     this.sendMessageService.sendEmail(this.contactForm.value)
       .subscribe(res => {
-        console.log('app response succes', res);
         this.showLoader = false;
         this.showSuccess = true;
-        setTimeout(() => { this.showSuccess = false; }, 3000);
+        setTimeout(() => { this.showSuccess = false; }, 5000);
         this.contactForm.reset();
       }, error => {
-        console.log('app response error', error);
         this.showLoader = false;
         this.showError = true;
       });
@@ -77,6 +73,11 @@ export class ContactFormComponent implements OnInit {
     if (this.showError) this.showError = false;
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    if (this.contactForm) {
+      this.storageService.storeMessage(this.contactForm.value);
+    }
   }
 }

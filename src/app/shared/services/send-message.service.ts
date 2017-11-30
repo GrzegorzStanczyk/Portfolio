@@ -15,11 +15,9 @@ export class SendMessageService {
   sendEmail(message: Message): Observable<Message> | any {
     return this.http.post(this.emailUrl, message)
       .map(response => {
-        console.log('Sending email was successfull', response);
         return response;
       })
       .catch(error => {
-        console.log('Sending email got error', error);
         return Observable.throw(error);
       });
   }
