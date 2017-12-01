@@ -1,4 +1,28 @@
 @import url('../shared/styles/tech.scss');
+
+@keyframes select-move {
+	0%{ transform: scale(1,1);} 
+	20%{ transform: scale(1,0.5);} 
+	40%{ transform: scale(1,0.5);} 
+	100%{ transform: scale(1,1);} 
+}
+@keyframes move-up {
+	0%{ transform: translateY(0px);} 
+	20%{ transform: translateY(20px);} 
+	40%{ transform: translateY(-10px);} 
+	60%{ transform: translateY(5px);} 
+	80%{ transform: translateY(0px);} 
+	100%{ transform: translateY(0px);} 
+}
+@keyframes move-down {
+	0%{ transform: translateY(0px);} 
+	20%{ transform: translateY(-20px);} 
+	40%{ transform: translateY(10px);} 
+	60%{ transform: translateY(-5px);} 
+	80%{ transform: translateY(0px);} 
+	100%{ transform: translateY(0px);} 
+}
+
 @keyframes slide-from-right {
   to {
     transform: translate3d(0, 0, 0);
@@ -100,13 +124,12 @@ ul {
     .selector {
       position: absolute;
       z-index: 1;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%, -50%, 0);
-      width: 50px;
-      height: 50px;
       border-radius: 50%;
       background-color: #FFF;
+      transition: all 0.5s ease;
+      &.animate {
+        animation: select-move 0.5s ease 0s forwards;
+      }
     }
     ul {
       z-index: 2;
@@ -123,6 +146,12 @@ ul {
         height: 35px;
         border-radius: 50%;
         background-color: #fff;
+        &.animate-up {
+          animation: move-up 0.7s ease 0s forwards;
+        }
+        &.animate-down {
+            animation: move-down 0.7s ease 0s forwards;
+        }
         a {
           @extend .center;
           width: 100%;
@@ -582,10 +611,6 @@ ul {
 @media screen and (max-height: 750px) {
   .pagination {
     .navigation {
-      .selector {
-        width: 40px;
-        height: 40px;
-      }
       ul {
         li {      
           width: 30px;

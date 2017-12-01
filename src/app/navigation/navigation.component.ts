@@ -77,7 +77,7 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  animateRouterLink(activeRoute, obj) {
+  animateRouterLink(obj) {
     const links = this.routerLinks.map(data => data.link);
     const prev = links.indexOf(obj.prev);
     // if navigate from not-found component do not animate non-existent route
@@ -164,7 +164,7 @@ export class NavigationComponent implements OnInit, OnDestroy, AfterViewInit {
       };
       this.activeRoute = this.findActiveRoute(event[1]);
       this.setSelectorPosition(this.activeRoute);
-      this.animateRouterLink(this.activeRoute, obj);
+      this.animateRouterLink(obj);
     });
 
     // Adjust selector position when window resize

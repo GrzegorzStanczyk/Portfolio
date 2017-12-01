@@ -48,6 +48,11 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   public projects: Project[] = PROJECTS;
   public showRipple = true;
 
+  private selectorSize = {
+    width: 10,
+    height: 10
+  };
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -74,7 +79,12 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.route.params.subscribe((params: Params) => {
       this.project = PROJECTS.find((project, index) => {
         if (project.path.toLowerCase() === params.id.toLowerCase()) {
-          this.storageService.projectCounter = index + 1;
+          // this.projectCounter = index + 1;
+          this.storageService.projectCounter = this.projectCounter = index + 1;
+          setTimeout(() => {
+            this.setSelectorPosition(this.navigationLink['_results'][index].nativeElement);
+            this.animateRouterLink();
+          }, 0);
           return true;
         }
       });
@@ -139,9 +149,85 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.renderer.removeChild(this.rippleProject.nativeElement, this.rippleProject.nativeElement.firstChild);
   }
 
+
+
+
+
+
+
+  setSelectorPosition(activeRoute): void {
+    if (activeRoute) {
+      this.renderer.setStyle(this.selector.nativeElement, `width`, `${activeRoute.offsetWidth + this.selectorSize.width}px`);
+      this.renderer.setStyle(this.selector.nativeElement, `height`, `${activeRoute.offsetHeight + this.selectorSize.height}px`);
+      this.renderer.setStyle(this.selector.nativeElement, `left`, `${activeRoute.offsetLeft - this.selectorSize.width / 2}px`);
+      this.renderer.setStyle(this.selector.nativeElement, `top`, `${activeRoute.offsetTop - this.selectorSize.height / 2}px`);
+    }
+  }
+
+  animateRouterLink() {
+    // const links = this.routerLinks.map(data => data.link);
+    // const curr = links.indexOf(obj.curr);
+    // const prev = links.indexOf(obj.prev);
+    // const len = this.routerLinks.length;
+    const len = this.navigationLink.length;
+    const curr = this.projectCounter;
+    const prev = curr - 1;
+    const diff = curr - prev;
+    const delay = 0.05;
+    let init = 1;
+    let dur = Math.abs(diff);
+
+    console.log('curr', curr)
+    console.log('prev', prev)
+
+    if (diff > 0) {
+      for (let i = prev; i < curr; i++) {
+        dur = delay * init;
+        const element = this.navigationLink['_results'][i].nativeElement;
+        // this.animateDirection(dur, 'animate-right', element);
+        console.log('element', element)
+        init = init + 1;
+      }
+    }
+
+    // if (diff < 0) {
+    //   for (let i = prev; i > curr; i--) {
+    //     dur = delay * init;
+    //     const element = this.navigationLink['_results'][i].nativeElement;
+    //     this.animateDirection(dur, 'animate-left', element);
+    //     init = init + 1;
+    //   }
+    // }
+    // if (diff !== 0) this.animateMove();
+  }
+
+  animateDirection(dur, anim, elem) {
+    this.renderer.addClass(elem, anim);
+    this.renderer.setStyle(elem, 'animation-delay', `${dur}s`);
+    setTimeout(() => {
+      this.renderer.removeClass(elem, anim);
+    }, 700);
+  }
+
+  animateMove() {
+    this.renderer.addClass(this.selector.nativeElement, 'animate');
+    setTimeout(() => {
+      this.renderer.removeClass(this.selector.nativeElement, 'animate');
+    }, 500);
+  }
+
+
+
+
+
+
+
+
+
+
+
   ngOnInit() {
     this.matchPath();
-    this.projectCounter = this.storageService.projectCounter;
   }
 
   ngAfterViewInit() {
