@@ -43,6 +43,8 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeSubscription: Subscription;
   private togglerInfoState: boolean = false;
   private mouseWheelSubscription = new Subject<MouseWheelEvent>();
+  private projectsNavigationSubscription = new Subject<number>();
+  private lastProjectCounter: number;
   public projectCounter: number = null || 1;
   public project: Project;
   public projects: Project[] = PROJECTS;
@@ -79,10 +81,10 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.route.params.subscribe((params: Params) => {
       this.project = PROJECTS.find((project, index) => {
         if (project.path.toLowerCase() === params.id.toLowerCase()) {
-          // this.projectCounter = index + 1;
+          this.lastProjectCounter = this.storageService.projectCounter;
           this.storageService.projectCounter = this.projectCounter = index + 1;
           setTimeout(() => {
-            this.setSelectorPosition(this.navigationLink['_results'][index].nativeElement);
+            this.setSelectorPosition(this.navigationLink['_results'][this.projectCounter - 1].nativeElement);
             this.animateRouterLink();
           }, 0);
           return true;
@@ -149,12 +151,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.renderer.removeChild(this.rippleProject.nativeElement, this.rippleProject.nativeElement.firstChild);
   }
 
-
-
-
-
-
-
+  // Pagination
   setSelectorPosition(activeRoute): void {
     if (activeRoute) {
       this.renderer.setStyle(this.selector.nativeElement, `width`, `${activeRoute.offsetWidth + this.selectorSize.width}px`);
@@ -165,40 +162,33 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   animateRouterLink() {
-    // const links = this.routerLinks.map(data => data.link);
-    // const curr = links.indexOf(obj.curr);
-    // const prev = links.indexOf(obj.prev);
-    // const len = this.routerLinks.length;
     const len = this.navigationLink.length;
     const curr = this.projectCounter;
-    const prev = curr - 1;
+    const prev = this.lastProjectCounter;
+    if (!prev) return;
     const diff = curr - prev;
     const delay = 0.05;
     let init = 1;
     let dur = Math.abs(diff);
 
-    console.log('curr', curr)
-    console.log('prev', prev)
-
     if (diff > 0) {
       for (let i = prev; i < curr; i++) {
         dur = delay * init;
-        const element = this.navigationLink['_results'][i].nativeElement;
-        // this.animateDirection(dur, 'animate-right', element);
-        console.log('element', element)
+        const element = this.navigationLink['_results'][i - 1].nativeElement;
+        this.animateDirection(dur, 'animate-up', element);
         init = init + 1;
       }
     }
 
-    // if (diff < 0) {
-    //   for (let i = prev; i > curr; i--) {
-    //     dur = delay * init;
-    //     const element = this.navigationLink['_results'][i].nativeElement;
-    //     this.animateDirection(dur, 'animate-left', element);
-    //     init = init + 1;
-    //   }
-    // }
-    // if (diff !== 0) this.animateMove();
+    if (diff < 0) {
+      for (let i = prev; i  > curr; i--) {
+        dur = delay * init;
+        const element = this.navigationLink['_results'][i - 1].nativeElement;
+        this.animateDirection(dur, 'animate-down', element);
+        init = init + 1;
+      }
+    }
+    if (diff !== 0) this.animateMove();
   }
 
   animateDirection(dur, anim, elem) {
@@ -215,16 +205,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.renderer.removeClass(this.selector.nativeElement, 'animate');
     }, 500);
   }
-
-
-
-
-
-
-
-
-
-
+  // Pagination - end
 
   ngOnInit() {
     this.matchPath();
@@ -235,6 +216,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.resizeSubscription = this.resizeService.resizeSubject$
     .debounceTime(200)
     .subscribe(event => {
+      this.setSelectorPosition(this.navigationLink['_results'][this.projectCounter - 1].nativeElement);
       if (event.innerWidth > 701) {
         this.showRipple = true;
         if (this.infoToggler.nativeElement.getAttribute('aria-expanded') === 'true') {
@@ -258,11 +240,22 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
           this.navigeteToProject(-1);
         }
     });
+    this.projectsNavigationSubscription.asObservable()
+    .throttleTime(500)
+    .subscribe((event: number) => {
+      if (event > 0) {
+        this.navigeteToProject(event);
+      }
+      if (event < 0) {
+        this.navigeteToProject(event);
+      }
+  });
   }
 
   ngOnDestroy() {
     this.resizeSubscription.unsubscribe();
     this.mouseWheelSubscription.unsubscribe();
+    this.projectsNavigationSubscription.unsubscribe();
     if (this.togglerInfoState) this.stateService.toggleNavigation();
   }
 
@@ -281,13 +274,13 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostListener('document:keydown.ArrowDown')
   @HostListener('swipedown')
   navigeteUp() {
-    this.navigeteToProject(1);
+    this.projectsNavigationSubscription.next(1);
   }
 
   @HostListener('document:keydown.ArrowUp')
   @HostListener('swipeup')
   navigeteDown() {
-    this.navigeteToProject(-1);
+    this.projectsNavigationSubscription.next(-1);
   }
 
   @HostListener('mousewheel', ['$event'])
