@@ -194,9 +194,10 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   animateDirection(dur, anim, elem) {
     this.renderer.addClass(elem, anim);
     this.renderer.setStyle(elem, 'animation-delay', `${dur}s`);
+    const timer = 900 + dur * 100;
     setTimeout(() => {
       this.renderer.removeClass(elem, anim);
-    }, 700);
+    }, timer);
   }
 
   animateMove() {
