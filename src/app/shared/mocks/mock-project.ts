@@ -43,8 +43,8 @@ export const PROJECTS: Project[] = [
         path: 'Twitchtv-JSON-API',
         title: 'Twitchtv JSON API',
         tech: ['bootstrap', 'javascript', 'sass'],
-        desc: 'Twitchtv-JSON-API',
-        git: 'https://github.com/GrzegorzStanczyk/The-New-York-Times-Project'
+        desc: 'Twitchtv JSON <strong>API</strong> loads streamers from array. Shows their status and online watchers. View is made with <strong>bootstrap</strong>. The possibility of <strong>ES7</strong> such as <strong>async/await</strong> was used.',
+        git: null
     },
     {
         liveUrl: 'https://grzegorzstanczyk.github.io/The-New-York-Times-Project-live.github.io/',
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
         path: 'The-New-York-Times-Project',
         title: 'NY Times News',
         tech: ['angular', 'bootstrap', 'sass'],
-        desc: 'Project which i made for recruitment task with <strong>Angular</strong>. It use NY Times Developer API to get article snippets. There is field to search articles. We can pick date range. The page support infinite scroll to find next articles, thanks to <strong>RxJS</strong>',
+        desc: 'Project which i made for recruitment task with <strong>Angular</strong>. It use NY Times Developer <strong>API</strong> to get article snippets. There is field to search articles. We can pick date range. The page support infinite scroll to find next articles, thanks to <strong>RxJS</strong>.',
         git: 'https://github.com/GrzegorzStanczyk/The-New-York-Times-Project'
     },
     {
@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
         path: 'Show-the-Local-Weather',
         title: 'Show the Local Weather',
         tech: ['javascript'],
-        desc: 'Show the Local Weather',
+        desc: 'Local Weather is loaded form <a href="https://www.wunderground.com/">wunderground <strong>API</strong></a>. The background change depend on current weather and time of day.',
         git: null
     },
     {
@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
         path: 'Store-list',
         title: 'Store List',
         tech: ['jquery'],
-        desc: 'Store List',
+        desc: 'My very first app. Ofc <strong>ToDo</strong> list as every beginner should do. It is written with <strong>jquery</strong>.',
         git: 'https://github.com/GrzegorzStanczyk/Order-list.github.io'
     },
     {
@@ -102,8 +102,8 @@ export const PROJECTS: Project[] = [
         desktopViewWEBP: 'Random-Quote-desktop.webp',
         path: 'Random-Quote-Generator',
         title: 'Random Quote Generator',
-        tech: ['javascript'],
-        desc: 'Random Quote Generator',
+        tech: ['javascript', 'material'],
+        desc: 'The Random Quote Generator which take quotes of the Author from <strong>REST API</strong>.',
         git: 'https://github.com/GrzegorzStanczyk/random-quote-generator'
     },
     {
@@ -118,7 +118,7 @@ export const PROJECTS: Project[] = [
         path: 'Magic-The-Gathering-AJAX',
         title: 'Magic The Gathering AJAX',
         tech: ['jquery'],
-        desc: 'Magic-The-Gathering-AJAX',
+        desc: 'The view of Magic The Gathering cards loaded from <a href="https://mtgjson.com/">mtgjson <strong>API</strong></a>, which are shown on the <strong>carousel</strong>.',
         git: 'https://github.com/GrzegorzStanczyk/Magic-The-Gathering-AJAX.github.io'
     },
     {
@@ -133,7 +133,7 @@ export const PROJECTS: Project[] = [
         path: 'OS-X-Command-Line',
         title: 'OS X Command Line',
         tech: ['sass'],
-        desc: 'OS X Command Line',
+        desc: 'The command line drawn to improve styling skills, with <strong>scss</strong> usage.',
         git: null
     }
 ];
