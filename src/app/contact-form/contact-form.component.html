@@ -11,6 +11,7 @@
       [class.input__filled]="contactForm.value.title"
       class="input__field"
       type="text" 
+      aria-required="true"
       placeholder="Title"
       id="field__title">
     <label class="input__label" for="field__title">Title<span class="required--color">*</span></label>
@@ -24,6 +25,7 @@
       [class.input__filled]="contactForm.value.email"      
       class="input__field"
       type="email" 
+      aria-required="true"
       placeholder="email"
       id="field__email"
       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
@@ -38,6 +40,7 @@
       [class.input__filled]="contactForm.value.message"      
       rows="5" 
       class="input__field"
+      aria-required="true"
       placeholder="message"
       id="field__message"></textarea>
     <label class="input__label" for="field__message">Message<span class="required--color">*</span></label>
