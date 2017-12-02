@@ -49,6 +49,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   public project: Project;
   public projects: Project[] = PROJECTS;
   public showRipple = true;
+  public showInstruction: boolean = true;
 
   private selectorSize = {
     width: 10,
@@ -210,6 +211,9 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.matchPath();
+    if (localStorage.instruction) {
+      this.showInstruction = false;
+    }
   }
 
   ngAfterViewInit() {

@@ -17,6 +17,7 @@ export class InstructionModalComponent implements OnInit {
 
   closeModal() {
     this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
+    localStorage.setItem('instruction', 'true');
   }
 
 }

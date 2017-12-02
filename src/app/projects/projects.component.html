@@ -1,7 +1,10 @@
+<app-instruction-modal *ngIf="showInstruction"></app-instruction-modal>
+<div class="ripple-project--effect" *ngIf="showRipple" #rippleProject></div>
 <div class="projects-container" [@slideDownAnimation]="project">
   <section class="project" *ngIf="project">
     <button 
       #infoToggler
+      appRipple
       class="info-toggler"
       type="button"
       aria-label="Open/close project information"
@@ -169,8 +172,3 @@
   </div>
   
 </div>
-
-
-
-<!-- <app-instruction-modal></app-instruction-modal> -->
-<div class="ripple-project--effect" *ngIf="showRipple" #rippleProject></div>

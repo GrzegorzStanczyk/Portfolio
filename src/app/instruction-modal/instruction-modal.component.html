@@ -1,12 +1,19 @@
 <div class="instruction__container">
   <button 
+    appRipple
     type="button"
     aria-label="Close instruction"
     aria-expanded="false"
-    class="btn btn--close"
+    class="btn "
     (click)="closeModal()">Close
   </button>
-  <div class="instruction instruction__arrow-keys"></div>
-  <div class="instruction instruction__mouse-wheel"></div>
-  <div class="instruction instruction__gesture"></div>
+  <div class="instruction">
+    <span class="icon icon--arrows" project-nav="arrows"></span>
+  </div>
+  <div class="instruction instruction__gesture">
+    <span class="icon icon--gesture" project-nav="gesture"></span>
+  </div>
+  <div class="instruction">
+    <span class="icon icon--wheel" project-nav="wheel"></span>
+  </div>
 </div>
