@@ -2,8 +2,8 @@
 
 @keyframes select-move {
 	0%{ transform: scale(1,1);} 
-	20%{ transform: scale(1,0.5);} 
-	40%{ transform: scale(1,0.5);} 
+	20%{ transform: scale(0.5,1);} 
+	40%{ transform: scale(0.5,1);} 
 	100%{ transform: scale(1,1);} 
 }
 @keyframes move-up {
@@ -32,12 +32,6 @@
 @keyframes slide-from-left {
   to {
     transform: translate3d(-50%, -50%, 0);
-  }
-}
-
-@keyframes transform-to-left {
-  to {
-    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -115,8 +109,8 @@ ul {
   position: absolute;
   left: 0%;
   top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  // animation: slide-from-left 2s .1s cubic-bezier(.19, 1, .22, 1) forwards;
+  transform: translate3d(-200%, -50%, 0);
+  animation: slide-from-left 2s .1s cubic-bezier(.19, 1, .22, 1) forwards;
   .navigation {
     filter: url('#goo2');
     width: 100%;
@@ -150,7 +144,7 @@ ul {
           animation: move-up 0.7s ease 0s forwards;
         }
         &.animate-down {
-            animation: move-down 0.7s ease 0s forwards;
+          animation: move-down 0.7s ease 0s forwards;
         }
         a {
           @extend .center;
@@ -599,9 +593,7 @@ ul {
   .projects-container {
     width: 100%;
   }
-} // animation: slide-from-right 1.3s .8s cubic-bezier(.19,1,.22,1) forwards;
-// animation: slide-from-right 1.3s .5s ease-in-out forwards;
-// animation: slide-from-right 1.3s .5s cubic-bezier(.8,0,0,1) forwards;
+}
 @media screen and (min-width: 701px) {
   .project__info {
     &::before {
