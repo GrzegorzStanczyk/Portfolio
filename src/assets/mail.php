@@ -1,5 +1,5 @@
 <?php
-  $mailToSend = 'grzegorz.stanczyk@o2.pl';
+  $mailToSend = 'admin@code-it.eu';
   $errors = Array();
 	$return = Array();
   
