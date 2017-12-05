@@ -9,7 +9,8 @@
   cursor: pointer;
   align-self: flex-end;
   width: 140px;
-  height: 50px;
+  height: auto;
+  min-height: 50px;
   margin: 20px;
   background-color: transparent;
   font-family: 'Montserrat', sans-serif;
