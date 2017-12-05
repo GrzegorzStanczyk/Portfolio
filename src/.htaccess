@@ -6,5 +6,5 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
   RewriteCond %{HTTPS} !=on
-  RewriteRule ^(.*)$ https://code-it.eu/$1 [R=301,L]
+  RewriteRule ^(.*)$ https://code-it.eu/$1 [R,L]
 </IfModule>
