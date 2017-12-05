@@ -12,6 +12,7 @@ $secondary-color: #77B3FD;
   width: 100%;
   height: 100%;
   z-index: 10;
+  background-color: $primary-color;
 }
 
 .message-close {
@@ -25,16 +26,13 @@ $secondary-color: #77B3FD;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  margin: 0 auto;
   width: 100%;
+  max-width: 600px;
   height: 100%;
   font-size: 150%;
   color: #ffffff;
   z-index: 10;
-  background-color: $primary-color;
   .honey__row {
     display: none;
   }
@@ -120,6 +118,7 @@ textarea~.graphic {
 
 .submit-container {
   display: flex;
+  width: 100%;
   justify-content: space-around;
 }
 
@@ -169,7 +168,6 @@ textarea~.graphic {
     display: none;
   }
   .submit-container {
-    width: 100%;
     justify-content: flex-end;
   }
   .graphic {
