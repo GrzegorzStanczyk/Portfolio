@@ -105,6 +105,7 @@ ul {
   @extend .center;
   flex-direction: column;
   height: 70%;
+  max-height: 650px;
   width: 100px;
   position: absolute;
   left: 0%;
