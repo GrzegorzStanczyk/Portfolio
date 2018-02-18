@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -21,6 +22,11 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
 
 import { ParticlesDirective } from './shared/directives/particles.directive';
 import { RippleDirective } from './shared/directives/ripple.directive';
+
+import { reducers } from './reducers';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environemnt
 
 import {
   ResizeService,
@@ -60,7 +66,12 @@ export class MyHammerConfig extends HammerGestureConfig  {
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production // Restrict extension to log-only mode
+    })
   ],
   providers: [ResizeService,
     StorageService,

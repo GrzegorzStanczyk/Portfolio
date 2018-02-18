@@ -12,6 +12,9 @@ import {
   QueryList, } from '@angular/core';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as CounterActions from '../actions/counter';
+import * as fromRoot from '../reducers';
 
 import { ResizeService } from '@app/shared';
 import { StorageService } from '@app/shared';
@@ -24,6 +27,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/operator/take';
+
 
 
 @Component({
@@ -45,7 +50,9 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   private mouseWheelSubscription = new Subject<MouseWheelEvent>();
   private projectsNavigationSubscription = new Subject<number>();
   private lastProjectCounter: number;
+  // private lastProjectCounter: Observable<number>;
   public projectCounter: number = null || 1;
+  // public projectCounter: Observable<number>;
   public project: Project;
   public projects: Project[] = PROJECTS;
   public showRipple = true;
@@ -63,7 +70,8 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     private resizeService: ResizeService,
     private storageService: StorageService,
     private stateService: StateService,
-    private el: ElementRef) { }
+    private el: ElementRef,
+    private store: Store<fromRoot.State>) { }
 
   toggleInfo() {
     this.togglerInfoState = !this.togglerInfoState;
@@ -82,11 +90,14 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.route.params.subscribe((params: Params) => {
       this.project = PROJECTS.find((project, index) => {
         if (project.path.toLowerCase() === params.id.toLowerCase()) {
-          this.lastProjectCounter = this.storageService.projectCounter;
-          this.storageService.projectCounter = this.projectCounter = index + 1;
-          setTimeout(() => {
-            this.setSelectorPosition(this.navigationLink['_results'][this.projectCounter - 1].nativeElement);
-            this.animateRouterLink();
+          this.store.select(fromRoot.getCurrentCounter)
+            .take(1)
+            .subscribe(v => this.lastProjectCounter = v);
+          this.projectCounter = index + 1;
+          this.store.dispatch(new CounterActions.SetCounterAction(index + 1));
+            setTimeout(() => {
+              this.setSelectorPosition(this.navigationLink['_results'][this.projectCounter - 1].nativeElement);
+              this.animateRouterLink();
           }, 0);
           return true;
         }
@@ -98,16 +109,22 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     }, error => console.log(error));
   }
 
-  navigeteToProject(counter: number) {
+  navigateToProject(counter: number) {
     this.projectCounter += counter;
     if (this.projectCounter < 1) {
       this.projectCounter = PROJECTS.length;
+      this.router.navigate(['/projects', PROJECTS[this.projectCounter - 1].path]);
     }
     if (this.projectCounter > PROJECTS.length) {
       this.projectCounter = 1;
+      this.router.navigate(['/projects', PROJECTS[this.projectCounter - 1].path]);
     }
-    if (counter === -1) this.createRipple('up');
-    if (counter === 1) this.createRipple('down');
+    if (counter === -1) {
+      this.createRipple('up');
+    }
+    if (counter === 1) {
+      this.createRipple('down');
+    }
     this.router.navigate(['/projects', PROJECTS[this.projectCounter - 1].path]);
   }
 
@@ -182,7 +199,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (diff < 0) {
-      for (let i = prev; i  > curr; i--) {
+      for (let i = prev; i > curr; i--) {
         dur = delay * init;
         const element = this.navigationLink['_results'][i - 1].nativeElement;
         this.animateDirection(dur, 'animate-down', element);
@@ -239,20 +256,20 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
       .throttleTime(500)
       .subscribe((event: MouseWheelEvent) => {
         if (event.deltaY > 0) {
-          this.navigeteToProject(1);
+          this.navigateToProject(1);
         }
         if (event.deltaY < 0) {
-          this.navigeteToProject(-1);
+          this.navigateToProject(-1);
         }
     });
     this.projectsNavigationSubscription.asObservable()
     .throttleTime(500)
     .subscribe((event: number) => {
       if (event > 0) {
-        this.navigeteToProject(event);
+        this.navigateToProject(event);
       }
       if (event < 0) {
-        this.navigeteToProject(event);
+        this.navigateToProject(event);
       }
   });
   }
