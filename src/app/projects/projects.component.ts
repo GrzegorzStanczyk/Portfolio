@@ -50,9 +50,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   private mouseWheelSubscription = new Subject<MouseWheelEvent>();
   private projectsNavigationSubscription = new Subject<number>();
   private lastProjectCounter: number;
-  // private lastProjectCounter: Observable<number>;
   public projectCounter: number = null || 1;
-  // public projectCounter: Observable<number>;
   public project: Project;
   public projects: Project[] = PROJECTS;
   public showRipple = true;
