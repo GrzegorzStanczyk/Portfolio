@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { NavigateService, StateService, SendMessageService, StorageService } from '@app/shared';
+import { NavigateService, StateService, SendMessageService } from '@app/shared';
 import { FormControl } from '@angular/forms/src/model';
 
 import { Subscription } from 'rxjs/Subscription';
 
 import { Message } from '@app/shared';
 import { fadeAnimation } from '@app/shared';
-
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../reducers';
+import * as MessageActions from '../actions/message';
 
 @Component({
   selector: 'app-contact-form',
@@ -26,8 +28,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     private navigateService: NavigateService,
     private stateService: StateService,
     private sendMessageService: SendMessageService,
-    private storageService: StorageService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private store: Store<fromRoot.AppState>) {
       this.createForm();
     }
 
@@ -40,13 +42,15 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    const message = this.storageService.getMessage();
-    this.contactForm = this.fb.group({
-      title: [message.title, Validators.required ],
-      email: [message.email, Validators.required ],
-      message: [message.message, Validators.required ],
-      honey: [message.honey, Validators.maxLength(0) ]
-    });
+    this.store.select(fromRoot.getMessage)
+      .subscribe(message => {
+        this.contactForm = this.fb.group({
+          title: [message.title, Validators.required ],
+          email: [message.email, Validators.required ],
+          message: [message.message, Validators.required ],
+          honey: [message.honey, Validators.maxLength(0) ]
+        });
+      });
   }
 
   sendMessage() {
@@ -77,7 +81,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.contactForm) {
-      this.storageService.storeMessage(this.contactForm.value);
+      this.store.dispatch(new MessageActions.SaveMessageAction(this.contactForm.value));
     }
   }
 }

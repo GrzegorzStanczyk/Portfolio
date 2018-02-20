@@ -69,7 +69,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     private storageService: StorageService,
     private stateService: StateService,
     private el: ElementRef,
-    private store: Store<fromRoot.State>) { }
+    private store: Store<fromRoot.AppState>) { }
 
   toggleInfo() {
     this.togglerInfoState = !this.togglerInfoState;
