@@ -1,5 +1,5 @@
 import { Message } from './../shared/Interfaces/message';
-import { ActionReducerMap } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 import * as fromStorage from './storage';
 
 export interface AppState {
@@ -12,5 +12,6 @@ export const reducers: ActionReducerMap<AppState> = {
   message: fromStorage.messageReducer
 };
 
-export const getCurrentCounter = (state: AppState) => state.counter;
+// export const getCurrentCounter = (state: AppState) => state.counter;
+export const getCurrentCounter = createFeatureSelector<number>('counter');
 export const getMessage = (state: AppState) => state.message;
