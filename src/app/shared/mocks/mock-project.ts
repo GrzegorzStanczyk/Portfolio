@@ -2,6 +2,21 @@ import { Project } from '@app/shared';
 
 export const PROJECTS: Project[] = [
     {
+        liveUrl: 'https://voting-app-grzegorz-stanczyk.herokuapp.com/',
+        shortUrl: 'https://goo.gl/iuqgdo',
+        mobileView: true,
+        mobileViewJPG: 'Voting-App-mobile.jpg',
+        mobileViewWEBP: 'Voting-App-mobile.webp',
+        desktopView: true,
+        desktopViewJPG: 'Voting-App-desktop.jpg',
+        desktopViewWEBP: 'Voting-App-desktop.webp',
+        path: 'voting-app',
+        title: 'Voting App',
+        tech: ['SocketIO', 'Angular', 'MongoDB', 'ExpressJS', 'NodeJS', 'Bootstrap'],
+        desc: 'First app on which I challenge myself to develop back-end app working with mongodb database',
+        git: 'https://github.com/GrzegorzStanczyk/Voting-App'
+    },
+    {
         liveUrl: 'https://keyviewer-d5825.firebaseapp.com',
         shortUrl: 'https://goo.gl/QCQdsu',
         mobileView: true,
